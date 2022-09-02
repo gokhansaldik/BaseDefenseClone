@@ -3,9 +3,9 @@ using System;
 namespace Enums
 {
     [Serializable]
-    public enum GameStatesType
+    public enum UIPanels
     {
-        Idle,
-        Dungeon
+        StartPanel,
+        LevelPanel,
     }
 }
