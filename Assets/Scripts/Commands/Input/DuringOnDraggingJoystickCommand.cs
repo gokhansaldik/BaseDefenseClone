@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class DuringOnDraggingJoystickCommand : MonoBehaviour
+    public class DuringOnDraggingJoystickCommand
     {
         #region Self Variables
 
@@ -12,13 +12,13 @@ namespace Commands
 
         private Vector3 _joystickPos;
         private Vector3 _moveVector;
-        private readonly Joystick _joystick;
+        private readonly FloatingJoystick _joystick;
 
         #endregion
 
         #endregion
 
-        public DuringOnDraggingJoystickCommand(ref Vector3 joystickPos, ref Vector3 moveVector, ref Joystick joystick)
+        public DuringOnDraggingJoystickCommand(ref Vector3 joystickPos, ref Vector3 moveVector, ref FloatingJoystick joystick)
         {
             _joystickPos = joystickPos;
             _moveVector = moveVector;

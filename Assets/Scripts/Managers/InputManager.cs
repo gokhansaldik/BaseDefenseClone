@@ -2,8 +2,10 @@ using Commands;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Keys;
 using UnityEngine;
 using Signals;
+using UnityEngine.PlayerLoop;
 
 namespace Managers
 {
@@ -20,17 +22,18 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private bool isJoystick;
-        [SerializeField] private Joystick joystick;
+        [SerializeField] private  FloatingJoystick floatingJoystick;
         [SerializeField] private InputManager inputManager;
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
+        [SerializeField] private GameStatesType currentGameStatesType;
 
         #endregion
 
         #region Private Variables
 
-        private bool _isTouching;
+        private bool _isTouching = true;
         private float _currentVelocity;
-        private Vector3 _joystickPos;
+        private Vector3 _joystickPosition;
         private Vector3 _moveVector;
         private InputData _inputData;
         private DuringOnDraggingJoystickCommand _duringOnDraggingJoystickCommand;
@@ -53,7 +56,7 @@ namespace Managers
         private void Init()
         {
             _duringOnDraggingJoystickCommand =
-                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
+                new DuringOnDraggingJoystickCommand(ref _joystickPosition, ref _moveVector, ref floatingJoystick);
         }
 
         private InputData GetInputData()
@@ -80,22 +83,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetGameState += OnGetGameStates;
         }
 
-        private void Update()
-        {
-            if (!isReadyForTouch) return;
-            if (Input.GetMouseButton(0))
-                if (_isTouching)
-                {
-                    if (isJoystick)
-                    {
-                        _duringOnDraggingJoystickCommand.Execute();
-                    }
-                    // else
-                    // {
-                    //     if (MousePosition != null) _duringOnDraggingCommand.Execute();
-                    // }
-                }
-        }
+       
 
         private void UnSubscribeEvents()
         {
@@ -113,7 +101,7 @@ namespace Managers
         {
             if (states == GameStatesType.Idle)
             {
-                joystick.gameObject.SetActive(true);
+                floatingJoystick.gameObject.SetActive(true);
                 isJoystick = true;
             }
             else
@@ -121,6 +109,7 @@ namespace Managers
                 //dungeon kismi 
             }
         }
+
 
         private void OnPlay()
         {
@@ -135,5 +124,42 @@ namespace Managers
         }
 
         #endregion
+        private void Update()
+        {
+            if (!isReadyForTouch) return;
+            // if (Input.GetMouseButton(0))
+            //     if (_isTouching)
+            //     {
+            //         if (isJoystick)
+            //         {
+            //             _duringOnDraggingJoystickCommand.Execute();
+            //         }
+            //         // else
+            //         // {
+            //         //     if (MousePosition != null) _duringOnDraggingCommand.Execute();
+            //         // }
+            //     }
+            if (currentGameStatesType == GameStatesType.Idle)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    if (_isTouching)
+                    {
+                        
+                            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+                            
+                            _moveVector = _joystickPosition;
+                            
+                            InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
+                            {
+                                joystickMovement = _moveVector
+                            });
+                        
+                    }
+                }
+            
+        }
     }
+}
+    
 }
