@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CD_Player
   m_EditorClassIdentifier: 
   Data:
-    MovementData:
-      ForwardSpeed: 5
-      SidewaysSpeed: 2
-      PlayerJoystickSpeed: 3
+    playerMovementData:
+      IdleSpeed: 4
+      IdleTurnSpeed: 0.5
