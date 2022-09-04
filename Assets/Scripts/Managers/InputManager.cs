@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
 using Commands;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Keys;
-using UnityEngine;
 using Signals;
-using UnityEngine.PlayerLoop;
+using UnityEngine;
 
 namespace Managers
 {
@@ -15,28 +16,25 @@ namespace Managers
 
         #region Public Variables
 
-        public Vector3? MousePosition; //ref type
+        [Header("Data")] public InputData Data;
 
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private bool isJoystick;
-        [SerializeField] private  FloatingJoystick floatingJoystick;
-        [SerializeField] private InputManager inputManager;
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
-        [SerializeField] private GameStatesType currentGameStatesType;
+        [SerializeField] private FloatingJoystick floatingJoystick;
+        [SerializeField] private GameStatesType currentGameState;
 
         #endregion
 
         #region Private Variables
 
-        private bool _isTouching = true;
+        private bool _isTouching;
         private float _currentVelocity;
-        private Vector3 _joystickPosition;
+        private Vector2? _mousePosition;
         private Vector3 _moveVector;
-        private InputData _inputData;
-        private DuringOnDraggingJoystickCommand _duringOnDraggingJoystickCommand;
+        private Vector3 _joystickPosition;
 
         #endregion
 
@@ -44,72 +42,95 @@ namespace Managers
 
         private void Awake()
         {
-            GetReferences();
-            Init();
+            Data = GetInputData();
         }
 
-        private void GetReferences()
-        {
-            _inputData = GetInputData();
-        }
+        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
-        private void Init()
-        {
-            _duringOnDraggingJoystickCommand =
-                new DuringOnDraggingJoystickCommand(ref _joystickPosition, ref _moveVector, ref floatingJoystick);
-        }
-
-        private InputData GetInputData()
-        {
-            return Resources.Load<CD_Input>("Data/CD_Input").InputData;
-        }
-
-        #region Event Subscriptions
+        #region Event Subscription
 
         private void OnEnable()
         {
             SubscribeEvents();
         }
 
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-
         private void SubscribeEvents()
         {
+            InputSignals.Instance.onEnableInput += OnEnableInput;
+            InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onGetGameState += OnGetGameStates;
         }
 
-       
-
-        private void UnSubscribeEvents()
+        private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onGetGameState -= OnGetGameStates;
+            InputSignals.Instance.onEnableInput -= OnEnableInput;
+            InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
 
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
         #endregion
 
-
-        #region Subscriptions Methods
-
-        private void OnGetGameStates(GameStatesType states)
+        private void Update()
         {
-            if (states == GameStatesType.Idle)
+            if (!isReadyForTouch) return;
+            if (Input.GetMouseButtonUp(0))
             {
-                floatingJoystick.gameObject.SetActive(true);
-                isJoystick = true;
+                _isTouching = false;
+                InputSignals.Instance.onInputReleased?.Invoke();
             }
-            else
+
+            if (Input.GetMouseButtonDown(0))
             {
-                //dungeon kismi 
+                _isTouching = true;
+                InputSignals.Instance.onInputTaken?.Invoke();
+                if (!isFirstTimeTouchTaken)
+                {
+                    isFirstTimeTouchTaken = true;
+                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                }
+
+                _mousePosition = Input.mousePosition;
+            }
+
+
+            if ((currentGameState == GameStatesType.Idle))
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    if (_isTouching)
+                    {
+                        if (currentGameState == GameStatesType.Idle)
+                        {
+                            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
+
+                            _moveVector = _joystickPosition;
+
+                            InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
+                            {
+                                joystickMovement = _moveVector
+                            });
+                        }
+                    }
+                }
             }
         }
 
+        private void OnEnableInput()
+        {
+            isReadyForTouch = true;
+        }
+
+        private void OnDisableInput()
+        {
+            isReadyForTouch = false;
+        }
 
         private void OnPlay()
         {
@@ -122,44 +143,5 @@ namespace Managers
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;
         }
-
-        #endregion
-        private void Update()
-        {
-            if (!isReadyForTouch) return;
-            // if (Input.GetMouseButton(0))
-            //     if (_isTouching)
-            //     {
-            //         if (isJoystick)
-            //         {
-            //             _duringOnDraggingJoystickCommand.Execute();
-            //         }
-            //         // else
-            //         // {
-            //         //     if (MousePosition != null) _duringOnDraggingCommand.Execute();
-            //         // }
-            //     }
-            if (currentGameStatesType == GameStatesType.Idle)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    if (_isTouching)
-                    {
-                        
-                            _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
-                            
-                            _moveVector = _joystickPosition;
-                            
-                            InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
-                            {
-                                joystickMovement = _moveVector
-                            });
-                        
-                    }
-                }
-            
-        }
     }
-}
-    
 }

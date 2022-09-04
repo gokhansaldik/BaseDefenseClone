@@ -135,6 +135,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1702611891051671752}
     m_Modifications:
+    - target: {fileID: 3498676102893660642, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6196553412691873120, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -227,14 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e18d795a9e45b2bba788c1e80a792a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data:
-    MovementData:
-      ForwardSpeed: 5
-      SidewaysSpeed: 2
-      PlayerJoystickSpeed: 3
-  playerAnimationController: {fileID: 4062323075490146453}
-  playerMovementController: {fileID: 5689183532472190602}
-  colorParticle: {fileID: 0}
+  movementController: {fileID: 5689183532472190602}
+  physicsController: {fileID: 846378000982102565}
+  animationController: {fileID: 4062323075490146453}
 --- !u!114 &5689183532472190602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,8 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa93e4df6e64a9fb30aefdaad305423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 4641318569239889916}
-  cdMovementList: {fileID: 11400000, guid: 76961a7c3e355c3408ff32f378ddad9c, type: 2}
+  rigidBody: {fileID: 4641318569239889916}
+  currentGameState: 0
+  manager: {fileID: 563115210009882936}
 --- !u!114 &4062323075490146453
 MonoBehaviour:
   m_ObjectHideFlags: 0

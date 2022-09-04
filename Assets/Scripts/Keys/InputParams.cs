@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Keys
 {
-    public class InputParams : MonoBehaviour
+    public struct InputParams 
     {
         public Vector3 Values;
         public Vector2 ClampValues;

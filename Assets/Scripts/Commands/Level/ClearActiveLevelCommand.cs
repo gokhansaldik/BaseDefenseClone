@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class ClearActiveLevelCommand : MonoBehaviour
+    public class ClearActiveLevelCommand 
     {
         #region Self Variables
 

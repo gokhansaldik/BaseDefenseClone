@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class LevelLoaderCommand : MonoBehaviour
+    public class LevelLoaderCommand 
     {
         #region Self Variables
 
