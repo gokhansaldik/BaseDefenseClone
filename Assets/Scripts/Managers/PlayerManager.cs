@@ -19,7 +19,6 @@ namespace Managers
 
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerPhysicsController physicsController;
-
         [SerializeField] private PlayerAnimationController animationController;
 
         #endregion Seriliazed Field
@@ -27,6 +26,7 @@ namespace Managers
         #region Private
 
         private PlayerData _playerData;
+        private GameStatesType _states;
 
         #endregion Private
 
@@ -104,30 +104,39 @@ namespace Managers
         {
             DeactivateMovement();
         }
-
-
-        private void OnJoystickDragged(IdleInputParams inputParams) =>
-            movementController.UpdateIdleInputValue(inputParams);
-
-        //private void OnGameStateChange(GameStates gameState) => movementController.ChangeGameStates(gameState);
-
         
 
 
-        private void ActivateMovement()
+        private void OnJoystickDragged(IdleInputParams inputParams)
         {
-            movementController.ActivateMovement();
+            movementController.UpdateIdleInputValue(inputParams);
+            //PlayAnim(Mathf.Abs(inputParams.joystickMovement.x + inputParams.joystickMovement.y));
         }
+            
+
+        //private void OnGameStateChange(GameStates gameState) => movementController.ChangeGameStates(gameState);
+
+
+       
 
         public void DeactivateMovement()
         {
             movementController.DeactivateMovement();
+            ChangePlayerAnimation(PlayerAnimationStates.Idle);
+            //animationController.ChangeCollectableAnimation(PlayerAnimationStates.Idle);
+        }
+        private void ActivateMovement()
+        {
+            movementController.ActivateMovement();
+            ChangePlayerAnimation(PlayerAnimationStates.Run);
+            //animationController.ChangeCollectableAnimation(PlayerAnimationStates.Run);
         }
 
+        public void ChangePlayerAnimation(PlayerAnimationStates animType)
+        {
+            animationController.ChangeAnimationState(animType);
+        }
 
-      
-
-        
 
         private Transform OnGetPlayerTransform() => transform;
 
@@ -135,7 +144,6 @@ namespace Managers
 
         private void OnReset()
         {
-           
             movementController.MovementReset();
             animationController.gameObject.SetActive(false);
             transform.DOScale(Vector3.one, .1f);
