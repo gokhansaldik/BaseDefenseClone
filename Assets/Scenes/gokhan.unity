@@ -209,6 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416183111}
+  - component: {fileID: 416183112}
   m_Layer: 0
   m_Name: StackSignals
   m_TagString: Untagged
@@ -230,6 +231,18 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &416183112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416183110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7ecf3317c34a6f924b7a66b53dd356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &426803796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1599653110}
+  - component: {fileID: 1599653111}
   m_Layer: 0
   m_Name: PoolSignals
   m_TagString: Untagged
@@ -1094,6 +1108,18 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1599653111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599653109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6553caf5d4c946e6af3f848fbc772c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1628736466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,6 +1233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2022364030}
+  - component: {fileID: 2022364031}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -1228,6 +1255,20 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022364031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022364029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4e65d5415a4abd8a0cf0adb26b808d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelHolder: {fileID: 680762660}
+  poolManagerG: {fileID: 2022364030}
 --- !u!1 &2047799131
 GameObject:
   m_ObjectHideFlags: 0
