@@ -114,7 +114,7 @@ namespace Managers
 
                             InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
                             {
-                                joystickMovement = _moveVector
+                                JoystickMovement = _moveVector
                             });
                         }
                     }

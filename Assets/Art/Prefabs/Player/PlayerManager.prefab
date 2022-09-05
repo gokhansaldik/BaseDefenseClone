@@ -15177,6 +15177,7 @@ GameObject:
   - component: {fileID: 4965702947359201560}
   - component: {fileID: 4211737065757712237}
   - component: {fileID: 5015806628030634079}
+  - component: {fileID: 846378000982102565}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -15227,6 +15228,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &846378000982102565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535380664507532564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1241eb73d145a094b1d5b7ee2c691b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 563115210009882936}
 --- !u!1 &6187384513819193163
 GameObject:
   m_ObjectHideFlags: 0
@@ -15269,6 +15283,8 @@ GameObject:
   - component: {fileID: 6196553412691873120}
   - component: {fileID: 3498676102893660642}
   - component: {fileID: 1254033663869229792}
+  - component: {fileID: 563115210009882936}
+  - component: {fileID: 5689183532472190602}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Player
@@ -15285,7 +15301,7 @@ Transform:
   m_GameObject: {fileID: 6196553412691873121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5941423297749485145}
   - {fileID: 4965702947359201560}
@@ -15326,6 +15342,35 @@ CapsuleCollider:
   m_Height: 0.82
   m_Direction: 1
   m_Center: {x: 0, y: 0.42, z: 0}
+--- !u!114 &563115210009882936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196553412691873121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e18d795a9e45b2bba788c1e80a792a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementController: {fileID: 5689183532472190602}
+  physicsController: {fileID: 846378000982102565}
+  animationController: {fileID: 4062323075490146453}
+--- !u!114 &5689183532472190602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196553412691873121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa93e4df6e64a9fb30aefdaad305423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 3498676102893660642}
+  currentGameState: 0
 --- !u!1 &6332542681447834612
 GameObject:
   m_ObjectHideFlags: 0
@@ -15368,6 +15413,7 @@ GameObject:
   - component: {fileID: 5941423297749485145}
   - component: {fileID: 329890692009253923}
   - component: {fileID: 3787610702357292994}
+  - component: {fileID: 4062323075490146453}
   m_Layer: 0
   m_Name: PlayerArmature
   m_TagString: Untagged
@@ -15424,6 +15470,19 @@ CapsuleCollider:
   m_Height: 0.79
   m_Direction: 1
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &4062323075490146453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431137717616565475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dabc110e39a54230b4abc9cd93f7b5a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimatorController: {fileID: 329890692009253923}
 --- !u!1 &6555997386928766904
 GameObject:
   m_ObjectHideFlags: 0

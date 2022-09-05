@@ -10,8 +10,6 @@ public class PlayerData
 [Serializable]
 public class PlayerMovementData
 {
-    [Space]
-    [Header("Idle")]
-    public float IdleSpeed = 8f;
-    public float IdleTurnSpeed = .5f;
+    [Space] [Header("Idle")] public float IdleSpeed = 8f;
+    //public float IdleTurnSpeed = .5f;
 }

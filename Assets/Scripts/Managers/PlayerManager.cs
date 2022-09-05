@@ -3,11 +3,9 @@ using DG.Tweening;
 using Enums;
 using Keys;
 using Signals;
-using System;
 using Data.UnityObject;
-using Data.ValueObject;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 namespace Managers
 {
@@ -15,22 +13,22 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Seriliazed Field
+        #region Seriliazed Variables
 
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerAnimationController animationController;
 
-        #endregion Seriliazed Field
+        #endregion
 
-        #region Private
+        #region Private Variables
 
         private PlayerData _playerData;
         private GameStatesType _states;
 
-        #endregion Private
+        #endregion
 
-        #endregion Self Variables
+        #endregion
 
         private void Awake()
         {
@@ -58,7 +56,6 @@ namespace Managers
 
             InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
 
-
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
         }
 
@@ -73,7 +70,6 @@ namespace Managers
 
             InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
 
-
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
         }
 
@@ -82,7 +78,7 @@ namespace Managers
             UnsubscribeEvents();
         }
 
-        #endregion Event Subsicription
+        #endregion
 
         private void SetPlayerDataToControllers()
         {
@@ -104,32 +100,24 @@ namespace Managers
         {
             DeactivateMovement();
         }
-        
 
 
         private void OnJoystickDragged(IdleInputParams inputParams)
         {
             movementController.UpdateIdleInputValue(inputParams);
-            //PlayAnim(Mathf.Abs(inputParams.joystickMovement.x + inputParams.joystickMovement.y));
         }
-            
 
-        //private void OnGameStateChange(GameStates gameState) => movementController.ChangeGameStates(gameState);
-
-
-       
 
         public void DeactivateMovement()
         {
             movementController.DeactivateMovement();
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
-            //animationController.ChangeCollectableAnimation(PlayerAnimationStates.Idle);
         }
+
         private void ActivateMovement()
         {
             movementController.ActivateMovement();
             ChangePlayerAnimation(PlayerAnimationStates.Run);
-            //animationController.ChangeCollectableAnimation(PlayerAnimationStates.Run);
         }
 
         public void ChangePlayerAnimation(PlayerAnimationStates animType)
@@ -137,8 +125,6 @@ namespace Managers
             animationController.ChangeAnimationState(animType);
         }
 
-
-        private Transform OnGetPlayerTransform() => transform;
 
         private void OnLevelFailed() => movementController.IsReadyToPlay(false);
 

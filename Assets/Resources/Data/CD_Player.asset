@@ -15,4 +15,3 @@ MonoBehaviour:
   Data:
     playerMovementData:
       IdleSpeed: 4
-      IdleTurnSpeed: 0.5

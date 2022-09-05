@@ -66,20 +66,13 @@ namespace Managers
 
         private void InitPanels()
         {
-            //uiPanelController.ClosePanel(UIPanels.FailPanel);
             uiPanelController.ClosePanel(UIPanels.LevelPanel);
-            //uiPanelController.ClosePanel(UIPanels.IdlePanel);
         }
 
         private void OnSetLevelText()
         {
             levelPanelController.SetLevelText();
         }
-
-        // private void onSetScoreText(int value)
-        // {
-        //     idlePanelController.SetScoreText(value);
-        // }
 
 
         private void OnPlay()
@@ -91,7 +84,6 @@ namespace Managers
         private void OnLevelFailed()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            //UISignals.Instance.onOpenPanel?.Invoke(UIPanels.FailPanel);
         }
 
         private void OnLevelSuccessful()
@@ -108,14 +100,13 @@ namespace Managers
         public void NextLevel()
         {
             LevelSignals.Instance.onNextLevel?.Invoke();
-            //UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
+
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             OnSetLevelText();
         }
 
         public void Restart()
         {
-            // UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             LevelSignals.Instance.onRestartLevel?.Invoke();

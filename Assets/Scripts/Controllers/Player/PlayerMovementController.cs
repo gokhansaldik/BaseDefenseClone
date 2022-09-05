@@ -2,7 +2,6 @@ using Enums;
 using Keys;
 using DG.Tweening;
 using UnityEngine;
-using Managers;
 
 namespace Controllers
 {
@@ -10,39 +9,23 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public
-        
-        #endregion
-
-        #region Serialized
+        #region Serialized Variables
 
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private GameStatesType currentGameState;
-        [SerializeField] private PlayerManager manager;
-        
+
         #endregion
 
-        #region Private
+        #region Private Variables
 
         private PlayerMovementData _movementData;
-        private bool _isReadyToMove, _isReadyToPlay, _isMovingVertical;
-        private float _inputValueX;
-        private Vector2 _clampValues;
+        private bool _isReadyToMove;
+        private bool _isReadyToPlay;
         private Vector3 _movementDirection;
-        
 
         #endregion
-        
-        #endregion
-        
-        public void SetMovementData(PlayerMovementData movementData) => _movementData = movementData;
-        public void ActivateMovement() => _isReadyToMove = true;
-        public void DeactivateMovement() => _isReadyToMove = false;
 
-       
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.joystickMovement;
-        public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
-        //public void ChangeGameStates(GameStates currentState) => currentGameState = currentState;
+        #endregion
 
         private void FixedUpdate()
         {
@@ -50,16 +33,14 @@ namespace Controllers
             {
                 if (_isReadyToMove)
                 {
-                   
-                     if (currentGameState == GameStatesType.Idle)
+                    if (currentGameState == GameStatesType.Idle)
                     {
                         IdleMove();
                     }
                 }
                 else
                 {
-                    
-                     if (currentGameState == GameStatesType.Idle)
+                    if (currentGameState == GameStatesType.Idle)
                     {
                         Stop();
                     }
@@ -68,11 +49,7 @@ namespace Controllers
             else
                 Stop();
         }
-        
-        
 
-        
-        
         private void IdleMove()
         {
             Vector3 velocity = rigidBody.velocity;
@@ -84,22 +61,17 @@ namespace Controllers
             {
                 Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
                 transform.rotation = toRotation;
-                return;
             }
         }
-        
 
         private void Stop()
         {
             rigidBody.velocity = Vector3.zero;
-            
+
             rigidBody.angularVelocity = Vector3.zero;
         }
-       
 
-       
-
-        public  void MovementReset()
+        public void MovementReset()
         {
             Stop();
             _isReadyToPlay = false;
@@ -112,5 +84,14 @@ namespace Controllers
         {
             DOTween.KillAll();
         }
+
+        public void SetMovementData(PlayerMovementData movementData) => _movementData = movementData;
+        public void ActivateMovement() => _isReadyToMove = true;
+        public void DeactivateMovement() => _isReadyToMove = false;
+
+        public void UpdateIdleInputValue(IdleInputParams inputParam) =>
+            _movementDirection = inputParam.JoystickMovement;
+
+        public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
     }
 }
