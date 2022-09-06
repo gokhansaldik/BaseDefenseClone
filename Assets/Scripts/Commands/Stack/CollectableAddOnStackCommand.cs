@@ -14,6 +14,7 @@ namespace Commands
         private readonly StackManager _stackManager;
         private readonly List<GameObject> _stackList;
         private readonly StackData _stackData;
+        private PlayerManager _playerManager;
 
         #endregion
 
@@ -31,7 +32,7 @@ namespace Commands
         {
             _obj.transform.parent = _stackManager.transform;
             _stackList.Add(_obj);
-            if (_stackList.Count > _stackData.StackLimit) _obj.SetActive(false);
+            //if (_stackList.Count > _stackData.StackLimit) _obj.SetActive(false);
             var pivot = _stackList[_stackList.Count - 1].transform.position;
 
             _obj.transform.localPosition =

@@ -1586,9 +1586,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5079944467522814789}
     m_Modifications:
+    - target: {fileID: 46886551493076501, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
+      propertyPath: m_TagString
+      value: Collectable
+      objectReference: {fileID: 0}
     - target: {fileID: 8425939303997151591, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_Name
       value: CollectablePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425939303997151591, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_RootOrder
@@ -1596,15 +1604,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: -1.59
       objectReference: {fileID: 0}
     - target: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.023
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.148
+      value: 7.53
       objectReference: {fileID: 0}
     - target: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_LocalRotation.w

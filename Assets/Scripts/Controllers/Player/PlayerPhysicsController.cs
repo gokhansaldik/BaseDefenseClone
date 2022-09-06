@@ -30,9 +30,7 @@ namespace Controllers
             if (other.CompareTag("Collectable"))
             {
              
-                StackSignals.Instance.onAddInStack?.Invoke(other.gameObject);
-                Debug.Log("çalıştı");
-        
+                StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
             }
         }
 
