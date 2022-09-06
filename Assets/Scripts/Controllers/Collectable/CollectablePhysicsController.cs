@@ -1,4 +1,6 @@
+using Enums;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -16,6 +18,7 @@ namespace Controllers
         #region Serializable Variables
 
         [SerializeField] private CollectableManager collectablemanager;
+        private readonly StackManager _manager;
 
         #endregion
 
@@ -30,13 +33,18 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Collectable") && !isTaken)
+            if (other.CompareTag("Player")&& !isTaken)
             {
-                var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
-                if (!otherPhysic.isTaken)
-                {
-                    otherPhysic.isTaken = true;
-                }
+                //var otherPhysic = other.gameObject.GetComponent<CollectablePhysicsController>();
+                //  StackSignals.Instance.onAddInStack?.Invoke(gameObject);
+                //  if (!otherPhysic.isTaken)
+                //  {
+                //      otherPhysic.isTaken = true;
+                // }
+                // StackSignals.Instance.onAddInStack?.Invoke(other.gameObject);
+                // Debug.Log("Collectable Physics");
+                // var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Collectable);
+                // _manager.AddInStack(obj);
             }
 
 

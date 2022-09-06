@@ -1648,9 +1648,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1702611891051671752}
     m_Modifications:
+    - target: {fileID: 846378000982102565, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
+      propertyPath: isTaken
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1254033663869229792, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535380664507532564, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6196553412691873120, guid: d03bb3d4395360e449ab85eb1bdcf4bc, type: 3}
       propertyPath: m_RootOrder

@@ -134,7 +134,7 @@ namespace Managers
 
         public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
         {
-            _collectableAnimSetCommand.Execute(obj, animationStates);
+            //_collectableAnimSetCommand.Execute(obj, animationStates);
         }
 
         private void OnEnterFinish()
@@ -157,9 +157,9 @@ namespace Managers
 
         private void OnAddInStack(GameObject obj)
         {
-            //StartCoroutine(_stackShackAnimCommand.Execute());
-            CollectableAnimSet(obj, CollectableAnimationStates.Run);
             AddInStack(obj);
+            CollectableAnimSet(obj, CollectableAnimationStates.Run);
+            //StartCoroutine(_stackShackAnimCommand.Execute());
         }
 
 

@@ -1,5 +1,7 @@
 using Managers;
+using Signals;
 using UnityEngine;
+
 
 namespace Controllers
 {
@@ -8,7 +10,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
-
+        public bool isTaken;
         #endregion
 
         #region Serialized Variables
@@ -25,6 +27,13 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Collectable"))
+            {
+             
+                StackSignals.Instance.onAddInStack?.Invoke(other.gameObject);
+                Debug.Log("çalıştı");
+        
+            }
         }
 
         private void OnTriggerStay(Collider other)
