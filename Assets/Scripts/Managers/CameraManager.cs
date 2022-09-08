@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Enums;
 using Signals;
@@ -37,6 +38,11 @@ namespace Managers
         private void GetReferences()
         {
             _animator = GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+            SetPlayerFollow();
         }
 
         #region Event Subscriptions
