@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cinemachine;
 using Commands;
 using Data.UnityObject;
 using Datas.ValueObject;
@@ -7,6 +8,7 @@ using Enums;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Managers
 {
@@ -38,7 +40,7 @@ namespace Managers
         private Transform _playerManager;
 
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
-
+        
         #endregion
 
         #endregion
@@ -125,6 +127,9 @@ namespace Managers
             if (!_playerManager)
                 return;
             _stackLerpMovementCommand.Execute(ref _playerManager);
+
+           
+
         }
 
         public void AddInStack(GameObject obj)
