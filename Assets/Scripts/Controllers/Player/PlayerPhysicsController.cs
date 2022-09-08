@@ -31,6 +31,7 @@ namespace Controllers
             {
              
                 StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
+                other.gameObject.tag = "Collected";
             }
         }
 

@@ -38,6 +38,8 @@ namespace Commands
             _obj.transform.localPosition =
                 new Vector3(pivot.x, pivot.y, pivot.z - _stackData.StackOffset * _stackList.Count * 2);
             //ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
+             
+             
         }
     }
 }

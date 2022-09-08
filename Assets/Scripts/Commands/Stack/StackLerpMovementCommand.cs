@@ -61,6 +61,7 @@ namespace Commands
                 
                 _positionHistory.Insert(0, _playerTransform.position);
                 int index = 0;
+                
                  foreach (var body in _stackList)
                  {
                      Vector3 point = _positionHistory[Mathf.Min(index * _gap, _positionHistory.Count - 1)];
