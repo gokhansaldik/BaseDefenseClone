@@ -11,5 +11,7 @@ public class PlayerData
 public class PlayerMovementData
 {
     [Space] [Header("Idle")] public float IdleSpeed = 8f;
+    public int PlayerHealth;
+    public float AttackRange;
     //public float IdleTurnSpeed = .5f;
 }
