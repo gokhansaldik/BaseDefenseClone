@@ -7,6 +7,7 @@ using Datas.ValueObject;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,6 +26,7 @@ namespace Managers
         #region Serilazible Variables
 
         [SerializeField] private StackManager stackManager;
+        [SerializeField] private Transform moneyHolderTransform;
 
         #endregion
 
@@ -32,15 +34,18 @@ namespace Managers
 
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
-        
+
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
+
         //private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private StackItemsCombineCommand _stackItemsCombineCommand;
         private Transform _playerManager;
 
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
-        
+        private int _numOfItemsHolding = 0;
+        private Stack<Transform> _moneyTransform = new Stack<Transform>();
+
         #endregion
 
         #endregion
@@ -64,8 +69,7 @@ namespace Managers
             StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
             //StackSignals.Instance.onTransportInStack += _transportInStack.Execute;
             StackSignals.Instance.onGetStackList += OnGetStackList;
-
-
+            //StackSignals.Instance.onAddStackMoney += OnAddStackMoney;
             CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -78,7 +82,7 @@ namespace Managers
             StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
             //StackSignals.Instance.onTransportInStack -= _transportInStack.Execute;
             StackSignals.Instance.onGetStackList -= OnGetStackList;
-
+            //StackSignals.Instance.onAddStackMoney -= OnAddStackMoney;
 
             CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -101,19 +105,19 @@ namespace Managers
         private void GetReferences()
         {
             StackData = GetStackData();
+            //moneyHolderTransform = FindObjectOfType<PlayerManager>().transform;
         }
 
-      
 
         private void Init()
         {
             _collectableAddOnStackCommand =
                 new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList, ref StackData);
-            
+
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager,
                 ref StackData);
-           // _transportInStack = new TransportInStack(ref _stackList, ref stackManager, ref StackData);
+            // _transportInStack = new TransportInStack(ref _stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
 
 
@@ -127,9 +131,6 @@ namespace Managers
             if (!_playerManager)
                 return;
             _stackLerpMovementCommand.Execute(ref _playerManager);
-
-           
-
         }
 
         public void AddInStack(GameObject obj)
@@ -167,6 +168,14 @@ namespace Managers
             //StartCoroutine(_stackShackAnimCommand.Execute());
         }
 
+        // private void OnAddStackMoney(GameObject obj)
+        // {
+        //     obj.transform.SetParent(moneyHolderTransform);
+        //     obj.transform.localPosition = new Vector3(0, _moneyTransform.Count * .1f, .1f);
+        //     obj.transform.localRotation = Quaternion.identity;
+        //     _moneyTransform.Push(obj.transform);
+        // }
+
 
         // private void Initialized()
         // {
@@ -187,8 +196,6 @@ namespace Managers
             CollectableAnimSet(_stackListObj, CollectableAnimationStates.Run);
             AddInStack(_stackListObj);
         }
-
-       
 
 
         private async void ClearStackManager()

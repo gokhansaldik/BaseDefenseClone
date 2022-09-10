@@ -33,6 +33,15 @@ namespace Controllers
                 StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 other.gameObject.tag = "Collected";
             }
+
+            else if(other.CompareTag("CollectableMoney"))
+            {
+                playerManager.AddStack(other.gameObject);
+                
+                   // StackSignals.Instance.onAddStackMoney?.Invoke(other.gameObject);
+                
+               
+            }
         }
 
         private void OnTriggerStay(Collider other)

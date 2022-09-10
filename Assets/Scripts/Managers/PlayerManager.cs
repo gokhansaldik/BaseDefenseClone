@@ -13,12 +13,19 @@ namespace Managers
     {
         #region Self Variables
 
+        #region Public Variables
+
+        public PlayerData PlayerData;
+
+        #endregion
+
         #region Seriliazed Variables
 
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerAnimationController animationController;
-
+        [SerializeField] private PlayerStackController playerStackController;
+        
         #endregion
 
         #region Private Variables
@@ -34,6 +41,7 @@ namespace Managers
         {
             _playerData = GetPlayerData();
             SetPlayerDataToControllers();
+            SendPlayerDataToControllers();
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -123,6 +131,14 @@ namespace Managers
         public void ChangePlayerAnimation(PlayerAnimationStates animType)
         {
             animationController.ChangeAnimationState(animType);
+        }
+        private void SendPlayerDataToControllers()
+        {
+            playerStackController.SetStackData(PlayerData.StackData);
+        }
+        public void AddStack(GameObject obj)
+        {
+            playerStackController.AddStack(obj);
         }
 
 

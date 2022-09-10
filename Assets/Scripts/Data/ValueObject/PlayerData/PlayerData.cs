@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerData
 {
     public PlayerMovementData playerMovementData;
+    public PlayerStackData StackData;
 }
 
 [Serializable]
@@ -14,4 +15,12 @@ public class PlayerMovementData
     public int PlayerHealth;
     public float AttackRange;
     //public float IdleTurnSpeed = .5f;
+}
+[Serializable]
+public class PlayerStackData
+{
+    public int StackLimit = 10;
+    public float StackoffsetY = 10;
+    public float StackoffsetZ = 10;
+    public float AnimationDurition = 1;
 }

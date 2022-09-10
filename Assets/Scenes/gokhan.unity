@@ -741,6 +741,7 @@ MonoBehaviour:
     StackLerpZDelay: 0.3
     StackOffset: 0.3
   stackManager: {fileID: 817862041}
+  moneyHolderTransform: {fileID: 0}
 --- !u!1 &889590986
 GameObject:
   m_ObjectHideFlags: 0
