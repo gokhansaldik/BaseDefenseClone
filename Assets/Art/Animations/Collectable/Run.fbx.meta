@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: 32eeb98df054d804d8d0615c0622efc7
+guid: d188d3472509c44478a645881c94e882
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Kneeling Inspecting
+    second: Running (1)
+  - first:
+      74: -9121621101649706817
+    second: Running
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Kneeling Inspecting
+      name: Running
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 148
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -521,11 +524,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 32eeb98df054d804d8d0615c0622efc7, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
