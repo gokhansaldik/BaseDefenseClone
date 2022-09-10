@@ -17,6 +17,7 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private GameObject moneyStackHolder;
+        //[SerializeField] private GameObject diamondStackHolder;
 
         #endregion
 
@@ -36,13 +37,20 @@ namespace Controllers
         }
 
 
-        public void AddStack(GameObject obj)
+        public void MoneyAddStack(GameObject obj)
         {
             if (obj == null) return;
             MoneyStackList.Add(obj);
             obj.transform.SetParent(moneyStackHolder.transform);
             SetObjPosition(obj);
         }
+        // public void DiamondAddStack(GameObject obj)
+        // {
+        //     if (obj == null) return;
+        //     MoneyStackList.Add(obj);
+        //     obj.transform.SetParent(moneyStackHolder.transform);
+        //     SetObjPosition(obj);
+        // }
 
         private void SetObjPosition(GameObject obj)
         {

@@ -12,19 +12,11 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private CollectableAnimationController collectableAnimationController;
         [SerializeField] private CollectableMeshController collectableMeshController;
         [SerializeField] private CollectableManager collectableManager;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 

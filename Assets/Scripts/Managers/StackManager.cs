@@ -165,7 +165,6 @@ namespace Managers
         {
             AddInStack(obj);
             CollectableAnimSet(obj, CollectableAnimationStates.Run);
-            //StartCoroutine(_stackShackAnimCommand.Execute());
         }
 
         // private void OnAddStackMoney(GameObject obj)
@@ -174,20 +173,6 @@ namespace Managers
         //     obj.transform.localPosition = new Vector3(0, _moneyTransform.Count * .1f, .1f);
         //     obj.transform.localRotation = Quaternion.identity;
         //     _moneyTransform.Push(obj.transform);
-        // }
-
-
-        // private void Initialized()
-        // {
-        //     for (var i = 0; i < 6; i++)
-        //     {
-        //         var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Collectable);
-        //         obj.SetActive(true);
-        //         _collectableAddOnStackCommand.Execute(obj);
-        //     }
-        //
-        //
-        //     SetAllCollectableAnim(CollectableAnimationStates.Crouch);
         // }
 
 

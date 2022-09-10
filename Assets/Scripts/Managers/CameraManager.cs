@@ -11,12 +11,11 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
+        #region Serialized Variables
 
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
 
         #endregion
-
 
         #region Private Variables
 

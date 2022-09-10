@@ -25,7 +25,7 @@ namespace Managers
         [SerializeField] private PlayerPhysicsController physicsController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerStackController playerStackController;
-        
+
         #endregion
 
         #region Private Variables
@@ -132,13 +132,16 @@ namespace Managers
         {
             animationController.ChangeAnimationState(animType);
         }
+
         private void SendPlayerDataToControllers()
         {
             playerStackController.SetStackData(PlayerData.StackData);
         }
+
         public void AddStack(GameObject obj)
         {
-            playerStackController.AddStack(obj);
+            playerStackController.MoneyAddStack(obj);
+            //playerStackController.DiamondAddStack(obj);
         }
 
 

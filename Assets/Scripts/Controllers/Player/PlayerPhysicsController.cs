@@ -9,17 +9,9 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region Public Variables
-        public bool isTaken;
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-
-        #endregion
-
-        #region Private Variables
 
         #endregion
 
@@ -29,19 +21,20 @@ namespace Controllers
         {
             if (other.CompareTag("CollectablePlayer"))
             {
-             
                 StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 other.gameObject.tag = "Collected";
             }
 
-            else if(other.CompareTag("CollectableMoney"))
+            else if (other.CompareTag("CollectableMoney"))
             {
                 playerManager.AddStack(other.gameObject);
-                
-                   // StackSignals.Instance.onAddStackMoney?.Invoke(other.gameObject);
-                
-               
+                other.gameObject.tag = "CollectedMoney";
             }
+            // else if (other.CompareTag("CollectableDiamond"))
+            // {
+            //     playerManager.AddStack(other.gameObject);
+            //     other.gameObject.tag = "CollectedMoney";
+            // }
         }
 
         private void OnTriggerStay(Collider other)
