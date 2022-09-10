@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Collectable
   - Collected
+  - BuyArea
+  - CollectablePlayer
+  - CollectableMoney
+  - Collectable
+  - CollectableDiamond
   layers:
   - Default
   - TransparentFX

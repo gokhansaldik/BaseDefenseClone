@@ -27,7 +27,7 @@ namespace Controllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Collectable"))
+            if (other.CompareTag("CollectablePlayer"))
             {
              
                 StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
