@@ -13,6 +13,7 @@ namespace Managers
 
         [SerializeField] private UIPanelController uiPanelController;
         [SerializeField] private LevelPanelController levelPanelController;
+        [SerializeField] private IdlePanelController idlePanelController;
 
         #endregion
 
@@ -29,6 +30,7 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            UISignals.Instance.onSetMoneyText += onSetScoreText;
             //UISignals.Instance.onSetScoreText += onSetScoreText;
             //CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -40,6 +42,7 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
+            UISignals.Instance.onSetMoneyText -= onSetScoreText;
             //UISignals.Instance.onSetScoreText -= onSetScoreText;
             //CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -72,6 +75,10 @@ namespace Managers
         private void OnSetLevelText()
         {
             levelPanelController.SetLevelText();
+        }
+        private void onSetScoreText(int value)
+        {
+            idlePanelController.SetScoreText(value);
         }
 
 

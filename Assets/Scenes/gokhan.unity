@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 107611967}
+  - component: {fileID: 107611968}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -153,6 +154,18 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &107611968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107611966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b0a8407dc3d794db44f492c967255d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &190787525
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +825,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 995413866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ef33601a744f1c9db99c1ebc319cef, type: 3}
+  m_Script: {fileID: 11500000, guid: 465818ef40aca1a4f84cc3f2244531e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1051524297
@@ -930,6 +943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1163435186}
+  - component: {fileID: 1163435187}
   m_Layer: 0
   m_Name: ScoreSignals
   m_TagString: Untagged
@@ -951,6 +965,18 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1163435187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163435185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbe1308a705fab4c8f7a59004fe5dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1411125956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1628736467}
+  - component: {fileID: 1628736468}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -1230,6 +1257,18 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1628736468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628736466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd593296ce179624a92a888ae5338579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732328300
 GameObject:
   m_ObjectHideFlags: 0
