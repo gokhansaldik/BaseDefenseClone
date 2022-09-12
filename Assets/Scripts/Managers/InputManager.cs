@@ -25,7 +25,7 @@ namespace Managers
         [SerializeField] private bool isReadyForTouch, isFirstTimeTouchTaken;
         [SerializeField] private FloatingJoystick floatingJoystick;
         [SerializeField] private GameStatesType currentGameState;
-
+        [SerializeField] private StackManager _stackManager;
         #endregion
 
         #region Private Variables
@@ -35,6 +35,7 @@ namespace Managers
         private Vector2? _mousePosition;
         private Vector3 _moveVector;
         private Vector3 _joystickPosition;
+        
 
         #endregion
 
@@ -83,7 +84,10 @@ namespace Managers
             if (Input.GetMouseButtonUp(0))
             {
                 _isTouching = false;
+                
                 InputSignals.Instance.onInputReleased?.Invoke();
+                _stackManager.LerpOk = false;
+                
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -104,17 +108,20 @@ namespace Managers
             {
                 if (Input.GetMouseButton(0))
                 {
+                    _stackManager.LerpOk = true;
                     if (_isTouching)
                     {
+                       
                         if (currentGameState == GameStatesType.Idle)
                         {
                             _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
 
                             _moveVector = _joystickPosition;
-
+                            
                             InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
                             {
                                 JoystickMovement = _moveVector
+                                
                             });
                         }
                     }
@@ -124,17 +131,20 @@ namespace Managers
 
         private void OnEnableInput()
         {
-            isReadyForTouch = true;
+           // isReadyForTouch = true;
+            
         }
 
         private void OnDisableInput()
         {
-            isReadyForTouch = false;
+            //isReadyForTouch = false;
+            
         }
 
         private void OnPlay()
         {
             isReadyForTouch = true;
+            
         }
 
         private void OnReset()

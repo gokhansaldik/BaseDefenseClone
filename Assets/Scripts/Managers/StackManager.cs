@@ -20,6 +20,7 @@ namespace Managers
         #region Public Variables
 
         [Header("Data")] public StackData StackData;
+        public bool LerpOk;
 
         #endregion
 
@@ -45,7 +46,9 @@ namespace Managers
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
         private int _numOfItemsHolding = 0;
         private Stack<Transform> _moneyTransform = new Stack<Transform>();
-
+        
+        
+       
         #endregion
 
         #endregion
@@ -130,7 +133,11 @@ namespace Managers
         {
             if (!_playerManager)
                 return;
-            _stackLerpMovementCommand.Execute(ref _playerManager);
+            if (LerpOk == true)
+            {
+                _stackLerpMovementCommand.Execute(ref _playerManager);
+            }
+            
         }
 
         public void AddInStack(GameObject obj)

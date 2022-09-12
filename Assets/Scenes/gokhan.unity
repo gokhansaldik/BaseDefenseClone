@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPanelController: {fileID: 1441128373}
   levelPanelController: {fileID: 1732328302}
+  idlePanelController: {fileID: 0}
 --- !u!1 &245725899
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   isFirstTimeTouchTaken: 0
   floatingJoystick: {fileID: 1598359216775357879}
   currentGameState: 0
+  _stackManager: {fileID: 817862041}
 --- !u!1 &756839930
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +755,7 @@ MonoBehaviour:
     StackLerpYDelay: 0.3
     StackLerpZDelay: 0.3
     StackOffset: 0.3
+  LerpOk: 0
   stackManager: {fileID: 817862041}
   moneyHolderTransform: {fileID: 0}
 --- !u!1 &889590986

@@ -1,6 +1,7 @@
 using Enums;
 using Keys;
 using DG.Tweening;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -17,11 +18,12 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-
         private PlayerMovementData _movementData;
         private bool _isReadyToMove;
         private bool _isReadyToPlay;
         private Vector3 _movementDirection;
+        
+
 
         #endregion
 
@@ -43,6 +45,7 @@ namespace Controllers
                     if (currentGameState == GameStatesType.Idle)
                     {
                         Stop();
+                        
                     }
                 }
             }
@@ -56,19 +59,20 @@ namespace Controllers
             velocity = new Vector3(_movementDirection.x * _movementData.IdleSpeed, velocity.y,
                 _movementDirection.z * _movementData.IdleSpeed);
             rigidBody.velocity = velocity;
-
             if (_movementDirection != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
                 transform.rotation = toRotation;
             }
+
+           
         }
 
         private void Stop()
         {
             rigidBody.velocity = Vector3.zero;
-
             rigidBody.angularVelocity = Vector3.zero;
+            
         }
 
         public void MovementReset()
@@ -86,8 +90,17 @@ namespace Controllers
         }
 
         public void SetMovementData(PlayerMovementData movementData) => _movementData = movementData;
-        public void ActivateMovement() => _isReadyToMove = true;
-        public void DeactivateMovement() => _isReadyToMove = false;
+
+        public void ActivateMovement()
+        {
+            _isReadyToMove = true;
+        }
+
+        public void DeactivateMovement()
+        {
+            _isReadyToMove = false;
+            
+        } 
 
         public void UpdateIdleInputValue(IdleInputParams inputParam) =>
             _movementDirection = inputParam.JoystickMovement;
