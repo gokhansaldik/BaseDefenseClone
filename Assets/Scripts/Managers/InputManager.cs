@@ -81,12 +81,14 @@ namespace Managers
         private void Update()
         {
             if (!isReadyForTouch) return;
+            
             if (Input.GetMouseButtonUp(0))
             {
                 _isTouching = false;
-                
                 InputSignals.Instance.onInputReleased?.Invoke();
                 _stackManager.LerpOk = false;
+                
+                //_stackManager.CollectableAnimSet(obj, CollectableAnimationStates.Idle);
                 
             }
 
@@ -109,6 +111,8 @@ namespace Managers
                 if (Input.GetMouseButton(0))
                 {
                     _stackManager.LerpOk = true;
+                    
+                    //_stackManager.CollectableAnimSet(obj, CollectableAnimationStates.Run);
                     if (_isTouching)
                     {
                        
@@ -153,5 +157,6 @@ namespace Managers
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;
         }
+        
     }
 }

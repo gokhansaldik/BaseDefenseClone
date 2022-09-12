@@ -30,11 +30,7 @@ namespace Controllers
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
             }
-            // else if (other.CompareTag("CollectableDiamond"))
-            // {
-            //     playerManager.AddStack(other.gameObject);
-            //     other.gameObject.tag = "CollectedMoney";
-            // }
+           
         }
 
         private void OnTriggerStay(Collider other)

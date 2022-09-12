@@ -8708,6 +8708,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4816361586087098720}
     m_Modifications:
+    - target: {fileID: 2660360280734434724, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
+      propertyPath: collectableAnimatorController
+      value: 
+      objectReference: {fileID: 4275956779666015221}
     - target: {fileID: 8425939303997151591, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
       propertyPath: m_Name
       value: CollectablePlayer (1)
@@ -8761,6 +8765,11 @@ PrefabInstance:
 --- !u!4 &4744641306992425866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9197796894207689693, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
+  m_PrefabInstance: {fileID: 4502888975548905559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4275956779666015221 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 372173292602653602, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
   m_PrefabInstance: {fileID: 4502888975548905559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4628990210054927218

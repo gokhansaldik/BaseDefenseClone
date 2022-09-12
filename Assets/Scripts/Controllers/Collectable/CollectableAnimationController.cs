@@ -9,7 +9,7 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private Animator animatorController;
+        [SerializeField] private Animator collectableAnimatorController;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace Controllers
 
         public void Playanim(CollectableAnimationStates animationStates)
         {
-            animatorController.SetTrigger(animationStates.ToString());
+            collectableAnimatorController.SetTrigger(animationStates.ToString());
         }
     }
 }

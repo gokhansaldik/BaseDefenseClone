@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148caf16c9ccd9c489d7f417bc77afd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorController: {fileID: 372173292602653602}
+  collectableAnimatorController: {fileID: 372173292602653602}
 --- !u!114 &1047103995097804598
 MonoBehaviour:
   m_ObjectHideFlags: 0

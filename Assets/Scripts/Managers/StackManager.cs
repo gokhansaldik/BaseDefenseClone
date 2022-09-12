@@ -27,7 +27,7 @@ namespace Managers
         #region Serilazible Variables
 
         [SerializeField] private StackManager stackManager;
-        [SerializeField] private Transform moneyHolderTransform;
+       
 
         #endregion
 
@@ -136,18 +136,29 @@ namespace Managers
             if (LerpOk == true)
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
+                
             }
-            
+            else if (LerpOk == false)
+            { 
+                SetAllCollectableAnim(CollectableAnimationStates.Idle);
+            }
         }
 
         public void AddInStack(GameObject obj)
         {
             _collectableAddOnStackCommand.Execute(obj);
+            
+        }
+        public void SetAllCollectableAnim(CollectableAnimationStates states)
+        {
+            foreach (var t in _stackList)
+                CollectableAnimSet(t, states);
         }
 
         public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
         {
-            //_collectableAnimSetCommand.Execute(obj, animationStates);
+            _collectableAnimSetCommand.Execute(obj, animationStates);
+            
         }
 
         private void OnEnterFinish()
@@ -156,11 +167,11 @@ namespace Managers
         }
 
 
-        private void SetAllCollectableAnim(CollectableAnimationStates states)
-        {
-            foreach (var t in _stackList)
-                CollectableAnimSet(t, states);
-        }
+        // private void SetAllCollectableAnim(CollectableAnimationStates states)
+        // {
+        //     foreach (var t in _stackList)
+        //         CollectableAnimSet(t, states);
+        // }
 
         private void FindPlayer()
         {
@@ -171,7 +182,12 @@ namespace Managers
         private void OnAddInStack(GameObject obj)
         {
             AddInStack(obj);
-            CollectableAnimSet(obj, CollectableAnimationStates.Run);
+            if (LerpOk == true)
+            {
+                CollectableAnimSet(obj, CollectableAnimationStates.Run);
+            }
+           
+            
         }
 
         // private void OnAddStackMoney(GameObject obj)
@@ -208,7 +224,7 @@ namespace Managers
         private void OnPlay()
         {
             FindPlayer();
-            SetAllCollectableAnim(CollectableAnimationStates.Run);
+            ////SetAllCollectableAnim(CollectableAnimationStates.Run);
             //ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
 
