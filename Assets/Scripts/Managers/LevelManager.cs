@@ -52,7 +52,7 @@ namespace Managers
 
         private int GetLevelCount()
         {
-            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
+            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
         }
 
         #region Event Subscription

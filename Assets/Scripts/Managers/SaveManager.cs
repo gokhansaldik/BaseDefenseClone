@@ -1,115 +1,119 @@
+using System;
 using System.Collections.Generic;
-using ValueObject;
 using Keys;
 using Signals;
 using UnityEngine;
-
 
 namespace Managers
 {
     public class SaveManager : MonoBehaviour
     {
-       #region Event Subscription
+        #region Self Variables
+        #region Private Variables
+
+        private int _levelCache;
+        private ScoreDataParams _scoreDataCache;
+        private AreaDataParams _areaDataCache;
+        
+        #endregion
+
+        #endregion
+        
+        #region Event Subscription
 
         private void OnEnable()
         {
-            Subscribe();
+            SubscribeEvents();
         }
 
-        private void Subscribe()
+        private void SubscribeEvents()
         {
-            SaveSignals.Instance.onSaveIdleData += onSaveIdleData;
-            SaveSignals.Instance.onSaveScoreData += onSaveScoreData;
-            SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
+            SaveSignals.Instance.onLevelSave += OnLevelSave;
+            SaveSignals.Instance.onScoreSave += OnScoreSave;
+            SaveSignals.Instance.onAreaDataSave += OnAreaDataSave;
+            SaveSignals.Instance.onLoadCurrentLevel += OnLevelLoad;
             SaveSignals.Instance.onLoadScoreData += OnLoadScoreData;
+            SaveSignals.Instance.onLoadAreaData += OnLoadAreaData;
         }
 
-        private void Unsubscribe()
+
+        private void UnsubscribeEvents()
         {
-            SaveSignals.Instance.onSaveIdleData -= onSaveIdleData;
-            SaveSignals.Instance.onSaveScoreData -= onSaveScoreData;
-            SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
+            SaveSignals.Instance.onLevelSave -= OnLevelSave;
+            SaveSignals.Instance.onScoreSave -= OnScoreSave;
+            SaveSignals.Instance.onAreaDataSave -= OnAreaDataSave;
+            SaveSignals.Instance.onLoadCurrentLevel -= OnLevelLoad;
             SaveSignals.Instance.onLoadScoreData -= OnLoadScoreData;
+            SaveSignals.Instance.onLoadAreaData -= OnLoadAreaData;
         }
 
         private void OnDisable()
         {
-            Unsubscribe();
+            UnsubscribeEvents();
         }
 
         #endregion
-
-        private void OnSaveData()
+        
+        private void OnLevelSave()
         {
-            SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
+            _levelCache = SaveSignals.Instance.onSaveLevelData();
+            if (_levelCache != 0) ES3.Save("Level", _levelCache,"Level.es3");
         }
 
-        private void onSaveIdleData()
+        private void OnScoreSave()
         {
-            SaveIdleData(SaveSignals.Instance.onGetSaveIdleData());
-        }
-
-        private void onSaveScoreData()
-        {
-            SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
-        }
-
-        private void SaveIdleData(IdleDataParams idleDataParams)
-        {
-            if (idleDataParams.CityLevel != null)
-                ES3.Save("CityLevel",
-                    idleDataParams.CityLevel,
-                    "IdleData.json");
-            if (idleDataParams.AreaDictionary != null)
-                ES3.Save("AreaDatas",
-                    idleDataParams.AreaDictionary,
-                    "IdleData.json");
-        }
-
-        private void SaveScoreData(ScoreDataParams scoreDataParams)
-        {
-            if (scoreDataParams.Money != null)
-                ES3.Save("Money",
-                    scoreDataParams.Money,
-                    "ScoreData.json");
-            if (scoreDataParams.Diamond != null)
-                ES3.Save("Diamond",
-                    scoreDataParams.Diamond,
-                    "ScoreData.json");
-        }
-
-        private IdleDataParams OnLoadIdleData()
-        {
-            return new IdleDataParams
+            _scoreDataCache = new ScoreDataParams()
             {
-                AreaDictionary =
-                    ES3.KeyExists("AreaDatas",
-                        "IdleData.json")
-                        ? ES3.Load<Dictionary<int, AreaData>>("AreaDatas",
-                            "IdleData.json")
-                        : new Dictionary<int, AreaData>(),
-                CityLevel = ES3.KeyExists("CityLevel",
-                    "IdleData.json")
-                    ? ES3.Load<int>("CityLevel",
-                        "IdleData.json")
-                    : 0
+                MoneyScore = SaveSignals.Instance.onSaveScoreData().MoneyScore,
+                GemScore = SaveSignals.Instance.onSaveScoreData().GemScore
             };
+            if (_scoreDataCache.MoneyScore != 0) ES3.Save("MoneyScore", _scoreDataCache.MoneyScore,"ScoreData.es3");
+            if (_scoreDataCache.GemScore != 0) ES3.Save("GemScore", _scoreDataCache.GemScore,"ScoreData.es3");
+        }
+
+        private void OnAreaDataSave()
+        {
+            _areaDataCache = new AreaDataParams()
+            {
+                RoomPayedAmound = SaveSignals.Instance.onSaveAreaData().RoomPayedAmound,
+                RoomTurretPayedAmound = SaveSignals.Instance.onSaveAreaData().RoomTurretPayedAmound
+            };
+            if (_areaDataCache.RoomPayedAmound != null) ES3.Save("RoomPayedAmound",
+                _areaDataCache.RoomPayedAmound,"AreaData.es3");
+            if (_areaDataCache.RoomTurretPayedAmound != null) ES3.Save("RoomTurretPayedAmound",
+                _areaDataCache.RoomTurretPayedAmound,"AreaData.es3");
+        }
+
+        private int OnLevelLoad()
+        {
+            return ES3.KeyExists("Level", "Level.es3") 
+                ? ES3.Load<int>("Level", "Level.es3") 
+                : 0;
         }
 
         private ScoreDataParams OnLoadScoreData()
         {
             return new ScoreDataParams
             {
-                Money = ES3.KeyExists("Money",
-                    "ScoreData.json")
-                    ? ES3.Load<int>("Money",
-                        "ScoreData.json")
-                    : 0,
-                Diamond = ES3.KeyExists("Diamond",
-                    "ScoreData.json")
-                    ? ES3.Load<int>("Diamond",
-                        "ScoreData.json")
-                    : 0
+                MoneyScore = ES3.KeyExists("MoneyScore", "ScoreData.es3")
+                    ? ES3.Load<int>("MoneyScore", "ScoreData.es3")
+                    : 1000,
+                GemScore = ES3.KeyExists("GemScore", "ScoreData.es3")
+                    ? ES3.Load<int>("GemScore", "ScoreData.es3")
+                    : 1000
+            };
+        }
+
+        private AreaDataParams OnLoadAreaData()
+        {
+            return new AreaDataParams
+            {
+                RoomPayedAmound = ES3.KeyExists("RoomPayedAmound", "AreaData.es3")
+                    ? ES3.Load<List<int>>("RoomPayedAmound", "AreaData.es3")
+                    : new List<int>(),
+                RoomTurretPayedAmound = ES3.KeyExists("RoomTurretPayedAmound", "AreaData.es3")
+                    ? ES3.Load<List<int>>("RoomTurretPayedAmound", "AreaData.es3")
+                    : new List<int>()
             };
         }
     }

@@ -7,13 +7,19 @@ namespace Signals
 {
     public class SaveSignals : MonoSingleton<SaveSignals>
     {
-        public UnityAction onSaveIdleData = delegate { };
-        public UnityAction onSaveScoreData = delegate { };
+        public UnityAction onLevelSave = delegate {  };
+        public Func<int> onSaveLevelData = delegate { return 0;};
+        
+        public UnityAction onScoreSave = delegate {  };
+        public Func<ScoreDataParams> onSaveScoreData = delegate { return default;};
+        
+        public UnityAction onAreaDataSave = delegate {  };
+        public Func<AreaDataParams> onSaveAreaData = delegate { return default;};
 
-        public Func<IdleDataParams> onGetSaveIdleData = delegate { return default; };
-        public Func<IdleDataParams> onLoadIdleData = delegate { return default; };
-
-        public Func<ScoreDataParams> onGetSaveScoreData = delegate { return default; };
-        public Func<ScoreDataParams> onLoadScoreData = delegate { return default; };
+        //load
+        public Func<int> onLoadCurrentLevel = delegate { return 0;};
+        public Func<ScoreDataParams> onLoadScoreData = delegate { return default;};
+        public Func<AreaDataParams> onLoadAreaData = delegate { return default;};
+        
     }
 }

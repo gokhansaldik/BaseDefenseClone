@@ -1,3 +1,6 @@
+using System;
+using Data.ValueObject;
+using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -6,133 +9,86 @@ namespace Managers
 {
     public class ScoreManager : MonoBehaviour
     {
-     #region Self Variables
-
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
+        #region Self Variables
 
         #region Private Variables
 
-        private int _money;
-        private int _diamond;
+        private ScoreDataParams _loadedScoreDatas;
+        private ScoreData _scoreData = new ScoreData();
 
         #endregion
 
         #endregion
 
-
-        #region EventSubscription
+        #region Event Subscriptions
 
         private void OnEnable()
         {
-            SubscribeEvent();
+            SubscribeEvents();
         }
 
-        private void SubscribeEvent()
+        private void SubscribeEvents()
         {
-            ScoreSignals.Instance.onBuyArea += OnBuyArea;
-            ScoreSignals.Instance.onAddDiamond += OnAddDiamond;
-            ScoreSignals.Instance.onAddMoney += OnAddMoney;
-            ScoreSignals.Instance.onMoneyDown += OnMoneyDown;
-            ScoreSignals.Instance.onDiamondDown += OnDiamondDown;
-
-            SaveSignals.Instance.onGetSaveScoreData += OnGetSaveScoreData;
+            SaveSignals.Instance.onSaveScoreData += OnGetSaveScoreData;
+            ScoreSignals.Instance.onScoreData += OnGetScoreData;
+            ScoreSignals.Instance.onSetScore += OnSetScore;
         }
 
-        private void UnSubscribeEvent()
+        private void UnsubscribeEvents()
         {
-            ScoreSignals.Instance.onBuyArea -= OnBuyArea;
-            ScoreSignals.Instance.onAddDiamond -= OnAddDiamond;
-            ScoreSignals.Instance.onAddMoney -= OnAddMoney;
-            ScoreSignals.Instance.onMoneyDown -= OnMoneyDown;
-            ScoreSignals.Instance.onDiamondDown -= OnDiamondDown;
-
-            SaveSignals.Instance.onGetSaveScoreData -= OnGetSaveScoreData;
+            SaveSignals.Instance.onSaveScoreData -= OnGetSaveScoreData;
+            ScoreSignals.Instance.onScoreData -= OnGetScoreData;
+            ScoreSignals.Instance.onSetScore -= OnSetScore;
         }
-
 
         private void OnDisable()
         {
-            UnSubscribeEvent();
+            UnsubscribeEvents();
         }
 
         #endregion
 
         private void Start()
         {
-            LoadData();
+            _loadedScoreDatas = SaveSignals.Instance.onLoadScoreData();
+            _scoreData.MoneyScore = _loadedScoreDatas.MoneyScore;
+            _scoreData.DiamondScore = _loadedScoreDatas.GemScore;
+            ScoreSignals.Instance.onSetScoreToUI?.Invoke();
         }
 
-       
-
-        private void OnBuyArea()
+        private void OnSetScore(PayType scoreType, int score)
         {
-            if (_money <= 0) return;
-            _money--;
-            IdleGameSignals.Instance.onAreaCostDown?.Invoke();
-            SetMoneyText();
-        }
+            switch (scoreType)
+            {
+                case PayType.Money:
+                    _scoreData.MoneyScore += score;
+                    break;
+                case PayType.Gem:
+                    _scoreData.DiamondScore += score;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(scoreType), scoreType, null);
+            }
 
-
-        private void OnAddMoney(int value)
-        {
-            _money += value;
-            SetMoneyText();
-        }
-
-        private void OnMoneyDown(int value)
-        {
-            _money -= value;
-            SetMoneyText();
-        }
-
-        private void OnAddDiamond(int value)
-        {
-            _diamond += value;
-            SetDiamondText();
-        }
-
-        private void OnDiamondDown(int value)
-        {
-            _diamond -= value;
-            SetDiamondText();
-        }
-
-
-        private void SetMoneyText()
-        {
-            UISignals.Instance.onSetMoneyText?.Invoke(_money);
-        }
-
-        private void SetDiamondText()
-        {
-            UISignals.Instance.onSetDiamondText?.Invoke(_diamond);
+            ScoreSignals.Instance.onSetScoreToUI?.Invoke();
         }
 
         private ScoreDataParams OnGetSaveScoreData()
         {
             return new ScoreDataParams
             {
-                Money = _money,
-                Diamond = _diamond
+                MoneyScore = _scoreData.MoneyScore,
+                GemScore = _scoreData.DiamondScore
             };
         }
 
-        public void LoadData()
+        private ScoreDataParams OnGetScoreData()
         {
-            ScoreDataParams data = SaveSignals.Instance.onLoadScoreData();
-            _money = data.Money;
-            _diamond = data.Diamond;
-        }
-
-        public void SaveData()
-        {
-        
+            return new ScoreDataParams
+            {
+                MoneyScore = _scoreData.MoneyScore,
+                GemScore = _scoreData.DiamondScore
+            };
         }
     }
 }

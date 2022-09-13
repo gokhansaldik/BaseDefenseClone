@@ -4,5 +4,7 @@ namespace Enums
     {
         Idle,
         IdleFinish,
+        TurretCam,
+        DroneCam
     }
 }

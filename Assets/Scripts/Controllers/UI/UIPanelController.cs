@@ -4,26 +4,16 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class UIPanelController : MonoBehaviour
+    public class UIPanelController 
     {
-        #region Self Variables
-
-        #region Serialized Variables
-
-        [SerializeField] private List<GameObject> panels;
-
-        #endregion
-
-        #endregion
-
-        public void OpenPanel(UIPanels panelParam)
+        public void OpenPanel(UIPanels panelParam,List<GameObject> panels)
         {
-            panels[(int)panelParam].SetActive(true);
+            panels[(int) panelParam].SetActive(true);
         }
 
-        public void ClosePanel(UIPanels panelParam)
+        public void ClosePanel(UIPanels panelParam,List<GameObject> panels)
         {
-            panels[(int)panelParam].SetActive(false);
+            panels[(int) panelParam].SetActive(false);
         }
     }
 }

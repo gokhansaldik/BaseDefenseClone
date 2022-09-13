@@ -1,6 +1,10 @@
+using System.Collections.Generic;
 using Controllers;
 using Enums;
+using Keys;
 using Signals;
+using TMPro;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -10,14 +14,24 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
+        [SerializeField] private List<GameObject> panels;
+        [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private TextMeshProUGUI gemText;
 
-        [SerializeField] private UIPanelController uiPanelController;
-        [SerializeField] private LevelPanelController levelPanelController;
-        [SerializeField] private IdlePanelController idlePanelController;
+        #endregion
 
+        #region Private Variables
+        private UIPanelController _uiPanelController;
+        private ScoreDataParams _scoreData;
+        
         #endregion
 
         #endregion
+
+        private void Awake()
+        {
+            _uiPanelController = new UIPanelController();
+        }
 
         #region Event Subscriptions
 
@@ -28,26 +42,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onPlay += OnPlay;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
-            UISignals.Instance.onSetMoneyText += onSetScoreText;
-            //UISignals.Instance.onSetScoreText += onSetScoreText;
-            //CoreGameSignals.Instance.onGetGameState += OnGetGameState;
-            CoreGameSignals.Instance.onPlay += OnPlay;
-            LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            ScoreSignals.Instance.onSetScoreToUI += OnSetScoreText;
         }
 
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onPlay -= OnPlay;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-            UISignals.Instance.onSetMoneyText -= onSetScoreText;
-            //UISignals.Instance.onSetScoreText -= onSetScoreText;
-            //CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-            LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
-            LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            ScoreSignals.Instance.onSetScoreToUI -= OnSetScoreText;
         }
 
         private void OnDisable()
@@ -59,44 +65,26 @@ namespace Managers
 
         private void OnOpenPanel(UIPanels panelParam)
         {
-            uiPanelController.OpenPanel(panelParam);
+            _uiPanelController.OpenPanel(panelParam , panels);
         }
 
         private void OnClosePanel(UIPanels panelParam)
         {
-            uiPanelController.ClosePanel(panelParam);
+            _uiPanelController.ClosePanel(panelParam , panels);
         }
-
-        private void InitPanels()
+        
+        private void OnSetScoreText()
         {
-            uiPanelController.ClosePanel(UIPanels.LevelPanel);
+            _scoreData = ScoreSignals.Instance.onScoreData();
+            moneyText.text = _scoreData.MoneyScore.ToString();
+            gemText.text = _scoreData.GemScore.ToString();
         }
-
-        private void OnSetLevelText()
-        {
-            levelPanelController.SetLevelText();
-        }
-        private void onSetScoreText(int value)
-        {
-            idlePanelController.SetScoreText(value);
-        }
-
-
+        
         private void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-        }
-
-        private void OnLevelFailed()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-        }
-
-        private void OnLevelSuccessful()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            LevelSignals.Instance.onLevelSuccessful?.Invoke();
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.ScorePanel);
         }
 
         public void Play()
@@ -104,19 +92,5 @@ namespace Managers
             CoreGameSignals.Instance.onPlay?.Invoke();
         }
 
-        public void NextLevel()
-        {
-            LevelSignals.Instance.onNextLevel?.Invoke();
-
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            OnSetLevelText();
-        }
-
-        public void Restart()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            LevelSignals.Instance.onRestartLevel?.Invoke();
-        }
     }
 }
