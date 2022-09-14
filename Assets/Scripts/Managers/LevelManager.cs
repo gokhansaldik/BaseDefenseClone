@@ -1,3 +1,4 @@
+using Command;
 using Commands;
 using Data.UnityObject;
 using Signals;
@@ -12,7 +13,7 @@ namespace Managers
 
         #region Public Variables
 
-        [Header("Data")] public int LevelData;
+        [Header("Data")] public int Data;
 
         #endregion
 
@@ -24,8 +25,8 @@ namespace Managers
 
         #region Private Variables
 
-        private ClearActiveLevelCommand _clearActiveLevel;
         private LevelLoaderCommand _levelLoader;
+        private ClearActiveLevelCommand _levelClearer;
         [ShowInInspector] private int _levelID;
 
         #endregion
@@ -34,27 +35,10 @@ namespace Managers
 
         private void Awake()
         {
-            GetReferences();
-            Init();
+            _levelClearer = new ClearActiveLevelCommand();
+            _levelLoader = new LevelLoaderCommand();
         }
-
-        private void GetReferences()
-        {
-            LevelData = GetLevelCount();
-        }
-
-
-        private void Init()
-        {
-            _clearActiveLevel = new ClearActiveLevelCommand(ref levelHolder);
-            _levelLoader = new LevelLoaderCommand(ref levelHolder);
-        }
-
-        private int GetLevelCount()
-        {
-            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
-        }
-
+        
         #region Event Subscription
 
         private void OnEnable()
@@ -66,22 +50,18 @@ namespace Managers
         {
             LevelSignals.Instance.onLevelInitialize += OnInitializeLevel;
             LevelSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
-            //LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            //LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             LevelSignals.Instance.onNextLevel += OnNextLevel;
             LevelSignals.Instance.onRestartLevel += OnRestartLevel;
-            LevelSignals.Instance.onGetLevel += OnGetLevel;
+            LevelSignals.Instance.onGetLevelID += OnGetLevelID;
         }
 
         private void UnsubscribeEvents()
         {
             LevelSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             LevelSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
-            //LevelSignals.Instance.onLevelFailed += OnLevelFailed;
-            //LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             LevelSignals.Instance.onNextLevel -= OnNextLevel;
             LevelSignals.Instance.onRestartLevel -= OnRestartLevel;
-            LevelSignals.Instance.onGetLevel -= OnGetLevel;
+            LevelSignals.Instance.onGetLevelID -= OnGetLevelID;
         }
 
         private void OnDisable()
@@ -93,23 +73,8 @@ namespace Managers
 
         private void Start()
         {
+            _levelID = SaveSignals.Instance.onLoadCurrentLevel();
             OnInitializeLevel();
-        }
-
-        private int OnGetLevel()
-        {
-            return _levelID;
-        }
-
-        private void OnInitializeLevel()
-        {
-            var newLevelData = GetLevelCount();
-            _levelLoader.Execute(newLevelData);
-        }
-
-        private void OnClearActiveLevel()
-        {
-            _clearActiveLevel.Execute();
         }
 
         private void OnNextLevel()
@@ -125,6 +90,27 @@ namespace Managers
             LevelSignals.Instance.onClearActiveLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
             LevelSignals.Instance.onLevelInitialize?.Invoke();
+        }
+        
+        private int OnGetLevelID()
+        {
+            return _levelID;
+        }
+
+        private void OnInitializeLevel()
+        {
+            int newLevelData = GetLevelCount();
+            _levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
+        }
+        
+        private int GetLevelCount()
+        {
+            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
+        }
+        
+        private void OnClearActiveLevel()
+        {
+            _levelClearer.ClearActiveLevel(levelHolder.transform);
         }
     }
 }
