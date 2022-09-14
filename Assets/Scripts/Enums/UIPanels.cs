@@ -8,6 +8,5 @@ namespace Enums
         StartPanel,
         ScorePanel,
         IdlePanel,
-       
     }
 }

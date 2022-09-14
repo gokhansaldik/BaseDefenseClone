@@ -14,8 +14,7 @@ namespace Controllers
         #endregion
 
         #endregion
-
-
+        
         public void Playanim(CollectableAnimationStates animationStates)
         {
             collectableAnimatorController.SetTrigger(animationStates.ToString());

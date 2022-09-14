@@ -2,7 +2,6 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-
 namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
@@ -30,15 +29,6 @@ namespace Controllers
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
             }
-           
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
         }
     }
 }

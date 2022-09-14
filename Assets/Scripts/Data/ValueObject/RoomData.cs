@@ -1,7 +1,6 @@
 using System;
 using Abstract;
 using Enums;
-using Sirenix.OdinInspector;
 
 namespace Data.ValueObject
 {
@@ -10,11 +9,6 @@ namespace Data.ValueObject
     {
         public RoomNameType RoomName;
         public bool Isbase;
-        
-        public RoomData(PayType payType, int cost, int payedAmount) : base(payType, cost, payedAmount)
-        {
-        }
-
         public TurretData TurretData;
     }
 }

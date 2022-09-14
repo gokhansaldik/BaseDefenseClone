@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class CollectableAddOnStackCommand 
+    public class CollectableAddOnStackCommand
     {
         #region Self Variables
 
@@ -32,14 +32,8 @@ namespace Commands
         {
             _obj.transform.parent = _stackManager.transform;
             _stackList.Add(_obj);
-            //if (_stackList.Count > _stackData.StackLimit) _obj.SetActive(false);
             var pivot = _stackList[_stackList.Count - 1].transform.position;
-
-            _obj.transform.localPosition =
-                new Vector3(pivot.x, pivot.y, pivot.z - _stackData.StackOffset * _stackList.Count * 2);
-            //ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
-             
-             
+            _obj.transform.localPosition = new Vector3(pivot.x, pivot.y, pivot.z - _stackData.StackOffset * _stackList.Count * 2);
         }
     }
 }

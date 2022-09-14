@@ -32,8 +32,6 @@ namespace Managers
 
         private PlayerData _playerData;
         private GameStatesType _states;
-        
-       
 
         #endregion
 
@@ -108,13 +106,11 @@ namespace Managers
         private void OnInputReleased()
         {
             DeactivateMovement();
-            
         }
 
 
         private void OnJoystickDragged(IdleInputParams inputParams)
         {
-          
             movementController.UpdateIdleInputValue(inputParams);
         }
 
@@ -122,9 +118,8 @@ namespace Managers
         public void DeactivateMovement()
         {
             movementController.DeactivateMovement();
-            
+
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
-            
         }
 
         private void ActivateMovement()

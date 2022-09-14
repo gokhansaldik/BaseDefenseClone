@@ -15,21 +15,20 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-        
+
         #endregion
 
-        #region SerializeField Variables
+        #region Serialized Variables
 
         [SerializeField] private GameObject area;
         [SerializeField] private GameObject fencles;
-        [SerializeField] private GameObject invisibleWall;
         [SerializeField] private TextMeshPro tmp;
 
         #endregion
-        
+
         #region Private Variables
 
-        [ShowInInspector]private RoomData _roomData;
+        [ShowInInspector] private RoomData _roomData;
         private bool _isBase;
         private int _payedAmound;
         private int _remainingAmound;
@@ -45,7 +44,7 @@ namespace Managers
             _textParentGameObject = tmp.transform.parent.gameObject;
         }
 
-        public void SetRoomData(RoomData roomData,int payedAmound)
+        public void SetRoomData(RoomData roomData, int payedAmound)
         {
             _roomData = roomData;
             _isBase = roomData.Isbase;
@@ -55,6 +54,7 @@ namespace Managers
                 BuyAreaImageChange();
             }
         }
+
         public int PayedAmound
         {
             get => _payedAmound;
@@ -62,7 +62,7 @@ namespace Managers
             {
                 _payedAmound = value;
                 _remainingAmound = _roomData.Cost - _payedAmound;
-                if (_remainingAmound ==0)
+                if (_remainingAmound == 0)
                 {
                     _textParentGameObject.SetActive(false);
                     area.SetActive(true);
@@ -86,12 +86,14 @@ namespace Managers
                     {
                         StartCoroutine(Buy());
                     }
+
                     break;
-                case PayType.Gem :
+                case PayType.Gem:
                     if (_scoreCache.GemScore > _remainingAmound)
                     {
                         StartCoroutine(Buy());
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -101,6 +103,7 @@ namespace Managers
         public void BuyAreaExit()
         {
             StopAllCoroutines();
+            IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
         }
 
         private IEnumerator Buy()
@@ -112,6 +115,7 @@ namespace Managers
                 ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
                 yield return waitForSecond;
             }
+
             IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
         }
 

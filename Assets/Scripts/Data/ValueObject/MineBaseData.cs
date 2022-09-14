@@ -10,6 +10,5 @@ namespace Data.ValueObject
         public int DiamondCapacity;
         public int CurrentDiamondAmount;
         public int MineCartCapacity;
-        
     }
 }

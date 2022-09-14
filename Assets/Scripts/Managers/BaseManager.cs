@@ -19,30 +19,28 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-        
+
         [Header("Data")] public BaseData Data;
 
         #endregion
 
-        #region Serializefield Variables
+        #region Serialized Variables
 
-        [SerializeField] private GameObject backDoor;
         [SerializeField] private BaseStageType baseStage;
         [SerializeField] private TextMeshPro tmp;
         [SerializeField] private List<BaseObjects> level = new List<BaseObjects>();
         [SerializeField] private List<RoomManager> Rooms = new List<RoomManager>();
         [SerializeField] private List<TurretManager> Turrets = new List<TurretManager>();
 
-
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector]private AreaDataParams _areaDatas;
+        [ShowInInspector] private AreaDataParams _areaDatas;
         private int _baseLevel;
-        
-        
+
         #endregion
+
         #endregion
 
         private void Awake()
@@ -73,9 +71,9 @@ namespace Managers
         {
             UnsubscribeEvents();
         }
-        
+
         #endregion
-        
+
         private void ColoseGameObjects()
         {
             foreach (var VARIABLE in level[(int)baseStage].GameObjects)
@@ -83,7 +81,7 @@ namespace Managers
                 VARIABLE.SetActive(false);
             }
         }
-        
+
         private void Start()
         {
             _baseLevel = LevelSignals.Instance.onGetLevelID();
@@ -105,7 +103,7 @@ namespace Managers
         {
             for (int i = 0; i < Rooms.Count; i++)
             {
-                Rooms[i].SetRoomData(Data.BaseRoomData.BaseRooms[i],_areaDatas.RoomPayedAmound[i]);
+                Rooms[i].SetRoomData(Data.BaseRoomData.BaseRooms[i], _areaDatas.RoomPayedAmound[i]);
                 //Turrets[i].SetTurretData(Data.BaseRoomDatas.Rooms[i].TurretData,_areaDatas.RoomTurretPayedAmound[i]);
             }
         }
@@ -115,13 +113,13 @@ namespace Managers
             for (int i = 0; i < Rooms.Count; i++)
             {
                 _areaDatas.RoomPayedAmound[i] = Rooms[i].PayedAmound;
-                Debug.Log(Rooms[i].PayedAmound);
                 //_areaDatas.RoomTurretPayedAmound[i] = Turrets[i].PayedAmound;
             }
+
             SaveSignals.Instance.onAreaDataSave?.Invoke();
             SaveSignals.Instance.onScoreSave?.Invoke();
         }
-        
+
         private AreaDataParams OnGetAreaDatas()
         {
             return _areaDatas;

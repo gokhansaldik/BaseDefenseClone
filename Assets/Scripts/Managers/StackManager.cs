@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Cinemachine;
 using Commands;
 using Data.UnityObject;
 using Datas.ValueObject;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 namespace Managers
 {
@@ -27,7 +25,6 @@ namespace Managers
         #region Serilazible Variables
 
         [SerializeField] private StackManager stackManager;
-       
 
         #endregion
 
@@ -46,9 +43,7 @@ namespace Managers
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
         private int _numOfItemsHolding = 0;
         private Stack<Transform> _moneyTransform = new Stack<Transform>();
-        
-        
-       
+
         #endregion
 
         #endregion
@@ -116,7 +111,7 @@ namespace Managers
         {
             _collectableAddOnStackCommand =
                 new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
-            _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList, ref StackData);
+            _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList);
 
             _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager,
                 ref StackData);
@@ -125,7 +120,7 @@ namespace Managers
 
 
             _stackItemsCombineCommand =
-                new StackItemsCombineCommand(ref _stackList, ref StackData, ref stackManager);
+                new StackItemsCombineCommand(ref _stackList, ref StackData);
         }
 
 
@@ -136,10 +131,9 @@ namespace Managers
             if (LerpOk == true)
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
-                
             }
             else if (LerpOk == false)
-            { 
+            {
                 SetAllCollectableAnim(CollectableAnimationStates.Idle);
             }
         }
@@ -147,8 +141,8 @@ namespace Managers
         public void AddInStack(GameObject obj)
         {
             _collectableAddOnStackCommand.Execute(obj);
-            
         }
+
         public void SetAllCollectableAnim(CollectableAnimationStates states)
         {
             foreach (var t in _stackList)
@@ -158,7 +152,6 @@ namespace Managers
         public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
         {
             _collectableAnimSetCommand.Execute(obj, animationStates);
-            
         }
 
         private void OnEnterFinish()
@@ -186,17 +179,7 @@ namespace Managers
             {
                 CollectableAnimSet(obj, CollectableAnimationStates.Run);
             }
-           
-            
         }
-
-        // private void OnAddStackMoney(GameObject obj)
-        // {
-        //     obj.transform.SetParent(moneyHolderTransform);
-        //     obj.transform.localPosition = new Vector3(0, _moneyTransform.Count * .1f, .1f);
-        //     obj.transform.localRotation = Quaternion.identity;
-        //     _moneyTransform.Push(obj.transform);
-        // }
 
 
         private void OnGetStackList(GameObject _stackListObj)
@@ -224,15 +207,12 @@ namespace Managers
         private void OnPlay()
         {
             FindPlayer();
-            ////SetAllCollectableAnim(CollectableAnimationStates.Run);
-            //ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
 
 
         private void OnReset()
         {
             ClearStackManager();
-            //ScoreSignals.Instance.onGetPlayerScore?.Invoke(_stackList.Count);
         }
     }
 }

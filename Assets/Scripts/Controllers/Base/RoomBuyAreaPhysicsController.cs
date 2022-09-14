@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using UnityEngine;
 
@@ -8,19 +7,19 @@ namespace Controllers
     {
         #region Self Variables
 
-        #region SerializeField Variables
+        #region Serialized Variables
 
-        [SerializeField] private RoomManager manager;
+        [SerializeField] private RoomManager roomManager;
+
+        #endregion
 
         #endregion
 
-        #endregion
-        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                manager.BuyAreaEnter();
+                roomManager.BuyAreaEnter();
             }
         }
 
@@ -28,7 +27,7 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                manager.BuyAreaExit();
+                roomManager.BuyAreaExit();
             }
         }
     }

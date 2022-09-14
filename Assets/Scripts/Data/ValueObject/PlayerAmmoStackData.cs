@@ -8,6 +8,5 @@ namespace Data.ValueObject
     {
         public int AmmoCapacity;
         public Vector3 AmmoOffset;
-        
     }
 }

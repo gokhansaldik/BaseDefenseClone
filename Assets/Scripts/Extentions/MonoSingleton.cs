@@ -7,7 +7,7 @@ namespace Extentions
         private static T _instance;
 
         public static T Instance
-        {
+        { 
             get
             {
                 if (_instance == null)
@@ -21,7 +21,6 @@ namespace Extentions
                         DontDestroyOnLoad(newGo);
                     }
                 }
-
                 return _instance;
             }
         }

@@ -4,7 +4,6 @@ using Enums;
 using Keys;
 using Signals;
 using TMPro;
-using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -14,6 +13,7 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
+
         [SerializeField] private List<GameObject> panels;
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TextMeshProUGUI gemText;
@@ -21,9 +21,10 @@ namespace Managers
         #endregion
 
         #region Private Variables
+
         private UIPanelController _uiPanelController;
         private ScoreDataParams _scoreData;
-        
+
         #endregion
 
         #endregion
@@ -65,21 +66,21 @@ namespace Managers
 
         private void OnOpenPanel(UIPanels panelParam)
         {
-            _uiPanelController.OpenPanel(panelParam , panels);
+            _uiPanelController.OpenPanel(panelParam, panels);
         }
 
         private void OnClosePanel(UIPanels panelParam)
         {
-            _uiPanelController.ClosePanel(panelParam , panels);
+            _uiPanelController.ClosePanel(panelParam, panels);
         }
-        
+
         private void OnSetScoreText()
         {
             _scoreData = ScoreSignals.Instance.onScoreData();
             moneyText.text = _scoreData.MoneyScore.ToString();
             gemText.text = _scoreData.GemScore.ToString();
         }
-        
+
         private void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
@@ -91,6 +92,5 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
         }
-
     }
 }

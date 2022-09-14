@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Data.ValueObject
 {
     [Serializable]
-    public class BaseTurretData 
+    public class BaseTurretData
     {
         public int TurretDamage;
         public int TurretCapacity;

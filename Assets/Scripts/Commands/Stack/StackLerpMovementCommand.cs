@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Datas.ValueObject;
 using UnityEngine;
 
 namespace Commands
@@ -11,70 +10,32 @@ namespace Commands
         #region Private Variables
 
         private readonly List<GameObject> _stackList;
-        private readonly StackData _stackData;
         private List<Vector3> _positionHistory = new List<Vector3>();
         private int _gap = 10;
         private int _bodySpeed = 5;
-        
 
         #endregion
 
         #endregion
 
-        public StackLerpMovementCommand(ref List<GameObject> stackList, ref StackData stackData)
+        public StackLerpMovementCommand(ref List<GameObject> stackList)
         {
             _stackList = stackList;
-            _stackData = stackData;
         }
 
         public void Execute(ref Transform _playerTransform)
         {
-            // if (_stackList.Count > 0)
-            // {
-            //     var directX = Mathf.Lerp(_stackList[0].transform.localPosition.x, _playerTransform.position.x,
-            //         _stackData.StackLerpXDelay);
-            //     var directY = Mathf.Lerp(_stackList[0].transform.localPosition.y, _playerTransform.position.y, 1);
-            //     var directZ = Mathf.Lerp(_stackList[0].transform.localPosition.z,
-            //         _playerTransform.position.z - _stackData.StackOffset, _stackData.StackLerpZDelay);
-            //     _stackList[0].transform.localPosition = new Vector3(directX, directY, directZ);
-            //
-            //     _stackList[0]
-            //         .transform.LookAt(new Vector3(_playerTransform.transform.position.x,
-            //             _stackList[0]
-            //                 .transform.position.y,
-            //             _playerTransform.transform.position.z));
+            _positionHistory.Insert(0, _playerTransform.position);
+            int index = 0;
 
-                // for (var i = 1; i < _stackList.Count; i++)
-                // {
-                //     
-                //     var pos = _stackList[i - 1].transform.localPosition;
-                //     directX = Mathf.Lerp(_stackList[i].transform.localPosition.x, pos.x, _stackData.StackLerpXDelay);
-                //     directY = Mathf.Lerp(_stackList[i].transform.localPosition.y, pos.y, _stackData.StackLerpYDelay);
-                //     directZ = Mathf.Lerp(_stackList[i].transform.localPosition.z, pos.z - _stackData.StackOffset,
-                //         _stackData.StackLerpZDelay);
-                //     _stackList[i].transform.localPosition = new Vector3(directX, directY, directZ);
-                //     _stackList[i].transform.LookAt(new Vector3(pos.x, _stackList[i].transform.position.y, pos.z));
-                //     
-                //     
-                // }
-                
-                
-                    _positionHistory.Insert(0, _playerTransform.position);
-                    int index = 0;
-                
-                    foreach (var body in _stackList)
-                    {
-                        Vector3 point = _positionHistory[Mathf.Min(index * _gap, _positionHistory.Count - 1)];
-                        Vector3 moveDirection = point - body.transform.position;
-                        body.transform.position += moveDirection*_bodySpeed * Time.deltaTime;
-                        body.transform.LookAt(point);
-                        index++;
-                    }
-                
-                
-                
-                
-        }
+            foreach (var body in _stackList)
+            {
+                Vector3 point = _positionHistory[Mathf.Min(index * _gap, _positionHistory.Count - 1)];
+                Vector3 moveDirection = point - body.transform.position;
+                body.transform.position += moveDirection * _bodySpeed * Time.deltaTime;
+                body.transform.LookAt(point);
+                index++;
+            }
         }
     }
-//}
+}

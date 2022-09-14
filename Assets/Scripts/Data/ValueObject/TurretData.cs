@@ -1,6 +1,5 @@
 using System;
 using Abstract;
-using Enums;
 
 namespace Data.ValueObject
 {
@@ -11,9 +10,5 @@ namespace Data.ValueObject
         public bool HasTurretSoldier;
         public int AmmoCapacity;
         public int AmmoDamage;
-
-        public TurretData(PayType payType, int cost, int payedAmount) : base(payType, cost, payedAmount)
-        {
-        }
     }
 }

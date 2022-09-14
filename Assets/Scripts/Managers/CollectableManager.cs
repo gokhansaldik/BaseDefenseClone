@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using Commands;
 using Controllers;
-using Data.UnityObject;
-using Data.ValueObject;
 using Enums;
 using UnityEngine;
 
@@ -15,8 +11,6 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private CollectableAnimationController collectableAnimationController;
-        [SerializeField] private CollectableMeshController collectableMeshController;
-        [SerializeField] private CollectableManager collectableManager;
 
         #endregion
 

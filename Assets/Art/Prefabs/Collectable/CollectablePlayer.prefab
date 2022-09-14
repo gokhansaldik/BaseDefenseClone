@@ -365,7 +365,6 @@ GameObject:
   - component: {fileID: 4027669853857279287}
   - component: {fileID: 372173292602653602}
   - component: {fileID: 2660360280734434724}
-  - component: {fileID: 1047103995097804598}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -421,18 +420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableAnimatorController: {fileID: 372173292602653602}
---- !u!114 &1047103995097804598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2586861953157193269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2264bd02ce0ca24bbe45ef678e60a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3244100494687375549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,8 +1227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableAnimationController: {fileID: 2660360280734434724}
-  collectableMeshController: {fileID: 1047103995097804598}
-  collectableManager: {fileID: 1262647055996005725}
 --- !u!1 &8586845423176612412
 GameObject:
   m_ObjectHideFlags: 0

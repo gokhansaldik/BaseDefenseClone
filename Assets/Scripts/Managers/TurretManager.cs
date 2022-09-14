@@ -9,16 +9,15 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-        
+
         public int PayedAmound
         {
             get => _payedAmound;
             set
             {
                 _payedAmound = value;
-                if (_turretData.Cost - _payedAmound <=0)
+                if (_turretData.Cost - _payedAmound <= 0)
                 {
-                    
                 }
                 else
                 {
@@ -34,7 +33,7 @@ namespace Managers
         [SerializeField] private TextMeshPro tmp;
 
         #endregion
-        
+
         #region Private Variables
 
         private TurretData _turretData;
@@ -45,7 +44,7 @@ namespace Managers
 
         #endregion
 
-        public void SetTurretData(TurretData roomData,int payedAmound)
+        public void SetTurretData(TurretData roomData, int payedAmound)
         {
             _turretData = roomData;
             PayedAmound = payedAmound;
