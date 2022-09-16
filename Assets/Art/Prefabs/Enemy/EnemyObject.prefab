@@ -1212,6 +1212,9 @@ GameObject:
   - component: {fileID: 4071275807104192776}
   - component: {fileID: 5394442157017184407}
   - component: {fileID: 5394442157017184401}
+  - component: {fileID: 5098861989969436783}
+  - component: {fileID: 1913926369863520819}
+  - component: {fileID: 4505303517356905441}
   m_Layer: 0
   m_Name: EnemyObject
   m_TagString: Untagged
@@ -1272,7 +1275,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8942388817615324809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70dd910dd6a34074a8b46d969caed645, type: 3}
   m_Name: 
@@ -1285,7 +1288,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8942388817615324809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.13
   m_Speed: 1
@@ -1300,6 +1303,56 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5098861989969436783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942388817615324809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259b876d9a5b44b997a9a8b99dc0fee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Method: 2
+  m_Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1913926369863520819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942388817615324809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3d4f0e0fab2aa43a3d8b08acd17e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  UpdateRate: 0.1
+  Animator: {fileID: 3275008536688695243}
+--- !u!114 &4505303517356905441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942388817615324809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6387fbc2fec02334b87e00d7b61b82eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 0}
+  Movement: {fileID: 1913926369863520819}
+  Agent: {fileID: 5394442157017184401}
+  Health: 100
 --- !u!1 &8951232263176774819
 GameObject:
   m_ObjectHideFlags: 0
