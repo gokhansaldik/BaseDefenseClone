@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403471415}
   - component: {fileID: 403471416}
+  - component: {fileID: 403471417}
   m_Layer: 0
   m_Name: EnemySpawnManager
   m_TagString: Untagged
@@ -292,6 +293,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redEnemyPrefab: {fileID: 8942388817615324809, guid: c523f351733e5784bb8e6ad8021cfa46, type: 3}
   redEnemyInterval: 3.5
+--- !u!114 &403471417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403471414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25ba4ccfa0caec49b56fe0c2617a8e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 8942388817615324809, guid: c523f351733e5784bb8e6ad8021cfa46, type: 3}
+  NumberOfEnemiesToSpawn: 15
+  SpawnDelay: 1.2
+  spawnPos: {fileID: 285893569}
 --- !u!1 &416183110
 GameObject:
   m_ObjectHideFlags: 0
