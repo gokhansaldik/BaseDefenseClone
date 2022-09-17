@@ -1,6 +1,7 @@
 using Data.UnityObject;
 using UnityEngine;
 
+
 namespace Commands
 {
     public class PoolGenerateCommand
@@ -37,6 +38,7 @@ namespace Commands
                 for (int j = 0; j < pooldata[i].ObjectCount; j++)
                 {
                     var obj = Object.Instantiate(pooldata[i].Pref, _managerTranform.GetChild(i));
+                    obj.transform.position = new Vector3(Random.Range(-20f, 20f), 0f, 8f);
                     obj.SetActive(false);
                 }
             }
