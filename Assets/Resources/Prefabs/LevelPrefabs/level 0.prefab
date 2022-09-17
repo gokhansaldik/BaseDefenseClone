@@ -34654,6 +34654,7 @@ GameObject:
   - component: {fileID: 3134594193767200082}
   - component: {fileID: 1249314966703594985}
   - component: {fileID: 3051468389116448453}
+  - component: {fileID: 6598300534880340447}
   m_Layer: 0
   m_Name: UnderPlane
   m_TagString: Untagged
@@ -34738,6 +34739,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6598300534880340447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580993973214479122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298900ff145cd184b86f0d582f7d463d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6582094985856149178
 GameObject:
   m_ObjectHideFlags: 0
