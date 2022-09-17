@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Data.ValueObject
@@ -8,5 +9,6 @@ namespace Data.ValueObject
     public class EnemyAiData
     {
         public List<EnemyTypeData> EnemyList;
+        public List<Transform> SpawnPosList;
     }
 }

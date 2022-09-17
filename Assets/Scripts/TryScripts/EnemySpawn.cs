@@ -10,7 +10,7 @@ namespace TryScripts
         
         void Start()
         {
-            InvokeRepeating ("Crear",0.0f,TiempoCreacion);
+            InvokeRepeating ("Crear",2.0f,TiempoCreacion);
         }
 
        

@@ -5,5 +5,6 @@ namespace Enums
         RedEnemy,
         OrangeEnemy,
         BigRedEnemy,
+        Boss,
     }
 }

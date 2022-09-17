@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 3f42d3839d6e60548af45c1dd1a7b7e6, type: 2}
 --- !u!1 &107611966
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403471415}
   - component: {fileID: 403471416}
+  - component: {fileID: 403471417}
   m_Layer: 0
   m_Name: EnemySpawnManager
   m_TagString: Untagged
@@ -292,6 +293,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redEnemyPrefab: {fileID: 8942388817615324809, guid: c523f351733e5784bb8e6ad8021cfa46, type: 3}
   redEnemyInterval: 3.5
+--- !u!114 &403471417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403471414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f70521741c046ef8d38cd454125f688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 8942388817615324809, guid: c523f351733e5784bb8e6ad8021cfa46, type: 3}
+  NumberOfEnemiesToSpawn: 15
+  SpawnDelay: 1.2
+  spawnPos: {fileID: 285893569}
 --- !u!1 &416183110
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +676,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 723283490}
-  - component: {fileID: 723283491}
   m_Layer: 0
   m_Name: CubeSpawner
   m_TagString: Untagged
@@ -680,19 +697,6 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &723283491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723283489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661262972430d794a8658e47ab19f500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnDelay: 2
 --- !u!1 &746099457
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +966,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1078602593}
-  - component: {fileID: 1078602594}
   m_Layer: 0
   m_Name: PoolManager2
   m_TagString: Untagged
@@ -984,20 +987,6 @@ Transform:
   m_Father: {fileID: 1411125957}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1078602594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078602592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd474accc6cf0a4da35260b24c50caa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 2091059140373410561, guid: 6ac2f58d4aebb4e4ca64de5776cade40, type: 3}
-  initialSize: 10
 --- !u!1 &1163435185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1290,7 @@ GameObject:
   - component: {fileID: 1766359274}
   - component: {fileID: 1766359275}
   m_Layer: 0
-  m_Name: Try
+  m_Name: EnemySpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,7 +1304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766359273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.69, z: 0}
+  m_LocalPosition: {x: 5.91, y: 2.69, z: 7.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1411125957}

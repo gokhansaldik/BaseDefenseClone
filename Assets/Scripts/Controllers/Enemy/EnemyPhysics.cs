@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class EnemyPhysicController : MonoBehaviour
+    public class EnemyPhysics : MonoBehaviour
     {
         [SerializeField]
         private GameObject collisionColliderObj;
@@ -34,9 +34,9 @@ namespace Controllers
             }
 
             /*if (other.GetComponent<Mine>())
-        {
-            _detectedMine = other.GetComponent<Mine>();
-        }*/
+    {
+        _detectedMine = other.GetComponent<Mine>();
+    }*/
         }
 
         private void OnTriggerExit(Collider other)
@@ -48,10 +48,9 @@ namespace Controllers
             }
 
             /*if (other.GetComponent<Mine>())
-        {
+    {
 
-        }*/
+    }*/
         }
-
     }
 }
