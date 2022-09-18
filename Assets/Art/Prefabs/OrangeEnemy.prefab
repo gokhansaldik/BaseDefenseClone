@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 664856847137712988}
   - component: {fileID: 8620078567344057641}
   - component: {fileID: 596738836420454939}
-  - component: {fileID: 1108861488277111786}
+  - component: {fileID: 3972992823294683302}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -62,7 +62,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1108861488277111786
+--- !u!114 &3972992823294683302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,10 +71,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 72669060912658256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 298900ff145cd184b86f0d582f7d463d, type: 3}
+  m_Script: {fileID: 11500000, guid: 39694e6d11b3b934a9795fd7f72ddd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerType: 0
+  brain: {fileID: 7194885538558762548}
 --- !u!1 &140869484437377433
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,8 +452,8 @@ GameObject:
   - component: {fileID: 1742091774990384932}
   - component: {fileID: 9033789990987520934}
   - component: {fileID: 6680117786231646372}
-  - component: {fileID: 1831332076872203846}
   - component: {fileID: 3380075708807889213}
+  - component: {fileID: 7194885538558762548}
   m_Layer: 0
   m_Name: OrangeEnemy
   m_TagString: Untagged
@@ -507,26 +507,6 @@ CapsuleCollider:
   m_Height: 0.82
   m_Direction: 1
   m_Center: {x: 0, y: 0.42, z: 0}
---- !u!114 &1831332076872203846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742091774990384933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7866068417f0a042988cc262a87c879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTarget: {fileID: 0}
-  _turretTarget: {fileID: 0}
-  MineTarget: {fileID: 0}
-  NavMeshAgent: {fileID: 3380075708807889213}
-  Health: 0
-  EnemyType: 0
-  enemyType: 1
-  physicsController: {fileID: 1108861488277111786}
 --- !u!195 &3380075708807889213
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -535,7 +515,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742091774990384933}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.13
   m_Speed: 1
   m_Acceleration: 8
@@ -549,6 +529,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7194885538558762548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742091774990384933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106c980d04794044962b8de2ddb249b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 3380075708807889213}
+  _animator: {fileID: 5280385440644263527}
 --- !u!1 &1887576995146437040
 GameObject:
   m_ObjectHideFlags: 0

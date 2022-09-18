@@ -1,14 +1,13 @@
+
+using Enums;
+using Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AIBrains;
-using Data.UnityObject;
-using Data.ValueObject;
-using Enums;
+using AiBrains;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
-
+using UnityEngine;
 
 namespace Managers
 {
@@ -17,47 +16,59 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
-        
-        [SerializeField]private List<GameObject> enemies = new List<GameObject>();
-        
+
+        [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+
+       // [SerializeField] private List<Transform> targetList = new List<Transform>();
+
+
         #endregion
-    
+
         #region Public Variables
-        
+
+       // public Transform Player;
+
         public int NumberOfEnemiesToSpawn = 50;
-        
+
         public float SpawnDelay = 2;
 
-        public Transform SpawnPos;
+       // public GameObject EnemyPrefab;
+
+       // public Transform SpawnPos;
 
         #endregion
 
         #region Private Variables
-        
+
         private EnemyType enemyType;
-        
-        private List<EnemyAIBrain> enemyScripts = new List<EnemyAIBrain>();
-        
+
+        private List<EnemyBrain> enemyScripts = new List<EnemyBrain>();
+
         private NavMeshTriangulation triangulation;
-        
-        private GameObject _EnemyAIObj;
-        private EnemyAIBrain _EnemyAIBrain;
+
+        private GameObject _enemyAI;
+
+        private EnemyBrain _enemyBrain;
+
         #endregion
         #endregion
+
+        private void Awake()
+        {
+            InitEnemyPool();
+            StartCoroutine(SpawnEnemies());
+
+        }
         private void InitEnemyPool()
         {
-            for (var i = 0; i < enemies.Count; i++)
-            {
-                ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
-            }
+            for (int i = 0; i < enemies.Count; i++)
+                ObjectPoolManager.Instance.AddObjectPool(() => Instantiate(enemies[i]), TurnOnEnemyAI, TurnOffEnemyAI, ((EnemyType)i).ToString(), 50, true);
         }
-        private void Awake()
-        {   
-            InitEnemyPool();
 
-            StartCoroutine(SpawnEnemies());
+        private void Start()
+        {
+           // triangulation = NavMesh.CalculateTriangulation();
         }
-        
         private void TurnOnEnemyAI(GameObject enemy)
         {
             enemy.SetActive(true);
@@ -66,61 +77,52 @@ namespace Managers
         private void TurnOffEnemyAI(GameObject enemy)
         {
             enemy.SetActive(false);
+
         }
-        private void ReleaseEnemyObject(GameObject go,Type t)
+
+        private void ReleaseEnemyObject(GameObject go, Type t)
         {
-            ObjectPoolManager.Instance.ReturnObject(go,t.ToString());
+            ObjectPoolManager.Instance.ReturnObject(go, t.ToString());
         }
-        
         private IEnumerator SpawnEnemies()
         {
             WaitForSeconds wait = new WaitForSeconds(SpawnDelay);
-            
+
             int spawnedEnemies = 0;
 
             while (spawnedEnemies < NumberOfEnemiesToSpawn)
             {
                 DoSpawnEnemy();
+
                 spawnedEnemies++;
                 yield return wait;
             }
         }
+
         private void DoSpawnEnemy()
         {
-            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyType)).Length-1);
-            int randomPercentage = Random.Range(0, 101);
-            if (randomType == (int)EnemyType.BigRedEnemy)
-            {
-                if (randomPercentage<30)
-                {
-                    randomType = (int)EnemyType.RedEnemy;
-                }
-            }
-            _EnemyAIObj = ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
-            _EnemyAIBrain = _EnemyAIObj.GetComponent<EnemyAIBrain>();
+            int randomType;
+            int randomPercentage = UnityEngine.Random.Range(0, 101);
             
+           
 
-            bool RandomPoint(Vector3 center, float range, out Vector3 result)
-           {
-               for (int i = 0; i < 60; i++)
-               {
-                   Vector3 randomPoint = center + Random.insideUnitSphere * range;
-                   Vector3 randomPos = new Vector3(randomPoint.x, 0, SpawnPos.transform.position.z);
-                   NavMeshHit hit;
-                   if (NavMesh.SamplePosition(randomPos, out hit, 1.0f, 1))
-                   {
-                       result = hit.position;
-                       return true;
-                   }
-                   
-               }
-               result = Vector3.zero;
-               return false;
+            if (randomPercentage<=15)
+            {
+                randomType = (int)EnemyType.RedEnemy;
+            }
+            else if (15< randomPercentage && randomPercentage <=50)
+            {
+                randomType = (int)EnemyType.RedEnemy;
+            }
+            else
+            {
+                randomType = (int)EnemyType.RedEnemy;
 
-           }
-            Vector3 point;
-           if (!RandomPoint(SpawnPos.position, 20, out point)) return;
-           _EnemyAIBrain.NavMeshAgent.Warp(point);
+            }
+           
+             ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
+         
+
         }
     }
 }

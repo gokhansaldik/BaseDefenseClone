@@ -25,4 +25,23 @@ MonoBehaviour:
     SoldierDamage: 0
     SoldierWorkerSpeed: 0
   EnemyAIData:
-    EnemyList: []
+    EnemyList:
+    - EnemyType: 1
+      Health: 0
+      Damage: 0
+      AttackRange: 0
+      AttackSpeed: 0
+      ScaleSize: {x: 0, y: 0, z: 0}
+      BodyColor: {r: 0, g: 0, b: 0, a: 0}
+      MoveSpeed: 0
+      ChaseSpeed: 0
+      NavMeshRadius: 0
+      NavMeshHeight: 0
+      TurretList: []
+      SpawnPosition: {fileID: 0}
+      Healt: 0
+      Damage: 0
+      AttackRange: 0
+      AttackSpeed: 0
+    SpawnPositionList:
+    - {fileID: 0}

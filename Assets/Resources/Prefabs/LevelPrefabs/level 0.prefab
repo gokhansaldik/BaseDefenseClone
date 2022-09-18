@@ -14439,7 +14439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2457665739639741123}
-  - component: {fileID: 6655184536257115371}
   - component: {fileID: 2977074330467270776}
   m_Layer: 0
   m_Name: Miner
@@ -14464,24 +14463,6 @@ Transform:
   m_Father: {fileID: 7443049332994691448}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6655184536257115371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977074330467270777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03349ca4c008cc94eb4c84c564f6a372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  Stack: {fileID: 0}
-  Diamond: {fileID: 0}
-  Axe: {fileID: 0}
-  agent: {fileID: 0}
-  animationController: {fileID: 0}
 --- !u!195 &2977074330467270776
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3f42d3839d6e60548af45c1dd1a7b7e6, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &107611966
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,9 +307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1742091774990384933, guid: 4acd87db03a730d4981bc053bf9bf09c, type: 3}
-  NumberOfEnemiesToSpawn: 3
+  NumberOfEnemiesToSpawn: 50
   SpawnDelay: 2
-  SpawnPos: {fileID: 285893569}
 --- !u!1 &416183110
 GameObject:
   m_ObjectHideFlags: 0

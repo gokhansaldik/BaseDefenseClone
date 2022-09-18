@@ -439,7 +439,6 @@ GameObject:
   - component: {fileID: 9033789990987520934}
   - component: {fileID: 6680117786231646372}
   - component: {fileID: 3380075708807889213}
-  - component: {fileID: 7303652361782652736}
   - component: {fileID: 3380075708807889211}
   m_Layer: 0
   m_Name: EnemyObjectRed
@@ -502,7 +501,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742091774990384933}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.13
   m_Speed: 1
   m_Acceleration: 8
@@ -516,22 +515,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7303652361782652736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742091774990384933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a31d68ffdd4b6746bd5b6e07460a865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  Distance: 0
-  isAngered: 0
-  Agent: {fileID: 3380075708807889213}
 --- !u!114 &3380075708807889211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +522,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742091774990384933}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70dd910dd6a34074a8b46d969caed645, type: 3}
   m_Name: 

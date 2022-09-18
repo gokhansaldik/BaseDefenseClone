@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Abstract;
 using UnityEngine;
 using Enums;
@@ -18,6 +19,15 @@ namespace Data.ValueObject
         public float ChaseSpeed;
         public float NavMeshRadius;
         public float NavMeshHeight;
+        public List<Transform> TurretList = new List<Transform>();
+
+        public Transform SpawnPosition;
+
+        public int Healt;
+        public int Damage;
+        public float AttackRange;
+        public float AttackSpeed;
+        
         public EnemyTypeData(EnemyType enemyType, int health, int damage, float attackRange, float attackSpeed, Vector3 scaleSize, Color bodyColor) : base(enemyType, health, damage, attackRange, attackSpeed, scaleSize, bodyColor)
         {
         }
