@@ -17,5 +17,5 @@ MonoBehaviour:
     Pref: {fileID: 8425939303997151591, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
     ObjectCount: 20
   - ObjName: EnemyRed
-    Pref: {fileID: 8942388817615324809, guid: c523f351733e5784bb8e6ad8021cfa46, type: 3}
+    Pref: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
     ObjectCount: 20

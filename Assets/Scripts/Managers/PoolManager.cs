@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using Commands;
 using Data.UnityObject;
@@ -82,6 +83,7 @@ namespace Managers
         private void StartPool()
         {
             _poolGenerateCommand.Execute();
+           
         }
 
         private CD_PoolGenerator GetPoolData()
@@ -97,19 +99,20 @@ namespace Managers
 
         private GameObject OnGetPoolObject(PoolType poolType)
         {
+            
             var parent = transform.GetChild((int)poolType);
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
                 : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, Vector3.zero, Quaternion.identity,
                     parent);
-
-
+            
             return obj;
+            
         }
 
         private void OnSendPool(GameObject CollectableObject, PoolType poolType)
         {
-            CollectableObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0);
+            //CollectableObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0);
             CollectableObject.transform.parent = transform.GetChild((int)poolType);
             CollectableObject.GetComponentInChildren<Collider>().enabled = true;
             CollectableObject.SetActive(false);
@@ -120,5 +123,11 @@ namespace Managers
         {
             RestartPool();
         }
+        private IEnumerator PoolSetActive(GameObject obj)
+        {
+            obj.SetActive(true);
+            yield return new WaitForSeconds(2f);
+        }
+       
     }
 }

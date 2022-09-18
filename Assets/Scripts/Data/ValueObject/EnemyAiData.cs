@@ -9,6 +9,6 @@ namespace Data.ValueObject
     public class EnemyAiData
     {
         public List<EnemyTypeData> EnemyList;
-        public List<Transform> SpawnPosList;
+        public List<Transform> SpawnPositionList;
     }
 }

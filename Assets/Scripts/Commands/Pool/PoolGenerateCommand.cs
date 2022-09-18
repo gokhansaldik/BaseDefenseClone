@@ -1,3 +1,4 @@
+using System.Collections;
 using Data.UnityObject;
 using UnityEngine;
 
@@ -40,8 +41,17 @@ namespace Commands
                     var obj = Object.Instantiate(pooldata[i].Pref, _managerTranform.GetChild(i));
                     obj.transform.position = new Vector3(Random.Range(-20f, 20f), 0f, 8f);
                     obj.SetActive(false);
+                    // for (int k = 0; k < pooldata[i].ObjectCount; k++)
+                    // {
+                    //     obj.SetActive(true);
+                    //     return;
+                    // }
                 }
+                
             }
         }
+
+       
+        
     }
 }
