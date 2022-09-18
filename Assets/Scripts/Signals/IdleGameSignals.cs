@@ -17,5 +17,14 @@ namespace Signals
         public UnityAction<int, AreaData> onSetAreaData = delegate { };
         public Func<int, AreaData> onGetAreaData = delegate { return default; };
         public UnityAction onBaseAreaBuyedItem = delegate {  };
+        
+        #region Mine Signals
+
+        public Func<GameObject> onGetMineTarget= delegate { return default;};
+        public Func<GameObject> onGetMineStackTarget= delegate { return default;};
+        public UnityAction<GameObject> onAddDiamondStack= delegate { };   
+    
+
+        #endregion
     }
 }

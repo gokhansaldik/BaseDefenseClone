@@ -1,9 +1,9 @@
 using Enums;
 using UnityEngine;
 
-namespace Interface
+namespace Abstract
 {
-    public class AiEnemy : MonoBehaviour
+    public abstract class AiEnemy
     {
         public EnemyType EnemyType;
         public int Health;
@@ -13,7 +13,8 @@ namespace Interface
         public Vector3 ScaleSize;
         public Color BodyColor;
 
-        protected AiEnemy(EnemyType enemyType, int health, int damage, float attackRange, float attackSpeed, Vector3 scaleSize, Color bodyColor)
+        protected AiEnemy(EnemyType enemyType, int health, int damage, float attackRange, float attackSpeed,
+            Vector3 scaleSize, Color bodyColor)
         {
             EnemyType = enemyType;
             Health = health;

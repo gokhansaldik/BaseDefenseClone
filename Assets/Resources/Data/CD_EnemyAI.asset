@@ -14,6 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAIData:
     EnemyList:
-    - {fileID: 0}
-    SpawnPosList:
-    - {fileID: 4933631560270997777, guid: d5fdf63bfa1dbc2469281a22fb238ae4, type: 3}
+    - EnemyType: 0
+      Health: 100
+      Damage: 0
+      AttackRange: 1.5
+      AttackSpeed: 2
+      ScaleSize: {x: 1, y: 1, z: 1}
+      BodyColor: {r: 0.9528302, g: 0.70026517, b: 0.0764062, a: 0}
+      MoveSpeed: 2
+      ChaseSpeed: 4
+      NavMeshRadius: 5
+      NavMeshHeight: 3
+    SpawnPositionList:
+    - {fileID: 1772013296167520256, guid: 6a51f4d15f0602b49a4a1627998333c3, type: 3}
