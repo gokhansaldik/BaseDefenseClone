@@ -11,6 +11,7 @@ namespace AIBrains
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Transform _spawnPoint;
         private readonly List<Transform> _targetList;
+        private IState _stateImplementation;
 
         public Search(EnemyAIBrain enemyAIBrain, NavMeshAgent navMeshAgent, Transform spawnPoint)
         {
@@ -31,6 +32,26 @@ namespace AIBrains
         public void OnExit()
         {
             
+        }
+
+        public void EnterState()
+        {
+            _stateImplementation.EnterState();
+        }
+
+        public void UpdateState()
+        {
+            _stateImplementation.UpdateState();
+        }
+
+        public void OnCollisionDetectionState(Collider other)
+        {
+            _stateImplementation.OnCollisionDetectionState(other);
+        }
+
+        public void SwitchState()
+        {
+            _stateImplementation.SwitchState();
         }
 
         private void GetRandomPointBakedSurface()

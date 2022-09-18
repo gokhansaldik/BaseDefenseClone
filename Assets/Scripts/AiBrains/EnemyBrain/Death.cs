@@ -24,6 +24,8 @@ namespace AIBrains
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
         private EnemyAIBrain _enemyAIBrain;
+        private IState _stateImplementation;
+
         #endregion
         
         #endregion
@@ -45,6 +47,26 @@ namespace AIBrains
         public void OnExit()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void EnterState()
+        {
+            _stateImplementation.EnterState();
+        }
+
+        public void UpdateState()
+        {
+            _stateImplementation.UpdateState();
+        }
+
+        public void OnCollisionDetectionState(Collider other)
+        {
+            _stateImplementation.OnCollisionDetectionState(other);
+        }
+
+        public void SwitchState()
+        {
+            _stateImplementation.SwitchState();
         }
     }
 }

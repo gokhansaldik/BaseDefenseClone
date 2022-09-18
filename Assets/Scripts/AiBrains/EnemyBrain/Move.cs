@@ -26,6 +26,7 @@ namespace AIBrains
         private static readonly int Speed = Animator.StringToHash("Speed");
         private Vector3 _lastPosition = Vector3.zero;
         private readonly float _moveSpeed;
+        private IState _stateImplementation;
 
         #endregion
         
@@ -55,6 +56,26 @@ namespace AIBrains
         {
             //_navMeshAgent.enabled = true;
             //_animator.SetFloat(,1f);
+        }
+
+        public void EnterState()
+        {
+            _stateImplementation.EnterState();
+        }
+
+        public void UpdateState()
+        {
+            _stateImplementation.UpdateState();
+        }
+
+        public void OnCollisionDetectionState(Collider other)
+        {
+            _stateImplementation.OnCollisionDetectionState(other);
+        }
+
+        public void SwitchState()
+        {
+            _stateImplementation.SwitchState();
         }
     }
 }

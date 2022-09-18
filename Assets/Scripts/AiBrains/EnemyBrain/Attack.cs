@@ -12,6 +12,7 @@ namespace AIBrains
         private readonly float _attackRange;
 
         private bool _inAttack;
+        private IState _stateImplementation;
         public bool InPlayerAttackRange() => _inAttack;
         public Attack(NavMeshAgent navMeshAgent, Animator animator, EnemyAIBrain enemyAIBrain, float attackRange)
         {
@@ -31,6 +32,27 @@ namespace AIBrains
         public void OnExit()
         {
         }
+
+        public void EnterState()
+        {
+            _stateImplementation.EnterState();
+        }
+
+        public void UpdateState()
+        {
+            _stateImplementation.UpdateState();
+        }
+
+        public void OnCollisionDetectionState(Collider other)
+        {
+            _stateImplementation.OnCollisionDetectionState(other);
+        }
+
+        public void SwitchState()
+        {
+            _stateImplementation.SwitchState();
+        }
+
         public void UpdateIState()
         {
             if (_enemyAIBrain.PlayerTarget)

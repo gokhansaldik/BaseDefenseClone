@@ -29,6 +29,8 @@ namespace AIBrains
         private readonly float _chaseSpeed;
 
         private bool _inAttack = false;
+        private IState _stateImplementation;
+
         #endregion
         
         #endregion
@@ -58,6 +60,27 @@ namespace AIBrains
         {
             
         }
+
+        public void EnterState()
+        {
+            _stateImplementation.EnterState();
+        }
+
+        public void UpdateState()
+        {
+            _stateImplementation.UpdateState();
+        }
+
+        public void OnCollisionDetectionState(Collider other)
+        {
+            _stateImplementation.OnCollisionDetectionState(other);
+        }
+
+        public void SwitchState()
+        {
+            _stateImplementation.SwitchState();
+        }
+
         private void CheckDistanceChase()
         {
             if (_navMeshAgent.remainingDistance <= _attackRange)
