@@ -12,6 +12,11 @@ TagManager:
   - CollectableDiamond
   - CollectedMoney
   - CollectedDiamond
+  - BuildArea
+  - Enemy
+  - MineWareHouse
+  - Miner
+  - Mine
   layers:
   - Default
   - TransparentFX

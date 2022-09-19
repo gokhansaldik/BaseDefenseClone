@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -44,13 +46,9 @@ namespace Controllers
             obj.transform.SetParent(moneyStackHolder.transform);
             SetObjPosition(obj);
         }
-        // public void DiamondAddStack(GameObject obj)
-        // {
-        //     if (obj == null) return;
-        //     MoneyStackList.Add(obj);
-        //     obj.transform.SetParent(moneyStackHolder.transform);
-        //     SetObjPosition(obj);
-        // }
+
+      
+       
 
         private void SetObjPosition(GameObject obj)
         {

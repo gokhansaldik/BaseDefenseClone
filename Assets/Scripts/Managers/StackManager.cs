@@ -131,6 +131,8 @@ namespace Managers
             if (LerpOk == true)
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
+                SetAllCollectableAnim(CollectableAnimationStates.Run);
+
             }
             else if (LerpOk == false)
             {

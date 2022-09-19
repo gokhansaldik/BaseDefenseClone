@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9348a7e1e984d89ad6b0a314aebb088, type: 3}
   m_Name: CD_PoolGenerator
   m_EditorClassIdentifier: 
-  PoolObjectList:
-  - ObjName: CollectablePlayer
-    Pref: {fileID: 8425939303997151591, guid: 93888c3acce2da742b79b09bdf065cbc, type: 3}
-    ObjectCount: 20
-  - ObjName: EnemyRed
-    Pref: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
-    ObjectCount: 20
+  PoolDataList:
+  - Type: 4
+    Pref: {fileID: 0}
+    ObjectCount: 0
+  - Type: 1
+    Pref: {fileID: 0}
+    ObjectCount: 0
+  - Type: 0
+    Pref: {fileID: 0}
+    ObjectCount: 0
+  - Type: 3
+    Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
+    ObjectCount: 100

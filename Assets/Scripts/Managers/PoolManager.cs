@@ -15,7 +15,6 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject levelHolder;
         [SerializeField] private Transform poolManagerG;
 
         #endregion
@@ -25,14 +24,37 @@ namespace Managers
         private CD_PoolGenerator _cdPoolGenerator;
         private GameObject _emptyGameObject;
         private PoolGenerateCommand _poolGenerateCommand;
-        private RestartPoolCommand _restartPoolCommand;
 
         #endregion
 
         #endregion
 
+        #region Event Subscription
 
-        private void Awake()
+        private void OnEnable()
+        {
+            SubscribeEvent();
+        }
+
+        private void SubscribeEvent()
+        {
+            PoolSignals.Instance.onGetPoolObject += OnGetPoolObject;
+            PoolSignals.Instance.onSendPool += OnSendPool;
+        }
+
+        private void UnSubscribeEvent()
+        {
+            PoolSignals.Instance.onGetPoolObject -= OnGetPoolObject;
+            PoolSignals.Instance.onSendPool -= OnSendPool;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvent();
+        }
+
+        #endregion
+         private void Awake()
         {
             GetReferences();
             Init();
@@ -48,42 +70,12 @@ namespace Managers
         {
             _poolGenerateCommand =
                 new PoolGenerateCommand(ref _cdPoolGenerator, ref poolManagerG, ref _emptyGameObject);
-            _restartPoolCommand = new RestartPoolCommand(ref _cdPoolGenerator, ref poolManagerG, ref levelHolder);
         }
-
-        #region EventSubscription
-
-        private void OnEnable()
-        {
-            SubscribeEvent();
-        }
-
-        private void SubscribeEvent()
-        {
-            CoreGameSignals.Instance.onReset += OnRestart;
-            PoolSignals.Instance.onGetPoolObject += OnGetPoolObject;
-            PoolSignals.Instance.onSendPool += OnSendPool;
-        }
-
-        private void UnSubscribeEvent()
-        {
-            CoreGameSignals.Instance.onReset -= OnRestart;
-            PoolSignals.Instance.onGetPoolObject -= OnGetPoolObject;
-            PoolSignals.Instance.onSendPool -= OnSendPool;
-        }
-
-        private void OnDisable()
-        {
-            UnSubscribeEvent();
-        }
-
-        #endregion
 
 
         private void StartPool()
         {
             _poolGenerateCommand.Execute();
-           
         }
 
         private CD_PoolGenerator GetPoolData()
@@ -91,43 +83,23 @@ namespace Managers
             return Resources.Load<CD_PoolGenerator>("Data/CD_PoolGenerator");
         }
 
-        private async void RestartPool()
-        {
-            await Task.Delay(500);
-            _restartPoolCommand.Execute();
-        }
-
         private GameObject OnGetPoolObject(PoolType poolType)
         {
-            
             var parent = transform.GetChild((int)poolType);
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
-                : Instantiate(_cdPoolGenerator.PoolObjectList[(int)poolType].Pref, Vector3.zero, Quaternion.identity,
-                    parent);
-            
+                : null;
             return obj;
-            
         }
 
-        private void OnSendPool(GameObject CollectableObject, PoolType poolType)
+        private void OnSendPool(GameObject poolObject, PoolType poolType)
         {
-            //CollectableObject.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0);
-            CollectableObject.transform.parent = transform.GetChild((int)poolType);
-            CollectableObject.GetComponentInChildren<Collider>().enabled = true;
-            CollectableObject.SetActive(false);
-            CollectableObject.transform.localPosition = new Vector3(0f, 0f, 0);
+            poolObject.SetActive(false);
+            poolObject.transform.localPosition = Vector3.zero;
+            poolObject.transform.parent = transform.GetChild((int)poolType);
         }
 
-        private void OnRestart()
-        {
-            RestartPool();
-        }
-        private IEnumerator PoolSetActive(GameObject obj)
-        {
-            obj.SetActive(true);
-            yield return new WaitForSeconds(2f);
-        }
+      
        
     }
 }

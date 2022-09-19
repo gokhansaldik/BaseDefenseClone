@@ -1,4 +1,4 @@
-using Command;
+﻿using Command;
 using Data.UnityObject;
 using Signals;
 using Sirenix.OdinInspector;
@@ -34,8 +34,8 @@ namespace Managers
 
         private void Awake()
         {
-            _levelClearer = new ClearActiveLevelCommand();
-            _levelLoader = new LevelLoaderCommand();
+            _levelClearer = new ClearActiveLevelCommand(ref levelHolder);
+            _levelLoader = new LevelLoaderCommand(ref levelHolder);
         }
 
         #region Event Subscription
@@ -98,8 +98,8 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            int newLevelData = GetLevelCount();
-            _levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
+            var newLevelData = GetLevelCount();
+            _levelLoader.Execute(newLevelData);
         }
 
         private int GetLevelCount()
@@ -109,7 +109,7 @@ namespace Managers
 
         private void OnClearActiveLevel()
         {
-            _levelClearer.ClearActiveLevel(levelHolder.transform);
+            _levelClearer.Execute();
         }
     }
 }

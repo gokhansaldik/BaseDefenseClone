@@ -11,9 +11,9 @@ namespace Commands
 
         #region Private Variables
 
-        private CD_PoolGenerator _cdPoolGenerator;
+        private readonly CD_PoolGenerator _cdPoolGenerator;
         private GameObject _emptyGameObject;
-        private Transform _managerTranform;
+        private readonly Transform _managerTranform;
 
         #endregion
 
@@ -29,29 +29,19 @@ namespace Commands
 
         public void Execute()
         {
-            var pooldata = _cdPoolGenerator.PoolObjectList;
-            for (int i = 0; i < pooldata.Count; i++)
+            var pooldata = _cdPoolGenerator.PoolDataList;
+            for (var i = 0; i < pooldata.Count; i++)
             {
                 _emptyGameObject = new GameObject();
                 _emptyGameObject.transform.parent = _managerTranform;
-                _emptyGameObject.name = pooldata[i].ObjName;
+                _emptyGameObject.name = pooldata[i].Type.ToString();
 
-                for (int j = 0; j < pooldata[i].ObjectCount; j++)
+                for (var j = 0; j < pooldata[i].ObjectCount; j++)
                 {
                     var obj = Object.Instantiate(pooldata[i].Pref, _managerTranform.GetChild(i));
-                    obj.transform.position = new Vector3(Random.Range(-20f, 20f), 0f, 8f);
                     obj.SetActive(false);
-                    // for (int k = 0; k < pooldata[i].ObjectCount; k++)
-                    // {
-                    //     obj.SetActive(true);
-                    //     return;
-                    // }
                 }
-                
             }
         }
-
-       
-        
     }
 }

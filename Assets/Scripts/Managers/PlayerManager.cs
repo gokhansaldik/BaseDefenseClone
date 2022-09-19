@@ -144,6 +144,8 @@ namespace Managers
             //playerStackController.DiamondAddStack(obj);
         }
 
+        
+
 
         private void OnLevelFailed() => movementController.IsReadyToPlay(false);
 

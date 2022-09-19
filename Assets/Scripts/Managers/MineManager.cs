@@ -102,10 +102,11 @@ namespace Managers
                         PoolSignals.Instance.onSendPool?.Invoke(obj,
                             PoolType.Diamond);
                     });
-                ScoreSignals.Instance.onAddDiamond?.Invoke(1);
+                //ScoreSignals.Instance.onAddDiamond?.Invoke(1);
+                ScoreSignals.Instance.onSetScore?.Invoke(PayType.Gem,_diamondList.Count);
             }
-
-            SaveSignals.Instance.onSaveScoreData?.Invoke();
+            SaveSignals.Instance.onScoreSave?.Invoke();
+            // SaveSignals.Instance.onSaveScoreData?.Invoke();
         }
 
         private void OnAddDiamondStack(GameObject target)
@@ -122,9 +123,6 @@ namespace Managers
 
         private void SetObjPosition(GameObject obj)
         {
-            // _directX = ((int)(_diamondList.Count % 3)) / 2f;
-            // _directY = ((int)(_diamondList.Count / 9)) / 2f;
-            // _directZ = ((int)(_diamondList.Count % 9) / 3) / 2f;
             _directX = ((int)(_diamondList.Count % _data.LimitX)) * _data.OffsetX;
             _directY = ((int)(_diamondList.Count / (_data.LimitX * _data.LimitZ))) * _data.OffsetY;
             _directZ = ((int)(_diamondList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;

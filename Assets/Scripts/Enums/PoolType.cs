@@ -5,6 +5,7 @@ namespace Enums
         Collectable,
         Bullet,
         Money,
-        Diamond
+        Diamond,
+        Enemy,
     }
 }

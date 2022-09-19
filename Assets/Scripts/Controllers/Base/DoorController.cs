@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -13,6 +14,8 @@ namespace Controllers
 
         #endregion
 
+        private PlayerManager _playerManager;
+
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -20,6 +23,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 OpenDoor();
+                
             }
         }
 
@@ -40,5 +44,7 @@ namespace Controllers
         {
             baseDoor.transform.DOLocalRotate(Vector3.zero, 1f);
         }
+
+       
     }
 }

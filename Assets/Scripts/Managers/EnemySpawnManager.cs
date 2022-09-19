@@ -5,9 +5,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using AiBrains;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -19,71 +21,66 @@ namespace Managers
 
         [SerializeField] private List<GameObject> enemies = new List<GameObject>();
 
-       // [SerializeField] private List<Transform> targetList = new List<Transform>();
-
-
         #endregion
 
         #region Public Variables
 
-       // public Transform Player;
-
         public int NumberOfEnemiesToSpawn = 50;
 
         public float SpawnDelay = 2;
-
-       // public GameObject EnemyPrefab;
-
-       // public Transform SpawnPos;
+        [SerializeField]
+        private Transform spawnPos;
 
         #endregion
 
-        #region Private Variables
-
-        private EnemyType enemyType;
-
-        private List<EnemyBrain> enemyScripts = new List<EnemyBrain>();
-
-        private NavMeshTriangulation triangulation;
-
-        private GameObject _enemyAI;
-
-        private EnemyBrain _enemyBrain;
-
-        #endregion
         #endregion
 
-        private void Awake()
+        #region Event Subscriptions
+
+        private void OnEnable()
         {
-            InitEnemyPool();
-            StartCoroutine(SpawnEnemies());
-
+            SubscribeEvent();
         }
+
+        private void SubscribeEvent()
+        {
+            LevelSignals.Instance.onLevelInitDone += InitEnemyPool;
+        }
+        private void UnsubscribeEvent()
+        {
+            LevelSignals.Instance.onLevelInitDone -= InitEnemyPool;
+        }
+        private void OnDisable()
+        {
+            UnsubscribeEvent();
+        }
+        #endregion
+
         private void InitEnemyPool()
         {
             for (int i = 0; i < enemies.Count; i++)
-                ObjectPoolManager.Instance.AddObjectPool(() => Instantiate(enemies[i]), TurnOnEnemyAI, TurnOffEnemyAI, ((EnemyType)i).ToString(), 50, true);
+            {
+                ObjectPoolManager.Instance.AddObjectPool(() => Instantiate(enemies[i], spawnPos), TurnOnEnemyAI, TurnOffEnemyAI, ((EnemyType)i).ToString(), 50, true);
+            }
+            StartCoroutine(SpawnEnemies());
         }
 
-        private void Start()
-        {
-           // triangulation = NavMesh.CalculateTriangulation();
-        }
         private void TurnOnEnemyAI(GameObject enemy)
         {
-            enemy.SetActive(true);
+            if (enemy) 
+                enemy.SetActive(true);
         }
 
         private void TurnOffEnemyAI(GameObject enemy)
         {
-            enemy.SetActive(false);
-
+            if (enemy)
+                enemy.SetActive(false);
         }
-
         private void ReleaseEnemyObject(GameObject go, Type t)
         {
             ObjectPoolManager.Instance.ReturnObject(go, t.ToString());
         }
+
         private IEnumerator SpawnEnemies()
         {
             WaitForSeconds wait = new WaitForSeconds(SpawnDelay);
@@ -93,7 +90,6 @@ namespace Managers
             while (spawnedEnemies < NumberOfEnemiesToSpawn)
             {
                 DoSpawnEnemy();
-
                 spawnedEnemies++;
                 yield return wait;
             }
@@ -101,27 +97,17 @@ namespace Managers
 
         private void DoSpawnEnemy()
         {
-            int randomType;
-            int randomPercentage = UnityEngine.Random.Range(0, 101);
-            
-           
 
-            if (randomPercentage<=15)
+            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyType)).Length-1);
+            int randomPercentage = Random.Range(0, 101);
+            if (randomType == (int)EnemyType.RedEnemy)
             {
-                randomType = (int)EnemyType.RedEnemy;
+                if (randomPercentage < 30)
+                {
+                    randomType = (int)EnemyType.RedEnemy;
+                }
             }
-            else if (15< randomPercentage && randomPercentage <=50)
-            {
-                randomType = (int)EnemyType.RedEnemy;
-            }
-            else
-            {
-                randomType = (int)EnemyType.RedEnemy;
-
-            }
-           
-             ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
-         
+            ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
 
         }
     }
