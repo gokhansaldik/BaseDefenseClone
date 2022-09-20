@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Command
+namespace Commands.Level
 {
     public class LevelLoaderCommand
     {
@@ -19,10 +19,9 @@ namespace Command
             _levelHolder = levelHolder;
         }
 
-        public void Execute(int _levelID)
+        public void Execute(int _levelId)
         {
-            Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {_levelID}"),
-                _levelHolder.transform);
+            Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {_levelId}"),_levelHolder.transform);
         }
     }
 }

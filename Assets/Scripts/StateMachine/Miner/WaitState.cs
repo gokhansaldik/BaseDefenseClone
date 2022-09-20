@@ -6,54 +6,43 @@ using UnityEngine.AI;
 
 namespace StateMachine.Miner
 {
-    public class WaitState:MinerStateMachine
+    public class WaitState : IMinerStateMachine
     {
         #region Self Variables
 
-        #region Public Variables
-
         
-
-        #endregion
-
-        #region Serialized Variables
-
-        
-
-        #endregion
 
         #region Private Variables
 
-        private MinerManager _manager;
-        private NavMeshAgent _agent;
+        private MinerManager _minerManager;
+        private NavMeshAgent _navmeshAgent;
 
         #endregion
 
         #endregion
 
-        public WaitState( MinerManager manager,ref NavMeshAgent agent)
+        public WaitState(MinerManager minerManager, ref NavMeshAgent navmeshAgent)
         {
-            _manager = manager;
-            _agent = agent;
+            _minerManager = minerManager;
+            _navmeshAgent = navmeshAgent;
         }
+
         public void EnterState()
         {
-           
-            _manager.SetTriggerAnim(MinerAnimType.Idle);
+            _minerManager.SetTriggerAnim(MinerAnimType.Idle);
         }
 
         public void UpdateState()
         {
-        
         }
 
-        public void OnCollisionDetectionState(Collider other)
+        public void CollisionState(Collider other)
         {
         }
 
         public void SwitchState()
         {
-            _manager.SwitchState(MinerStatesType.GoStack);
+            _minerManager.SwitchState(MinerStatesType.GoStacking);
         }
     }
 }

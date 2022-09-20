@@ -2,7 +2,7 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerPhysicsController : MonoBehaviour
     {

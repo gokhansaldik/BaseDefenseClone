@@ -13,10 +13,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        #endregion
-
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> targetList;
@@ -41,9 +37,9 @@ namespace Managers
             _data = GetMineData();
         }
 
-        private MineStackData GetMineData() => Resources.Load<CD_MineData>("Data/CD_MineData").Data;
+        private MineStackData GetMineData() => Resources.Load<CD_Mine>("Data/CD_MineData").MineStackData;
 
-        #region EventSubscription
+        #region Event Subscription
 
         private void OnEnable()
         {
@@ -83,30 +79,17 @@ namespace Managers
                 _diamondList.RemoveAt(0);
                 _diamondList.TrimExcess();
                 obj.transform.parent = target.transform;
-                obj.transform.DOLocalMove(
-                    new Vector3(Random.Range(-0.5f,
-                            0.5f),
-                        Random.Range(0,
-                            0.5f),
-                        Random.Range(-0.5f,
-                            0.5f)),
-                    0.5f);
-                
-                obj.transform.DOLocalMove(new Vector3(0,
-                            0.1f,
-                            0),
-                        0.5f)
-                    .SetDelay(0.5f)
-                    .OnComplete(() =>
+                obj.transform.DOLocalMove(new Vector3(Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f)),0.5f);
+                obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.2f).OnComplete(() =>
                     {
                         PoolSignals.Instance.onSendPool?.Invoke(obj,
                             PoolType.Diamond);
                     });
-                //ScoreSignals.Instance.onAddDiamond?.Invoke(1);
-                ScoreSignals.Instance.onSetScore?.Invoke(PayType.Gem,_diamondList.Count);
+
+                ScoreSignals.Instance.onSetScore?.Invoke(PayType.Gem, _diamondList.Count);
             }
+
             SaveSignals.Instance.onScoreSave?.Invoke();
-            // SaveSignals.Instance.onSaveScoreData?.Invoke();
         }
 
         private void OnAddDiamondStack(GameObject target)
@@ -114,8 +97,7 @@ namespace Managers
             var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Diamond);
             if (obj == null) return;
             obj.transform.parent = diamondHolder.transform;
-            obj.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 1,
-                target.transform.position.z);
+            obj.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 1,target.transform.position.z);
             SetObjPosition(obj);
             obj.SetActive(true);
             _diamondList.Add(obj);

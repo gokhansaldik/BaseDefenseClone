@@ -11,10 +11,7 @@ public class PlayerData
 [Serializable]
 public class PlayerMovementData
 {
-    [Space] [Header("Idle")] public float IdleSpeed = 8f;
-    public int PlayerHealth;
-
-    public float AttackRange;
+    public float IdleSpeed = 4f;
 }
 
 [Serializable]

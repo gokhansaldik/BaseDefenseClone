@@ -1,4 +1,4 @@
-using Controllers;
+using Controllers.Collectable;
 using Enums;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 using Enums;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerAnimationController : MonoBehaviour
     {

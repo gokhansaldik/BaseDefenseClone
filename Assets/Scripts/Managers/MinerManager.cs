@@ -1,8 +1,6 @@
 using System.Collections;
 using Abstract;
-using Controllers;
-using Data.UnityObject;
-using Datas.ValueObject;
+using Controllers.Miner;
 using Enums;
 using Signals;
 using StateMachine.Miner;
@@ -13,34 +11,30 @@ namespace Managers
 {
     public class MinerManager : MonoBehaviour
     {
-         #region Self Variables
+        #region Self Variables
 
         #region Public Variables
         
-
-        public MinerStatesType MinerSType;
         public GameObject Target;
         public GameObject Stack;
-        public MinerStateMachine CurrentState;
-       
+        public IMinerStateMachine CurrentState;
 
         #endregion
 
         #region Serialized Variables
 
-  
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private MinerAnimationController animationController;
         [SerializeField] private GameObject diamond;
-        [SerializeField] private GameObject axe;
+        [SerializeField] private GameObject pickaxe;
 
         #endregion
 
         #region Private Variables
 
-        private GoMineState _goMine;
-        private GoStackState _goStack;
-        private DigState _dig;
+        private GoDiggingState _goMine;
+        private GoStackingState _goStacking;
+        private PickaxeState _pickaxe;
         private WaitState _wait;
 
         #endregion
@@ -50,17 +44,13 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-           
         }
-
-       
-
 
         private void GetReferences()
         {
-            _dig = new DigState(this);
-            _goStack = new GoStackState(this, ref agent);
-            _goMine = new GoMineState(this, ref agent);
+            _pickaxe = new PickaxeState(this);
+            _goStacking = new GoStackingState(this, ref agent);
+            _goMine = new GoDiggingState(this, ref agent);
             _wait = new WaitState(this, ref agent);
             CurrentState = _goMine;
         }
@@ -70,31 +60,29 @@ namespace Managers
             Target = IdleGameSignals.Instance.onGetMineTarget();
             Stack = IdleGameSignals.Instance.onGetMineStackTarget();
             CurrentState.EnterState();
-            
         }
 
         private void Update()
         {
             CurrentState.UpdateState();
         }
-
-
-        public void SwitchState( MinerStatesType stateType)
+        
+        public void SwitchState(MinerStatesType stateType)
         {
             switch (stateType)
             {
-                case MinerStatesType.Dig:
-                    CurrentState = _dig;
+                case MinerStatesType.Pickaxe:
+                    CurrentState = _pickaxe;
                     diamond.SetActive(false);
-                    axe.SetActive(true);
+                    pickaxe.SetActive(true);
                     break;
-                case MinerStatesType.GoMine:
+                case MinerStatesType.GoDigging:
                     CurrentState = _goMine;
                     diamond.SetActive(false);
                     break;
-                case MinerStatesType.GoStack:
-                    CurrentState = _goStack;
-                    axe.SetActive(false);
+                case MinerStatesType.GoStacking:
+                    CurrentState = _goStacking;
+                    pickaxe.SetActive(false);
                     diamond.SetActive(true);
                     break;
                 case MinerStatesType.Wait:
@@ -110,16 +98,15 @@ namespace Managers
             animationController.SetAnim(animType);
         }
 
-        public void SetAnimLayer(AnimLayerType type,float weight)
+        public void SetAnimLayer(AnimationLayerType type, float weight)
         {
-            animationController.SetLayer(type,weight);
-            
+            animationController.SetLayer(type, weight);
         }
 
         public IEnumerator DigDiamond()
         {
-            yield return new WaitForSeconds(7);
-            SwitchState(MinerStatesType.GoStack);
+            yield return new WaitForSeconds(5);
+            SwitchState(MinerStatesType.GoStacking);
         }
     }
 }

@@ -14,9 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     StackLimit: 10
-    StackShackAnimDuration: 0.05
-    StackScaleDelay: 0.3
-    StackLerpXDelay: 0.3
-    StackLerpYDelay: 0.3
-    StackLerpZDelay: 0.3
-    StackOffset: 0.3
+    StackOffset: 0.01

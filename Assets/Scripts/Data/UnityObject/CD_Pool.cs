@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using Data.ValueObject;
+using System.Collections.Generic;
+using Datas.ValueObject;
 using UnityEngine;
 
 namespace Data.UnityObject
 {
-    [CreateAssetMenu(fileName = "CD_Pool", menuName = "Game/CD_Pool", order = 0)]
+    [CreateAssetMenu(fileName = "CD_PoolGenerator", menuName = "BaseDefense/CD_PoolGenerator", order = 0)]
     public class CD_Pool : ScriptableObject
     {
-        public List<PoolValueData> PoolValueDatas;
+        public List<PoolData> PoolDataList;
     }
 }

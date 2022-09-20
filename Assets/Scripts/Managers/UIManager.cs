@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Controllers;
+using Controllers.UI;
 using Enums;
 using Keys;
 using Signals;
@@ -66,12 +66,12 @@ namespace Managers
 
         private void OnOpenPanel(UIPanels panelParam)
         {
-            _uiPanelController.OpenPanel(panelParam, panels);
+            _uiPanelController.OpenUIPanel(panelParam, panels);
         }
 
         private void OnClosePanel(UIPanels panelParam)
         {
-            _uiPanelController.ClosePanel(panelParam, panels);
+            _uiPanelController.CloseUIPanel(panelParam, panels);
         }
 
         private void OnSetScoreText()

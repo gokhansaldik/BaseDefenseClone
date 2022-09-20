@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Command
+namespace Commands.Level
 {
     public class ClearActiveLevelCommand
     {
@@ -8,7 +8,7 @@ namespace Command
 
         #region Private Variables
 
-        private GameObject _levelholder;
+        private GameObject _levelHolder;
 
         #endregion
 
@@ -16,12 +16,12 @@ namespace Command
 
         public ClearActiveLevelCommand(ref GameObject levelHolder)
         {
-            _levelholder = levelHolder;
+            _levelHolder = levelHolder;
         }
 
         public void Execute()
         {
-            Object.Destroy(_levelholder.transform.GetChild(0).gameObject);
+            Object.Destroy(_levelHolder.transform.GetChild(0).gameObject);
         }
     }
 }

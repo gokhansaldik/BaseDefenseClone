@@ -2,9 +2,9 @@ namespace Enums
 {
     public enum MinerStatesType
     {
-        Dig,
-        GoMine,
-        GoStack,
+        Pickaxe,
+        GoDigging,
+        GoStacking,
         Wait
     }
 }

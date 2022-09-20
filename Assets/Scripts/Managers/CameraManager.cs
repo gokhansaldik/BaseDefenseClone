@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using Enums;
 using Signals;
@@ -19,7 +18,7 @@ namespace Managers
 
         #region Private Variables
 
-        [ShowInInspector] private Vector3 _initialPosition;
+        [ShowInInspector] private Vector3 _initalPosition;
         private Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Idle;
         private Transform _playerManager;
@@ -76,12 +75,12 @@ namespace Managers
 
         private void GetInitialPosition()
         {
-            _initialPosition = transform.GetChild(0).localPosition;
+            _initalPosition = transform.GetChild(0).localPosition;
         }
 
         private void MoveToInitialPosition()
         {
-            transform.GetChild(0).localPosition = _initialPosition;
+            transform.GetChild(0).localPosition = _initalPosition;
         }
 
         private void SetPlayerFollow()

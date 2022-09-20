@@ -15,3 +15,8 @@ MonoBehaviour:
   Data:
     playerMovementData:
       IdleSpeed: 4
+    StackData:
+      StackLimit: 10
+      StackoffsetY: 10
+      StackoffsetZ: 10
+      AnimationDurition: 1

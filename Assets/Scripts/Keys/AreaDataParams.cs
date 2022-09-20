@@ -4,7 +4,7 @@ namespace Keys
 {
     public struct AreaDataParams
     {
-        public List<int> RoomPayedAmound;
-        public List<int> RoomTurretPayedAmound;
+        public List<int> RoomPayedAmount;
+        public List<int> RoomTurretPayedAmount;
     }
 }

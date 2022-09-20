@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolDataList:
   - Type: 4
-    Pref: {fileID: 0}
-    ObjectCount: 0
+    Pref: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
+    ObjectCount: 5
   - Type: 1
     Pref: {fileID: 0}
     ObjectCount: 0

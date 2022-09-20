@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f400a3c00dd4686918077a411789b96, type: 3}
   m_Name: CD_MineData
   m_EditorClassIdentifier: 
-  Data:
+  MineStackData:
     OffsetX: 0.3
     OffsetY: 0.2
-    OffsetZ: 0.3
+    OffsetZ: 0.28
     LimitX: 5
-    LimitY: 1
-    LimitZ: 3
+    LimitY: 0
+    LimitZ: 4

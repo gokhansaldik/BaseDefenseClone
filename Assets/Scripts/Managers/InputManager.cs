@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Commands;
-using Data.UnityObject;
-using Data.ValueObject;
 using Enums;
 using Keys;
 using Signals;
@@ -15,8 +10,6 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
-        [Header("Data")] public InputData Data;
 
         #endregion
 
@@ -41,12 +34,6 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            Data = GetInputData();
-        }
-
-        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
 
         #region Event Subscription
 
@@ -57,16 +44,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput += OnEnableInput;
-            InputSignals.Instance.onDisableInput += OnDisableInput;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput -= OnEnableInput;
-            InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
@@ -130,15 +113,6 @@ namespace Managers
             }
         }
 
-        private void OnEnableInput()
-        {
-            // isReadyForTouch = true;
-        }
-
-        private void OnDisableInput()
-        {
-            //isReadyForTouch = false;
-        }
 
         private void OnPlay()
         {

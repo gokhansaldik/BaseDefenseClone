@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Keys;
 using Signals;
@@ -76,15 +75,15 @@ namespace Managers
         {
             _areaDataCache = new AreaDataParams()
             {
-                RoomPayedAmound = SaveSignals.Instance.onSaveAreaData().RoomPayedAmound,
-                RoomTurretPayedAmound = SaveSignals.Instance.onSaveAreaData().RoomTurretPayedAmound
+                RoomPayedAmount = SaveSignals.Instance.onSaveAreaData().RoomPayedAmount,
+                RoomTurretPayedAmount = SaveSignals.Instance.onSaveAreaData().RoomTurretPayedAmount
             };
-            if (_areaDataCache.RoomPayedAmound != null)
+            if (_areaDataCache.RoomPayedAmount != null)
                 ES3.Save("RoomPayedAmound",
-                    _areaDataCache.RoomPayedAmound, "AreaData.es3");
-            if (_areaDataCache.RoomTurretPayedAmound != null)
+                    _areaDataCache.RoomPayedAmount, "AreaData.es3");
+            if (_areaDataCache.RoomTurretPayedAmount != null)
                 ES3.Save("RoomTurretPayedAmound",
-                    _areaDataCache.RoomTurretPayedAmound, "AreaData.es3");
+                    _areaDataCache.RoomTurretPayedAmount, "AreaData.es3");
         }
 
         private int OnLevelLoad()
@@ -111,10 +110,10 @@ namespace Managers
         {
             return new AreaDataParams
             {
-                RoomPayedAmound = ES3.KeyExists("RoomPayedAmound", "AreaData.es3")
+                RoomPayedAmount = ES3.KeyExists("RoomPayedAmound", "AreaData.es3")
                     ? ES3.Load<List<int>>("RoomPayedAmound", "AreaData.es3")
                     : new List<int>(),
-                RoomTurretPayedAmound = ES3.KeyExists("RoomTurretPayedAmound", "AreaData.es3")
+                RoomTurretPayedAmount = ES3.KeyExists("RoomTurretPayedAmound", "AreaData.es3")
                     ? ES3.Load<List<int>>("RoomTurretPayedAmound", "AreaData.es3")
                     : new List<int>()
             };

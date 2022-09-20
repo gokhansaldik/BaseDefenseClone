@@ -7,7 +7,5 @@ namespace Enums
     {
         Idle,
         IdleFinish,
-        Turret,
-        Drone
     }
 }

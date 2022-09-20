@@ -8,7 +8,5 @@ namespace Signals
     {
         public UnityAction<UIPanels> onOpenPanel;
         public UnityAction<UIPanels> onClosePanel;
-        public UnityAction<int> onSetMoneyText;
-        public UnityAction<int> onSetDiamondText;
     }
 }

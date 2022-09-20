@@ -1,4 +1,4 @@
-﻿using Command;
+﻿using Commands.Level;
 using Data.UnityObject;
 using Signals;
 using Sirenix.OdinInspector;
@@ -104,7 +104,7 @@ namespace Managers
 
         private int GetLevelCount()
         {
-            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
+            return _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelData.Count;
         }
 
         private void OnClearActiveLevel()

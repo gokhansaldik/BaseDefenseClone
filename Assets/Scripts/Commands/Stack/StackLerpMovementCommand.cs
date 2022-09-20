@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.Stack
 {
     public class StackLerpMovementCommand
     {
@@ -9,9 +9,9 @@ namespace Commands
 
         #region Private Variables
 
-        private readonly List<GameObject> _stackList;
+        private List<GameObject> _stackList;
         private List<Vector3> _positionHistory = new List<Vector3>();
-        private int _gap = 10;
+        private int _distance = 10;
         private int _bodySpeed = 5;
 
         #endregion
@@ -30,7 +30,7 @@ namespace Commands
 
             foreach (var body in _stackList)
             {
-                Vector3 point = _positionHistory[Mathf.Min(index * _gap, _positionHistory.Count - 1)];
+                Vector3 point = _positionHistory[Mathf.Min(index * _distance, _positionHistory.Count - 1)];
                 Vector3 moveDirection = point - body.transform.position;
                 body.transform.position += moveDirection * _bodySpeed * Time.deltaTime;
                 body.transform.LookAt(point);

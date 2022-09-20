@@ -1,4 +1,4 @@
-using Controllers;
+using Controllers.Player;
 using DG.Tweening;
 using Enums;
 using Keys;
@@ -21,9 +21,8 @@ namespace Managers
 
         #region Seriliazed Variables
 
-        [SerializeField] private PlayerMovementController movementController;
-        [SerializeField] private PlayerPhysicsController physicsController;
-        [SerializeField] private PlayerAnimationController animationController;
+        [SerializeField] private PlayerMovementController playerMovementController;
+        [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerStackController playerStackController;
 
         #endregion
@@ -44,7 +43,7 @@ namespace Managers
             SendPlayerDataToControllers();
         }
 
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
 
         #region Event Subscription
 
@@ -56,28 +55,20 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
-            //CoreGameSignals.Instance.onChangeGameState += OnGameStateChange;
             CoreGameSignals.Instance.onReset += OnReset;
-
             InputSignals.Instance.onInputTaken += OnPointerDown;
             InputSignals.Instance.onInputReleased += OnInputReleased;
-
             InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
-
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            //CoreGameSignals.Instance.onChangeGameState -= OnGameStateChange;
             CoreGameSignals.Instance.onReset -= OnReset;
-
             InputSignals.Instance.onInputTaken -= OnPointerDown;
             InputSignals.Instance.onInputReleased -= OnInputReleased;
-
             InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
-
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
         }
 
@@ -90,12 +81,12 @@ namespace Managers
 
         private void SetPlayerDataToControllers()
         {
-            movementController.SetMovementData(_playerData.playerMovementData);
+            playerMovementController.SetMovementData(_playerData.playerMovementData);
         }
 
         private void OnPlay()
         {
-            movementController.IsReadyToPlay(true);
+            playerMovementController.IsReadyToPlay(true);
         }
 
         private void OnPointerDown()
@@ -111,26 +102,26 @@ namespace Managers
 
         private void OnJoystickDragged(IdleInputParams inputParams)
         {
-            movementController.UpdateIdleInputValue(inputParams);
+            playerMovementController.UpdateIdleInputValue(inputParams);
         }
 
 
         public void DeactivateMovement()
         {
-            movementController.DeactivateMovement();
+            playerMovementController.DeactivateMovement();
 
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
         }
 
         private void ActivateMovement()
         {
-            movementController.ActivateMovement();
+            playerMovementController.ActivateMovement();
             ChangePlayerAnimation(PlayerAnimationStates.Run);
         }
 
         public void ChangePlayerAnimation(PlayerAnimationStates animType)
         {
-            animationController.ChangeAnimationState(animType);
+            playerAnimationController.ChangeAnimationState(animType);
         }
 
         private void SendPlayerDataToControllers()
@@ -141,20 +132,16 @@ namespace Managers
         public void AddStack(GameObject obj)
         {
             playerStackController.MoneyAddStack(obj);
-            //playerStackController.DiamondAddStack(obj);
         }
-
         
-
-
-        private void OnLevelFailed() => movementController.IsReadyToPlay(false);
+        private void OnLevelFailed() => playerMovementController.IsReadyToPlay(false);
 
         private void OnReset()
         {
-            movementController.MovementReset();
-            animationController.gameObject.SetActive(false);
+            playerMovementController.MovementReset();
+            playerAnimationController.gameObject.SetActive(false);
             transform.DOScale(Vector3.one, .1f);
-            movementController.OnReset();
+            playerMovementController.OnReset();
         }
     }
 }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
-using Enums;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -26,11 +22,10 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private BaseStageType baseStage;
-        [SerializeField] private TextMeshPro tmp;
-        [SerializeField] private List<BaseObjects> level = new List<BaseObjects>();
+        [SerializeField] private TextMeshPro textMeshPro;
+
+
         [SerializeField] private List<RoomManager> Rooms = new List<RoomManager>();
-        [SerializeField] private List<TurretManager> Turrets = new List<TurretManager>();
 
         #endregion
 
@@ -43,10 +38,6 @@ namespace Managers
 
         #endregion
 
-        private void Awake()
-        {
-            ColoseGameObjects();
-        }
 
         #region Event Subscription
 
@@ -74,19 +65,12 @@ namespace Managers
 
         #endregion
 
-        private void ColoseGameObjects()
-        {
-            foreach (var VARIABLE in level[(int)baseStage].GameObjects)
-            {
-                VARIABLE.SetActive(false);
-            }
-        }
 
         private void Start()
         {
             _baseLevel = LevelSignals.Instance.onGetLevelID();
             _areaDatas = SaveSignals.Instance.onLoadAreaData();
-            Data = Resources.Load<CD_Level>("Data/CD_Level").LevelDatas[_baseLevel].BaseData;
+            Data = Resources.Load<CD_Level>("Data/CD_Level").LevelData[_baseLevel].BaseData;
             SetBaseLevelText();
             EmptyListChack();
             SetRoomData();
@@ -94,17 +78,16 @@ namespace Managers
 
         private void EmptyListChack()
         {
-            if (!_areaDatas.RoomPayedAmound.IsNullOrEmpty()) return;
-            _areaDatas.RoomPayedAmound = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
-            _areaDatas.RoomTurretPayedAmound = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
+            if (!_areaDatas.RoomPayedAmount.IsNullOrEmpty()) return;
+            _areaDatas.RoomPayedAmount = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
+            _areaDatas.RoomTurretPayedAmount = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
         }
 
         private void SetRoomData()
         {
             for (int i = 0; i < Rooms.Count; i++)
             {
-                Rooms[i].SetRoomData(Data.BaseRoomData.BaseRooms[i], _areaDatas.RoomPayedAmound[i]);
-                //Turrets[i].SetTurretData(Data.BaseRoomDatas.Rooms[i].TurretData,_areaDatas.RoomTurretPayedAmound[i]);
+                Rooms[i].SetRoomData(Data.BaseRoomData.BaseRooms[i], _areaDatas.RoomPayedAmount[i]);
             }
         }
 
@@ -112,8 +95,7 @@ namespace Managers
         {
             for (int i = 0; i < Rooms.Count; i++)
             {
-                _areaDatas.RoomPayedAmound[i] = Rooms[i].PayedAmound;
-                //_areaDatas.RoomTurretPayedAmound[i] = Turrets[i].PayedAmound;
+                _areaDatas.RoomPayedAmount[i] = Rooms[i].PayedAmound;
             }
 
             SaveSignals.Instance.onAreaDataSave?.Invoke();
@@ -127,7 +109,7 @@ namespace Managers
 
         private void SetBaseLevelText()
         {
-            tmp.text = "Base " + (SaveSignals.Instance.onLoadCurrentLevel() + 1).ToString();
+            textMeshPro.text = "Base " + (SaveSignals.Instance.onLoadCurrentLevel() + 1).ToString();
         }
     }
 }

@@ -1,9 +1,9 @@
+using DG.Tweening;
 using Enums;
 using Keys;
-using DG.Tweening;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerMovementController : MonoBehaviour
     {
@@ -12,13 +12,13 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private Rigidbody rigidBody;
-        [SerializeField] private GameStatesType currentGameState;
+        [SerializeField] private GameStatesType gameStatesType;
 
         #endregion
 
         #region Private Variables
 
-        private PlayerMovementData _movementData;
+        private PlayerMovementData _playerMovementData;
         private bool _isReadyToMove;
         private bool _isReadyToPlay;
         private Vector3 _movementDirection;
@@ -33,14 +33,14 @@ namespace Controllers
             {
                 if (_isReadyToMove)
                 {
-                    if (currentGameState == GameStatesType.Idle)
+                    if (gameStatesType == GameStatesType.Idle)
                     {
                         IdleMove();
                     }
                 }
                 else
                 {
-                    if (currentGameState == GameStatesType.Idle)
+                    if (gameStatesType == GameStatesType.Idle)
                     {
                         Stop();
                     }
@@ -53,8 +53,7 @@ namespace Controllers
         private void IdleMove()
         {
             Vector3 velocity = rigidBody.velocity;
-            velocity = new Vector3(_movementDirection.x * _movementData.IdleSpeed, velocity.y,
-                _movementDirection.z * _movementData.IdleSpeed);
+            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,_movementDirection.z * _playerMovementData.IdleSpeed);
             rigidBody.velocity = velocity;
             if (_movementDirection != Vector3.zero)
             {
@@ -83,7 +82,7 @@ namespace Controllers
             DOTween.KillAll();
         }
 
-        public void SetMovementData(PlayerMovementData movementData) => _movementData = movementData;
+        public void SetMovementData(PlayerMovementData movementData) => _playerMovementData = movementData;
 
         public void ActivateMovement()
         {
@@ -95,8 +94,7 @@ namespace Controllers
             _isReadyToMove = false;
         }
 
-        public void UpdateIdleInputValue(IdleInputParams inputParam) =>
-            _movementDirection = inputParam.JoystickMovement;
+        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.JoystickMovement;
 
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
     }

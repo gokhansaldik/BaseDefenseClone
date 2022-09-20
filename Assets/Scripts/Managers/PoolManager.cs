@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Threading.Tasks;
-using Commands;
+using Commands.Pool;
 using Data.UnityObject;
-using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -15,15 +12,15 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private Transform poolManagerG;
+        [SerializeField] private Transform poolManagerTransform;
 
         #endregion
 
         #region Private Variables
 
-        private CD_PoolGenerator _cdPoolGenerator;
+        private CD_Pool _cdPool;
         private GameObject _emptyGameObject;
-        private PoolGenerateCommand _poolGenerateCommand;
+        private PoolAddCommand _poolAddCommand;
 
         #endregion
 
@@ -54,7 +51,8 @@ namespace Managers
         }
 
         #endregion
-         private void Awake()
+
+        private void Awake()
         {
             GetReferences();
             Init();
@@ -63,32 +61,29 @@ namespace Managers
 
         private void GetReferences()
         {
-            _cdPoolGenerator = GetPoolData();
+            _cdPool = GetPoolData();
         }
 
         private void Init()
         {
-            _poolGenerateCommand =
-                new PoolGenerateCommand(ref _cdPoolGenerator, ref poolManagerG, ref _emptyGameObject);
+            _poolAddCommand = new PoolAddCommand(ref _cdPool, ref poolManagerTransform, ref _emptyGameObject);
         }
 
 
         private void StartPool()
         {
-            _poolGenerateCommand.Execute();
+            _poolAddCommand.Execute();
         }
 
-        private CD_PoolGenerator GetPoolData()
+        private CD_Pool GetPoolData()
         {
-            return Resources.Load<CD_PoolGenerator>("Data/CD_PoolGenerator");
+            return Resources.Load<CD_Pool>("Data/CD_PoolGenerator");
         }
 
         private GameObject OnGetPoolObject(PoolType poolType)
         {
             var parent = transform.GetChild((int)poolType);
-            var obj = parent.childCount != 0
-                ? parent.transform.GetChild(0).gameObject
-                : null;
+            var obj = parent.childCount != 0 ? parent.transform.GetChild(0).gameObject : null;
             return obj;
         }
 
@@ -98,8 +93,5 @@ namespace Managers
             poolObject.transform.localPosition = Vector3.zero;
             poolObject.transform.parent = transform.GetChild((int)poolType);
         }
-
-      
-       
     }
 }

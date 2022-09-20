@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using Enums;
-using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerStackController : MonoBehaviour
     {
@@ -19,13 +17,12 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private GameObject moneyStackHolder;
-        //[SerializeField] private GameObject diamondStackHolder;
 
         #endregion
 
         #region Private Variables
 
-        private PlayerStackData _data;
+        private PlayerStackData _playerStackData;
         private int _currentStackLevel;
         private float _directY;
 
@@ -35,7 +32,7 @@ namespace Controllers
 
         public void SetStackData(PlayerStackData data)
         {
-            _data = data;
+            _playerStackData = data;
         }
 
 
@@ -44,19 +41,16 @@ namespace Controllers
             if (obj == null) return;
             MoneyStackList.Add(obj);
             obj.transform.SetParent(moneyStackHolder.transform);
-            SetObjPosition(obj);
+            SetObjectPosition(obj);
         }
 
-      
-       
 
-        private void SetObjPosition(GameObject obj)
+        private void SetObjectPosition(GameObject obj)
         {
-            obj.transform.DOLocalRotate(Vector3.zero, _data.AnimationDurition);
-            obj.transform.DOLocalMove(new Vector3(0, _directY, -(_currentStackLevel * _data.StackoffsetZ)),
-                _data.AnimationDurition);
-            _directY = MoneyStackList.Count % _data.StackLimit * _data.StackoffsetY;
-            _currentStackLevel = MoneyStackList.Count / _data.StackLimit;
+            obj.transform.DOLocalRotate(Vector3.zero, _playerStackData.AnimationDurition);
+            obj.transform.DOLocalMove(new Vector3(0, _directY, -(_currentStackLevel * _playerStackData.StackoffsetZ +0.05f)),_playerStackData.AnimationDurition);
+            _directY = MoneyStackList.Count % _playerStackData.StackLimit * _playerStackData.StackoffsetY;
+            _currentStackLevel = MoneyStackList.Count / _playerStackData.StackLimit;
         }
     }
 }

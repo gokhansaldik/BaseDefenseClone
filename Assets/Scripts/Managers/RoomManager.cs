@@ -21,7 +21,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject area;
-        [SerializeField] private GameObject fencles;
+        [SerializeField] private GameObject fence;
         [SerializeField] private TextMeshPro tmp;
 
         #endregion
@@ -30,8 +30,8 @@ namespace Managers
 
         [ShowInInspector] private RoomData _roomData;
         private bool _isBase;
-        private int _payedAmound;
-        private int _remainingAmound;
+        private int _payedAmount;
+        private int _remainingAmount;
         private ScoreDataParams _scoreCache;
         private GameObject _textParentGameObject;
 
@@ -47,31 +47,29 @@ namespace Managers
         public void SetRoomData(RoomData roomData, int payedAmound)
         {
             _roomData = roomData;
-            _isBase = roomData.Isbase;
+            _isBase = roomData.Base;
             if (!_isBase)
             {
                 PayedAmound = payedAmound;
-                BuyAreaImageChange();
             }
         }
 
         public int PayedAmound
         {
-            get => _payedAmound;
+            get => _payedAmount;
             set
             {
-                _payedAmound = value;
-                _remainingAmound = _roomData.Cost - _payedAmound;
-                if (_remainingAmound == 0)
+                _payedAmount = value;
+                _remainingAmount = _roomData.Cost - _payedAmount;
+                if (_remainingAmount == 0)
                 {
                     _textParentGameObject.SetActive(false);
                     area.SetActive(true);
-                    fencles.SetActive(false);
-//                    invisibleWall.SetActive(false);
+                    fence.SetActive(false);
                 }
                 else
                 {
-                    SetText(_remainingAmound);
+                    SetText(_remainingAmount);
                 }
             }
         }
@@ -82,18 +80,17 @@ namespace Managers
             switch (_roomData.PayType)
             {
                 case PayType.Money:
-                    if (_scoreCache.MoneyScore > _remainingAmound)
+                    if (_scoreCache.MoneyScore > _remainingAmount)
                     {
                         StartCoroutine(Buy());
                     }
 
                     break;
                 case PayType.Gem:
-                    if (_scoreCache.GemScore > _remainingAmound)
+                    if (_scoreCache.GemScore > _remainingAmount)
                     {
                         StartCoroutine(Buy());
                     }
-
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -109,7 +106,7 @@ namespace Managers
         private IEnumerator Buy()
         {
             var waitForSecond = new WaitForSeconds(0.05f);
-            while (_remainingAmound > 0)
+            while (_remainingAmount > 0)
             {
                 PayedAmound++;
                 ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
@@ -122,11 +119,6 @@ namespace Managers
         private void SetText(int remainingAmound)
         {
             tmp.text = remainingAmound.ToString();
-        }
-
-        private void BuyAreaImageChange()
-        {
-            //_textParentGameObject.transform.GetChild(((int)_roomData.PayType) + 1).gameObject.SetActive(false);
         }
     }
 }

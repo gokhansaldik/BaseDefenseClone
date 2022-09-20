@@ -2,7 +2,7 @@ using Enums;
 using Managers;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.Stack
 {
     public class CollectableAnimSetCommand
     {

@@ -5,7 +5,7 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.Stack
 {
     public class CollectableRemoveOnStackCommand
     {
@@ -21,8 +21,7 @@ namespace Commands
 
         #endregion
 
-        public CollectableRemoveOnStackCommand(ref List<GameObject> stackList, ref StackManager manager,
-            ref StackData stackData)
+        public CollectableRemoveOnStackCommand(ref List<GameObject> stackList, ref StackManager manager,ref StackData stackData)
         {
             _stackList = stackList;
             _manager = manager;

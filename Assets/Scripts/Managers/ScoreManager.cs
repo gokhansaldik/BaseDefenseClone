@@ -13,7 +13,7 @@ namespace Managers
 
         #region Private Variables
 
-        private ScoreDataParams _loadedScoreDatas;
+        private ScoreDataParams _loadedScoreData;
         private ScoreData _scoreData = new ScoreData();
 
         #endregion
@@ -50,9 +50,9 @@ namespace Managers
 
         private void Start()
         {
-            _loadedScoreDatas = SaveSignals.Instance.onLoadScoreData();
-            _scoreData.MoneyScore = _loadedScoreDatas.MoneyScore;
-            _scoreData.DiamondScore = _loadedScoreDatas.GemScore;
+            _loadedScoreData = SaveSignals.Instance.onLoadScoreData();
+            _scoreData.MoneyScore = _loadedScoreData.MoneyScore;
+            _scoreData.DiamondScore = _loadedScoreData.GemScore;
             ScoreSignals.Instance.onSetScoreToUI?.Invoke();
         }
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Commands;
+using Commands.Stack;
 using Data.UnityObject;
 using Datas.ValueObject;
 using Enums;
@@ -32,14 +32,9 @@ namespace Managers
 
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
-
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
-
-        //private TransportInStack _transportInStack;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
-        private StackItemsCombineCommand _stackItemsCombineCommand;
         private Transform _playerManager;
-
         [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
         private int _numOfItemsHolding = 0;
         private Stack<Transform> _moneyTransform = new Stack<Transform>();
@@ -65,10 +60,10 @@ namespace Managers
         {
             StackSignals.Instance.onAddInStack += OnAddInStack;
             StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
-            //StackSignals.Instance.onTransportInStack += _transportInStack.Execute;
+
             StackSignals.Instance.onGetStackList += OnGetStackList;
-            //StackSignals.Instance.onAddStackMoney += OnAddStackMoney;
-            CoreGameSignals.Instance.onEnterFinish += OnEnterFinish;
+
+       
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -78,11 +73,11 @@ namespace Managers
         {
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
-            //StackSignals.Instance.onTransportInStack -= _transportInStack.Execute;
-            StackSignals.Instance.onGetStackList -= OnGetStackList;
-            //StackSignals.Instance.onAddStackMoney -= OnAddStackMoney;
 
-            CoreGameSignals.Instance.onEnterFinish -= OnEnterFinish;
+            StackSignals.Instance.onGetStackList -= OnGetStackList;
+
+
+           
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
@@ -96,14 +91,13 @@ namespace Managers
 
         private StackData GetStackData()
         {
-            return Resources.Load<CD_Stack>("Data/CD_Stack").Data;
+            return Resources.Load<CD_Stack>("Data/CD_Stack").StackData;
         }
 
 
         private void GetReferences()
         {
             StackData = GetStackData();
-            //moneyHolderTransform = FindObjectOfType<PlayerManager>().transform;
         }
 
 
@@ -112,15 +106,9 @@ namespace Managers
             _collectableAddOnStackCommand =
                 new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList);
-
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager,
-                ref StackData);
-            // _transportInStack = new TransportInStack(ref _stackList, ref stackManager, ref StackData);
+            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
-
-
-            _stackItemsCombineCommand =
-                new StackItemsCombineCommand(ref _stackList, ref StackData);
+            
         }
 
 
@@ -132,7 +120,6 @@ namespace Managers
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
                 SetAllCollectableAnim(CollectableAnimationStates.Run);
-
             }
             else if (LerpOk == false)
             {
@@ -155,18 +142,7 @@ namespace Managers
         {
             _collectableAnimSetCommand.Execute(obj, animationStates);
         }
-
-        private void OnEnterFinish()
-        {
-            _stackItemsCombineCommand.Execute();
-        }
-
-
-        // private void SetAllCollectableAnim(CollectableAnimationStates states)
-        // {
-        //     foreach (var t in _stackList)
-        //         CollectableAnimSet(t, states);
-        // }
+        
 
         private void FindPlayer()
         {
@@ -203,7 +179,6 @@ namespace Managers
             _stackList.Clear();
             _stackList.TrimExcess();
             await Task.Delay(100);
-            //Initialized();
         }
 
         private void OnPlay()

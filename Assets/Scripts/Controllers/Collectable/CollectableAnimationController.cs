@@ -1,7 +1,7 @@
 using Enums;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Collectable
 {
     public class CollectableAnimationController : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace Controllers
         #endregion
 
         #endregion
-        
+
         public void Playanim(CollectableAnimationStates animationStates)
         {
             collectableAnimatorController.SetTrigger(animationStates.ToString());

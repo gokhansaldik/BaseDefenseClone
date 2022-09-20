@@ -6,8 +6,5 @@ namespace Data.ValueObject
     public class BaseData
     {
         public BaseRoomDataList BaseRoomData;
-        public MineBaseData MineBaseData;
-        public MilitaryBaseData MilitaryBaseData;
-        public BuyablesData BuyablesData;
     }
 }

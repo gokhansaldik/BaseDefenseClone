@@ -3,7 +3,7 @@ using Datas.ValueObject;
 using Managers;
 using UnityEngine;
 
-namespace Commands
+namespace Commands.Stack
 {
     public class CollectableAddOnStackCommand
     {
@@ -17,11 +17,9 @@ namespace Commands
         private PlayerManager _playerManager;
 
         #endregion
-
         #endregion
 
-        public CollectableAddOnStackCommand(ref StackManager stackManager, ref List<GameObject> stackList,
-            ref StackData stackData)
+        public CollectableAddOnStackCommand(ref StackManager stackManager, ref List<GameObject> stackList,ref StackData stackData)
         {
             _stackList = stackList;
             _stackManager = stackManager;
