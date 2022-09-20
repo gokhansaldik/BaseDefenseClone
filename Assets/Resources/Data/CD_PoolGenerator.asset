@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: CD_PoolGenerator
   m_EditorClassIdentifier: 
   PoolDataList:
-  - Type: 4
+  - PoolType: 0
     Pref: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
     ObjectCount: 5
-  - Type: 1
+  - PoolType: 1
     Pref: {fileID: 0}
     ObjectCount: 0
-  - Type: 0
+  - PoolType: 2
     Pref: {fileID: 0}
     ObjectCount: 0
-  - Type: 3
+  - PoolType: 3
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100
+  - PoolType: 4
+    Pref: {fileID: 0}
+    ObjectCount: 0

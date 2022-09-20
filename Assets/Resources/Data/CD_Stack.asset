@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868499719d8c4b8d8c9e8982418b503e, type: 3}
   m_Name: CD_Stack
   m_EditorClassIdentifier: 
-  Data:
+  StackData:
     StackLimit: 10
     StackOffset: 0.01
