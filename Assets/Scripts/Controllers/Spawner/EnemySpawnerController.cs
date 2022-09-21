@@ -1,6 +1,7 @@
 using System;
 using Controllers.Enemy;
 using Data.UnityObject;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Spawner
@@ -67,7 +68,7 @@ namespace Controllers.Spawner
         private void Update()
         {
             _currentTime += Time.deltaTime;
-            if (_currentTime > _maxTime)
+            if (_currentTime > _maxTime && EnemyManager.Instance.CanSpawn )
             {
                 SpawnEnemy();
             }
@@ -75,7 +76,8 @@ namespace Controllers.Spawner
 
         private void SpawnEnemy()
         {
-           Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position, Quaternion.identity);
+          EnemyController enemyController = Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position, Quaternion.identity);
+          EnemyManager.Instance.AddEnemyController(enemyController);
            _currentTime = 0f;
            _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }
