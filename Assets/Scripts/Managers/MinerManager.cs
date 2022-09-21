@@ -2,6 +2,7 @@ using System.Collections;
 using Abstract;
 using Controllers.Miner;
 using Enums;
+using Interface;
 using Signals;
 using StateMachine.Miner;
 using UnityEngine;

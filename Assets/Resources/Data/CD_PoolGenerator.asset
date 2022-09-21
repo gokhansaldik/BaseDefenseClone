@@ -26,5 +26,5 @@ MonoBehaviour:
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100
   - PoolType: 4
-    Pref: {fileID: 0}
-    ObjectCount: 0
+    Pref: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
+    ObjectCount: 15
