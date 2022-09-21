@@ -57,6 +57,7 @@ namespace Controllers.Spawner
         //     _maxSpawnTime = Random.Range(min, max);
         // }
         [SerializeField] private CD_SpawnInfo spawnInfo;
+        [SerializeField] private GameObject enemyTarget;
         private float _currentTime = 0f;
         private float _maxTime;
 
@@ -78,6 +79,7 @@ namespace Controllers.Spawner
         {
           EnemyController enemyController = Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position, Quaternion.identity);
           EnemyManager.Instance.AddEnemyController(enemyController);
+          enemyController.EnemyTarget = enemyTarget;
            _currentTime = 0f;
            _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }

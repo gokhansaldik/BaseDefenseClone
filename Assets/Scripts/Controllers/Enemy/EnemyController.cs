@@ -10,6 +10,7 @@ namespace Controllers.Enemy
         
         [SerializeField] private Transform playerPrefab;
         private IMover _mover;
+        public GameObject EnemyTarget;
         
 
         private void Awake()
@@ -20,7 +21,16 @@ namespace Controllers.Enemy
 
         private void Update()
         {
-            _mover.MoveAction(playerPrefab.transform.position, 10f);
+            if (Vector3.Distance(playerPrefab.position,transform.position)<2)
+            {
+                _mover.MoveAction(playerPrefab.transform.position, 10f);
+            }
+            else
+            {
+                _mover.MoveAction(EnemyTarget.transform.position,10f);
+            }
+            
+           
             
         }
 
