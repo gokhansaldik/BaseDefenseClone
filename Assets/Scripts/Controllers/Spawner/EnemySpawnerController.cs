@@ -1,56 +1,83 @@
+using System;
+using Controllers.Enemy;
+using Data.UnityObject;
 using UnityEngine;
 
 namespace Controllers.Spawner
 {
     public class EnemySpawnerController : MonoBehaviour
     {
-        #region Self Variables
+        // #region Self Variables
+        //
+        // #region Serialized Variables
+        //
+        // [SerializeField] private GameObject redEnemyPrefab;
+        // [Range(1f, 5f)] [SerializeField] private float min = 1f;
+        // [Range(2f, 10f)] [SerializeField] private float max = 10f;
+        //
+        // #endregion
+        //
+        // #region Private Variables
+        //
+        // private float _maxSpawnTime;
+        //
+        // private float _currentSpawnTime = 0f;
+        //
+        // #endregion
+        //
+        // #endregion
+        //
+        //
+        // private void OnEnable()
+        // {
+        //     GetRandomMaxTime();
+        // }
+        //
+        // private void Update()
+        // {
+        //     _currentSpawnTime += Time.deltaTime;
+        //     if (_currentSpawnTime > _maxSpawnTime)
+        //     {
+        //         EnemySpawn();
+        //         // currentSpawnTime maxSpawnTime'dan buyukse calisacak ve surekli calısmamasi icin currentSpawnTime = 0 olacak.
+        //     }
+        // }
+        //
+        // private void EnemySpawn()
+        // {
+        //    GameObject newRedEnemy = Instantiate(redEnemyPrefab, transform.position, transform.rotation);  // parent ayarlamak icin yeni objeye atadık. 
+        //    newRedEnemy.transform.parent = this.transform;  // atadigimiz objenin parent'ini degistirdik
+        //     _currentSpawnTime = 0f;
+        //     GetRandomMaxTime();
+        // }
+        //
+        // private void GetRandomMaxTime()
+        // {
+        //     _maxSpawnTime = Random.Range(min, max);
+        // }
+        [SerializeField] private CD_SpawnInfo spawnInfo;
+        private float _currentTime = 0f;
+        private float _maxTime;
 
-        #region Serialized Variables
-
-        [SerializeField] private GameObject redEnemyPrefab;
-        [Range(1f, 5f)] [SerializeField] private float min = 1f;
-        [Range(2f, 10f)] [SerializeField] private float max = 10f;
-
-        #endregion
-
-        #region Private Variables
-
-        private float _maxSpawnTime;
-
-        private float _currentSpawnTime = 0f;
-
-        #endregion
-
-        #endregion
-
-
-        private void OnEnable()
+        private void Start()
         {
-            GetRandomMaxTime();
+            _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }
 
         private void Update()
         {
-            _currentSpawnTime += Time.deltaTime;
-            if (_currentSpawnTime > _maxSpawnTime)
+            _currentTime += Time.deltaTime;
+            if (_currentTime > _maxTime)
             {
-                EnemySpawn();
-                // currentSpawnTime maxSpawnTime'dan buyukse calisacak ve surekli calısmamasi icin currentSpawnTime = 0 olacak.
+                SpawnEnemy();
             }
         }
 
-        private void EnemySpawn()
+        private void SpawnEnemy()
         {
-           GameObject newRedEnemy = Instantiate(redEnemyPrefab, transform.position, transform.rotation);  // parent ayarlamak icin yeni objeye atadık. 
-           newRedEnemy.transform.parent = this.transform;  // atadigimiz objenin parent'ini degistirdik
-            _currentSpawnTime = 0f;
-            GetRandomMaxTime();
-        }
-
-        private void GetRandomMaxTime()
-        {
-            _maxSpawnTime = Random.Range(min, max);
+           Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position, Quaternion.identity);
+           _currentTime = 0f;
+           _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }
     }
 }

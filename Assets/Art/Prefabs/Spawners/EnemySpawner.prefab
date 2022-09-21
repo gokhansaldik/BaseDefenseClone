@@ -38,11 +38,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5150589019775792886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd36cc04475cb5543aaf631f77caa435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redEnemyPrefab: {fileID: 1742091774990384933, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
-  min: 1
-  max: 10
+  spawnInfo: {fileID: 11400000, guid: d07dd5144c289d0488a70e16af0df0b1, type: 2}
