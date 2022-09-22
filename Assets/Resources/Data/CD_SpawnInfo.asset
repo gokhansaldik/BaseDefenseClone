@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CD_SpawnInfo
   m_EditorClassIdentifier: 
   SpawnInfoData:
-    EnemyPrefab: {fileID: 1090655394841144278, guid: bd457e6b2ae625a4b89d7b535f307fe6, type: 3}
+    EnemyPrefab: {fileID: 389220563691099979, guid: 32018e8e6d05bdf43b41b3fae4b3d098, type: 3}
     MinSpawnTime: 3
     MaxSpawnTime: 7
