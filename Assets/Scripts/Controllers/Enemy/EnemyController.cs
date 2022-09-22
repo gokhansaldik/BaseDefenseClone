@@ -1,7 +1,10 @@
+using System;
+using Class;
 using Enums;
 using Interface;
 using Managers;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Controllers.Enemy
 {
@@ -11,11 +14,14 @@ namespace Controllers.Enemy
         [SerializeField] private Transform playerPrefab;
         private IMover _mover;
         public GameObject EnemyTarget;
-        
+        private CharacterAnimation _animation;
+        //private NavMeshAgent _navMeshAgent;
 
         private void Awake()
         {
             _mover = new EnemyMovementController(this);
+            _animation = new CharacterAnimation(this);
+            //_navMeshAgent = GetComponent<NavMeshAgent>();
             playerPrefab =FindObjectOfType<PlayerManager>().transform;
         }
 
@@ -34,5 +40,10 @@ namespace Controllers.Enemy
             
         }
 
+        private void LateUpdate()
+        {
+            _animation.MoveAnimation(0f);
+            //_animation.MoveAnimation(_navMeshAgent.velocity.magnitude);
+        }
     }
 }
