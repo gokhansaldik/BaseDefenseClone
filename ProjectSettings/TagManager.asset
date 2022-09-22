@@ -17,6 +17,7 @@ TagManager:
   - MineWareHouse
   - Miner
   - Mine
+  - MineArea
   layers:
   - Default
   - TransparentFX
