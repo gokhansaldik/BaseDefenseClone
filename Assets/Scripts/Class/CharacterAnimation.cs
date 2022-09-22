@@ -7,15 +7,20 @@ namespace Class
     {
         private Animator _animator;
 
-        public CharacterAnimation(IEntityController entity)
+        public CharacterAnimation(IEnemyController enemy)
         {
-            _animator = entity.transform.GetComponentInChildren<Animator>();
+            _animator = enemy.transform.GetComponentInChildren<Animator>();
         }
 
         public void MoveAnimation(float moveSpeed)
         {
             if (_animator.GetFloat("moveSpeed")==moveSpeed) return;
            _animator.SetFloat("moveSpeed",moveSpeed,0.1f,Time.deltaTime);
+        }
+
+        public void AttackAnim(bool canAttack)
+        {
+            _animator.SetBool("isAttack",canAttack);
         }
     }
 }

@@ -5,17 +5,22 @@ namespace StateMachine.Enemy
 {
     public class AttackState : IState
     {
+        private IEnemyController _enemyController;
+        public AttackState(IEnemyController enemyController)
+        {
+            _enemyController = enemyController;
+        }
         public void OnEnter()
         {
             Debug.Log($"{nameof(AttackState)}{nameof(OnEnter)}");
         }
         public void OnExit()
         {
-            Debug.Log($"{nameof(AttackState)}{nameof(OnExit)}");
+            _enemyController.Animation.AttackAnim(false);
         }
         public void Tick()
         {
-            Debug.Log($"{nameof(AttackState)}");
+            _enemyController.Animation.AttackAnim(true);
         }
 
        

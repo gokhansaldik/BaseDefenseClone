@@ -8,9 +8,9 @@ namespace Controllers.Enemy
     {
         private NavMeshAgent _navMeshAgent;
 
-        public EnemyMovementController(IEntityController entityController)
+        public EnemyMovementController(IEnemyController enemyController)
         {
-            _navMeshAgent = entityController.transform.GetComponent<NavMeshAgent>();
+            _navMeshAgent = enemyController.transform.GetComponent<NavMeshAgent>();
         }
 
         public void MoveAction(Vector3 direction, float moveSpeed)

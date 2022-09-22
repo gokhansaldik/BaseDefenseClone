@@ -12,16 +12,17 @@ using UnityEngine.AI;
 
 namespace Controllers.Enemy
 {
-    public class EnemyController : MonoBehaviour, IEntityController
+    public class EnemyController : MonoBehaviour, IEnemyController
     {
         [SerializeField] private Transform playerPrefab;
        // private IMover _mover;
         public GameObject EnemyTarget;
-        private CharacterAnimation _animation;
+        //private CharacterAnimation _animation;
         private NavMeshAgent _navMeshAgent;
         private StateMachinee _stateMachine;
         private bool _canAttack;
         public IMover Mover { get; private set; }
+        public CharacterAnimation Animation { get; private set; }
 
         public bool CanAttack => Vector3.Distance(playerPrefab.position, this.transform.position) <=
                                  _navMeshAgent.stoppingDistance &&
@@ -30,7 +31,7 @@ namespace Controllers.Enemy
         private void Awake()
         {
             Mover = new EnemyMovementController(this);
-            _animation = new CharacterAnimation(this);
+            Animation = new CharacterAnimation(this);
             _navMeshAgent = GetComponent<NavMeshAgent>();
             playerPrefab = FindObjectOfType<PlayerManager>().transform;
             _stateMachine = new StateMachinee();
@@ -40,7 +41,7 @@ namespace Controllers.Enemy
         {
             //playerPrefab = FindObjectOfType<PlayerManager>().transform;
             ChaseState chaseState = new ChaseState(this,playerPrefab);
-            AttackState attackState = new AttackState();
+            AttackState attackState = new AttackState(this);
 
             DeadState deadState = new DeadState();
             _stateMachine.AddState(chaseState, attackState, () => CanAttack);
@@ -73,7 +74,7 @@ namespace Controllers.Enemy
 
         private void LateUpdate()
         {
-            _animation.MoveAnimation(0f);
+            Animation.MoveAnimation(0f);
 
             //_animation.MoveAnimation(_navMeshAgent.velocity.magnitude);
         }
