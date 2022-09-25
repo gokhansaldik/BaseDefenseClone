@@ -11,5 +11,8 @@ namespace Signals
         public Func<GameObject> onGetMineTarget = delegate { return default; };
         public Func<GameObject> onGetMineStackTarget = delegate { return default; };
         public UnityAction<GameObject> onAddDiamondStack = delegate { };
+        
+        public Func<GameObject> onGetAmmo = delegate { return default; };
+        
     }
 }

@@ -18,6 +18,7 @@ TagManager:
   - Miner
   - Mine
   - MineArea
+  - AmmoArea
   layers:
   - Default
   - TransparentFX

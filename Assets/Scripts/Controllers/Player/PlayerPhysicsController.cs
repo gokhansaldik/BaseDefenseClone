@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -11,6 +12,11 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
+
+        #endregion
+        #region Private Variables
+
+        private int _timer;
 
         #endregion
 
@@ -28,6 +34,24 @@ namespace Controllers.Player
             {
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("AmmoArea"))
+            {
+                //TODO : player havaya kalkiyor .
+                if (_timer >= 10)
+                {
+                    playerManager.AddStack(IdleGameSignals.Instance.onGetAmmo());
+                    _timer = _timer * 60 / 100;
+                    
+                }
+                else
+                {
+                    _timer++;
+                }
             }
         }
     }

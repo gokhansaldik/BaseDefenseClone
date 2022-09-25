@@ -17,8 +17,8 @@ MonoBehaviour:
     Pref: {fileID: 0}
     ObjectCount: 0
   - PoolType: 1
-    Pref: {fileID: 0}
-    ObjectCount: 0
+    Pref: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9, type: 3}
+    ObjectCount: 10
   - PoolType: 0
     Pref: {fileID: 0}
     ObjectCount: 0

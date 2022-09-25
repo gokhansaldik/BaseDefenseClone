@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commands.Stack;
 using Data.UnityObject;
+using Data.ValueObject;
 using Datas.ValueObject;
 using Enums;
 using Signals;

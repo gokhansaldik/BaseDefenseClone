@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.ValueObject;
 using Datas.ValueObject;
 using Managers;
 using UnityEngine;
