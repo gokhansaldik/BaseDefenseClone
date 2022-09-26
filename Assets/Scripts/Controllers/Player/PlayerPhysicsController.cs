@@ -35,6 +35,7 @@ namespace Controllers.Player
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
             }
+          
         }
 
         private void OnTriggerStay(Collider other)

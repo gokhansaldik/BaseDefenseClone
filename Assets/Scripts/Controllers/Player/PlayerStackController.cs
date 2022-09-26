@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using Commands.Stack;
 using Data.ValueObject;
 using DG.Tweening;
+using Enums;
+using Signals;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controllers.Player
 {
@@ -66,6 +69,48 @@ namespace Controllers.Player
             obj.transform.DOLocalMove(new Vector3(0, _directY, -(_currentStackLevel * _playerStackData.StackoffsetZ +0.05f)),_playerStackData.AnimationDurition);
             _directY = MoneyStackList.Count % _playerStackData.StackLimit * _playerStackData.StackoffsetY;
             _currentStackLevel = MoneyStackList.Count / _playerStackData.StackLimit;
+        }
+        public void MoneyLeaving(GameObject target)
+        {
+            int limit = MoneyStackList.Count;
+            for (int i = 0; i < limit; i++)
+            {
+                var obj = MoneyStackList[0];
+                MoneyStackList.RemoveAt(0);
+                MoneyStackList.TrimExcess();
+                obj.transform.parent = target.transform;
+                obj.transform.DOLocalMove(
+                    new Vector3(Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f)), 0.5f);
+                obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.2f).OnComplete(() =>
+                {
+                    PoolSignals.Instance.onSendPool?.Invoke(obj,
+                        PoolType.Money);
+                });
+
+                ScoreSignals.Instance.onSetScore?.Invoke(PayType.Money, MoneyStackList.Count);
+                SaveSignals.Instance.onScoreSave?.Invoke();
+            }
+        }
+        public void BulletBoxLeaving(GameObject target)
+        {
+            int limit = MoneyStackList.Count;
+            for (int i = 0; i < limit; i++)
+            {
+                var obj = MoneyStackList[0];
+                MoneyStackList.RemoveAt(0);
+                MoneyStackList.TrimExcess();
+                obj.transform.parent = target.transform;
+                obj.transform.DOLocalMove(
+                    new Vector3(Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f)), 0.5f);
+                obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.2f).OnComplete(() =>
+                {
+                    PoolSignals.Instance.onSendPool?.Invoke(obj,
+                        PoolType.Bullet);
+                });
+
+               // ScoreSignals.Instance.onSetScore?.Invoke(PayType.Bullet, MoneyStackList.Count);
+                
+            }
         }
     }
 }
