@@ -139,5 +139,7 @@ namespace Managers
         {
             tmp.text = remainingAmound.ToString();
         }
+
+        
     }
 }
