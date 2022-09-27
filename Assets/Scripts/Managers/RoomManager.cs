@@ -86,12 +86,6 @@ namespace Managers
                     }
 
                     break;
-                case PayType.Gem:
-                    if (_scoreCache.GemScore > _remainingAmount)
-                    {
-                        StartCoroutine(Buy());
-                    }
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

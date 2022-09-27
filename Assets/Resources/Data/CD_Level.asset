@@ -20,15 +20,43 @@ MonoBehaviour:
           Cost: 100
           RoomName: 0
           Base: 0
+          TurretData:
+            PayType: 0
+            Cost: 200
+            IsActive: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
         - PayType: 0
-          Cost: 100
+          Cost: 200
           RoomName: 1
           Base: 0
+          TurretData:
+            PayType: 0
+            Cost: 222
+            IsActive: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
         - PayType: 0
           Cost: 200
           RoomName: 2
           Base: 0
+          TurretData:
+            PayType: 0
+            Cost: 222
+            IsActive: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
         - PayType: 0
           Cost: 200
           RoomName: 3
           Base: 0
+          TurretData:
+            PayType: 0
+            Cost: 222
+            IsActive: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0

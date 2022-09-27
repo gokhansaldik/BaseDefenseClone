@@ -10,5 +10,6 @@ namespace Data.ValueObject
     {
         public RoomNameType RoomName;
         public bool Base;
+        public TurretData TurretData;
     }
 }

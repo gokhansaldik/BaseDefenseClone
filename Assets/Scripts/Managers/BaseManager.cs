@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -31,6 +32,8 @@ namespace Managers
 
         #region Private Variables
 
+        private Dictionary<TurretNameEnum, int> _payedTurretDatas;
+        private Dictionary<RoomNameType, int> _payedRoomDatas;
         [ShowInInspector] private AreaDataParams _areaDatas;
         private int _baseLevel;
 
@@ -50,12 +53,14 @@ namespace Managers
         {
             IdleGameSignals.Instance.onBaseAreaBuyedItem += OnSetAreaDatas;
             SaveSignals.Instance.onSaveAreaData += OnGetAreaDatas;
+            IdleGameSignals.Instance.onTurretData += OnGetTurretData;
         }
 
         private void UnsubscribeEvents()
         {
             IdleGameSignals.Instance.onBaseAreaBuyedItem -= OnSetAreaDatas;
             SaveSignals.Instance.onSaveAreaData -= OnGetAreaDatas;
+            IdleGameSignals.Instance.onTurretData -= OnGetTurretData;
         }
 
         private void OnDisable()
@@ -111,5 +116,9 @@ namespace Managers
         {
             textMeshPro.text = "Base " + (SaveSignals.Instance.onLoadCurrentLevel() + 1).ToString();
         }
+
+
+        private TurretData OnGetTurretData(TurretNameEnum turret) =>
+            Data.BaseRoomData.BaseRooms[(int)turret].TurretData;
     }
 }

@@ -43,6 +43,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7766478305086392195}
   - component: {fileID: 2187814281783879738}
+  - component: {fileID: 8084987822602629293}
+  - component: {fileID: 2107906985457211035}
   m_Layer: 0
   m_Name: AutoArea
   m_TagString: Untagged
@@ -116,6 +118,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8084987822602629293
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123152640701874376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.9999995, y: 5.0000033, z: 0.9064261}
+  m_Center: {x: 0.00000372529, y: -2.756274e-15, z: -0.3532128}
+--- !u!114 &2107906985457211035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123152640701874376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0221322a2b7fb4796ec6f61b8ccb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 8429092496531566710}
 --- !u!1 &2284152638608789527
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +670,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8793684760489281320}
+  - component: {fileID: 8429092496531566710}
   m_Layer: 0
   m_Name: TurretArea1
   m_TagString: Untagged
@@ -665,6 +694,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8429092496531566710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551229005899560419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da3e24f14c2bb542ac10a32269852a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretName: 0
+  tmp: {fileID: 5566578280129173990}
 --- !u!1 &5605907393567484292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,9 +1103,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3234435580252385523}
   - component: {fileID: 6352318093488356542}
+  - component: {fileID: 6001148796152815266}
   m_Layer: 0
   m_Name: BeforeBuy
-  m_TagString: BuildArea
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1096,6 +1140,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.41, y: 1, z: 2.21}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &6001148796152815266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559603156773611256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0221322a2b7fb4796ec6f61b8ccb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 8429092496531566710}
 --- !u!1 &6718006911879128367
 GameObject:
   m_ObjectHideFlags: 0
