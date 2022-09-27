@@ -95,7 +95,7 @@ namespace Managers
         {
             for (int i = 0; i < Rooms.Count; i++)
             {
-                _areaDatas.RoomPayedAmount[i] = Rooms[i].PayedAmound;
+                _areaDatas.RoomPayedAmount[i] = Rooms[i].PayedAmount;
             }
 
             SaveSignals.Instance.onAreaDataSave?.Invoke();

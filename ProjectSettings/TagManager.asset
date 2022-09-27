@@ -19,6 +19,8 @@ TagManager:
   - Mine
   - MineArea
   - AmmoArea
+  - MoneyBullet
+  - BulletBox
   layers:
   - Default
   - TransparentFX

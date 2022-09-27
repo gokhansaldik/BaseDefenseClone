@@ -50,11 +50,11 @@ namespace Managers
             _isBase = roomData.Base;
             if (!_isBase)
             {
-                PayedAmound = payedAmound;
+                PayedAmount = payedAmound;
             }
         }
 
-        public int PayedAmound
+        public int PayedAmount
         {
             get => _payedAmount;
             set
@@ -108,7 +108,7 @@ namespace Managers
             var waitForSecond = new WaitForSeconds(0.05f);
             while (_remainingAmount > 0)
             {
-                PayedAmound++;
+                PayedAmount++;
                 ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
                 yield return waitForSecond;
             }
