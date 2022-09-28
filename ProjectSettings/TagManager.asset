@@ -21,6 +21,8 @@ TagManager:
   - AmmoArea
   - MoneyBullet
   - BulletBox
+  - TurretStack
+  - MoneyWorker
   layers:
   - Default
   - TransparentFX
