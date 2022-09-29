@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     // -------------- Yapilacaklar -------------
     // Ammo and Money Worker
     // Soldier
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
+    
+    
+    
+    // private void Awake()
+    // {
+    //     Application.targetFrameRate = 60;
+    // }
 }
