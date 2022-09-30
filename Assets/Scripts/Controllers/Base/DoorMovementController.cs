@@ -20,7 +20,7 @@ namespace Controllers.Base
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
             {
                 OpenDoDoor();
             }
@@ -28,7 +28,7 @@ namespace Controllers.Base
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player")|| other.CompareTag("MoneyWorker"))
             {
                 CloseDoDoor();
             }
