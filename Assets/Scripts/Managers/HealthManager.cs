@@ -9,9 +9,6 @@ namespace Managers
     {
         [SerializeField] private CD_Health healthInfo;
         private int _currentHealth;
-
-
-
         public bool IsDead => _currentHealth <= 0;
 
         private void Awake()

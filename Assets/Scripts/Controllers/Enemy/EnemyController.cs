@@ -5,6 +5,7 @@ using Data.ValueObject;
 using Enums;
 using Interface;
 using Managers;
+using Signals;
 using StateMachine;
 using StateMachine.Enemy;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Controllers.Enemy
         private NavMeshAgent _navMeshAgent;
         private StateMachinee _stateMachine;
         private bool _canAttack;
+       
         public IMover Mover { get; private set; }
         public CharacterAnimation Animation { get; private set; }
 
@@ -63,6 +65,7 @@ namespace Controllers.Enemy
             if (Vector3.Distance(playerPrefab.position, transform.position) < 2)
             {
                 _stateMachine.Tick();
+                
             }
             else
             {
@@ -79,8 +82,23 @@ namespace Controllers.Enemy
             //_animation.MoveAnimation(_navMeshAgent.velocity.magnitude);
         }
 
-        private void Condition()
+        private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Player") )
+            {
+                // _healthManager.TakeDamage(2);
+                 EnemySignals.Instance.onPlayerDamage();
+                //other.GetComponent<HealthManager>().TakeDamage(2);
+            }
         }
+
+        // private void OnCollisionEnter(Collision collision)
+        // {
+        //     if (collision.gameObject.CompareTag("Player") )
+        //     {
+        //         _healthManager.TakeDamage(2);
+        //         //collision.GetComponent<HealthManager>().TakeDamage(2);
+        //     }
+        // }
     }
 }
