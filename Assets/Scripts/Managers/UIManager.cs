@@ -6,6 +6,7 @@ using Signals;
 using TMPro;
 using UnityEngine;
 
+
 namespace Managers
 {
     public class UIManager : MonoBehaviour
@@ -24,7 +25,7 @@ namespace Managers
 
         private UIPanelController _uiPanelController;
         private ScoreDataParams _scoreData;
-
+       
         #endregion
 
         #endregion

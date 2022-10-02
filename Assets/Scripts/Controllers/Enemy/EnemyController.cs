@@ -88,6 +88,7 @@ namespace Controllers.Enemy
             {
                 // _healthManager.TakeDamage(2);
                  EnemySignals.Instance.onPlayerDamage();
+                 
                 //other.GetComponent<HealthManager>().TakeDamage(2);
             }
         }
