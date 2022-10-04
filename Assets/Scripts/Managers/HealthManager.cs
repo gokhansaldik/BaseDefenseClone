@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Controllers.UI;
 using Data.UnityObject;
+using Enums;
 using Interface;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,28 +12,35 @@ namespace Managers
 {
     public class HealthManager : MonoBehaviour, IHealth
     {
-        [SerializeField] private Image healthImage;
+        public Image healthImage;
         
-        [SerializeField] private CD_Health healthInfo;
-        private int _currentHealth;
-        public bool IsDead => _currentHealth <= 0;
+        [SerializeField] public CD_Health healthInfo;
+        public int CurrentHealth;
+        public bool IsDead => CurrentHealth <= 0;
+
+        [SerializeField]private PlayerManager _playerManager;
        // public event UnityAction<int, int> OnTakeHit;
         private void Awake()
         {
-            _currentHealth = healthInfo.HealthData.maxHealth;
+            CurrentHealth = healthInfo.HealthData.maxHealth;
           // healthImage = GameObject.FindGameObjectWithTag("Health");
           //healthImage = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
 
         }
-        
+
+      
+
 
         public void TakeDamage(int damage)
         {
             // Player can dusuren fonksiyon.
-            if(IsDead) return;
-            _currentHealth -= damage;
+            if (IsDead)
+            {
+                _playerManager.ChangePlayerAnimation(PlayerAnimationStates.Death);
+            }
+            CurrentHealth -= damage;
             //OnTakeHit?.Invoke(_currentHealth,healthInfo.HealthData.maxHealth);
-            healthImage.fillAmount = Convert.ToSingle(_currentHealth) / Convert.ToSingle(healthInfo.HealthData.maxHealth);
+            healthImage.fillAmount = Convert.ToSingle(CurrentHealth) / Convert.ToSingle(healthInfo.HealthData.maxHealth);
            
         }
         private void OnTakeHit(int currentHealth, int maxHealth)
@@ -41,5 +49,7 @@ namespace Managers
             healthImage.fillAmount = Convert.ToSingle(currentHealth) / Convert.ToSingle(maxHealth);
            
         }
+
+       
     }
 }

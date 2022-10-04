@@ -1,3 +1,4 @@
+using System;
 using Controllers.Player;
 using DG.Tweening;
 using Enums;
@@ -31,6 +32,7 @@ namespace Managers
 
         private PlayerData _playerData;
         private GameStatesType _states;
+        [SerializeField]private HealthManager _healthManager;
 
         #endregion
 
@@ -41,6 +43,12 @@ namespace Managers
             _playerData = GetPlayerData();
             SetPlayerDataToControllers();
             SendPlayerDataToControllers();
+        }
+
+        private void Update()
+        {
+            BaseHealthUpgrade();
+           _healthManager.healthImage.fillAmount = Convert.ToSingle(_healthManager.CurrentHealth) / Convert.ToSingle(_healthManager.healthInfo.HealthData.maxHealth);
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
@@ -109,8 +117,10 @@ namespace Managers
         public void DeactivateMovement()
         {
             playerMovementController.DeactivateMovement();
-
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
+            pistolGun.SetActive(false);
+           
+           
         }
 
         private void ActivateMovement()
@@ -118,8 +128,11 @@ namespace Managers
             playerMovementController.ActivateMovement();
             if (InBase) //InBase true ise
             {
+                
                 ChangePlayerAnimation(PlayerAnimationStates.Run);
                 pistolGun.SetActive(false);
+               
+
             }
             else if (!InBase)
             {
@@ -152,6 +165,15 @@ namespace Managers
             playerAnimationController.gameObject.SetActive(false);
             transform.DOScale(Vector3.one, .1f);
             playerMovementController.OnReset();
+        }
+
+        public void BaseHealthUpgrade()
+        {
+            if (InBase && _healthManager.CurrentHealth <100)
+            {
+                _healthManager.CurrentHealth++;
+            }
+            
         }
     }
 }

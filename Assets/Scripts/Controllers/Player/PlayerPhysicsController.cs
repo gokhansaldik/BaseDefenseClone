@@ -45,6 +45,7 @@ namespace Controllers.Player
             {
                 //playerManager.ChangePlayerAnimation(PlayerAnimationStates.Run);
                 playerManager.InBase = true;
+               
             }
           
         }

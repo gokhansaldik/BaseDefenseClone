@@ -4,7 +4,7 @@ namespace Enums
     {
         Idle,
         Run,
-        Dead,
+        Death,
         Gun,
     }
 }
