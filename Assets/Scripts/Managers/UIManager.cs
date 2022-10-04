@@ -25,6 +25,7 @@ namespace Managers
 
         private UIPanelController _uiPanelController;
         private ScoreDataParams _scoreData;
+        [SerializeField]private StoreUIController _storeUIController;
        
         #endregion
 
@@ -48,6 +49,9 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             ScoreSignals.Instance.onSetScoreToUI += OnSetScoreText;
+            
+            UISignals.Instance.onOpenStorePanel += OnOpenStorePanel;
+            UISignals.Instance.onCloseStorePanel += OnCloseStorePanel;
         }
 
         private void UnsubscribeEvents()
@@ -56,6 +60,9 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             ScoreSignals.Instance.onSetScoreToUI -= OnSetScoreText;
+            
+            UISignals.Instance.onOpenStorePanel -= OnOpenStorePanel;
+            UISignals.Instance.onCloseStorePanel -= OnCloseStorePanel;
         }
 
         private void OnDisable()
@@ -92,6 +99,14 @@ namespace Managers
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
+        }
+        private void OnOpenStorePanel(UIPanels panelParam)
+        {
+            _storeUIController.OpenStoreMenu(panelParam);
+        }
+        private void OnCloseStorePanel(UIPanels panelParam)
+        {
+            _storeUIController.CloseStoreMenu(panelParam);
         }
     }
 }

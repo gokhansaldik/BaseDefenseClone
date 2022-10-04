@@ -16,7 +16,7 @@ namespace Managers
         #region Public Variables
 
         public PlayerData PlayerData;
-
+        public bool InBase = true;
         #endregion
 
         #region Seriliazed Variables
@@ -24,7 +24,7 @@ namespace Managers
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerStackController playerStackController;
-
+        [SerializeField] private GameObject pistolGun;
         #endregion
 
         #region Private Variables
@@ -116,7 +116,17 @@ namespace Managers
         private void ActivateMovement()
         {
             playerMovementController.ActivateMovement();
-            ChangePlayerAnimation(PlayerAnimationStates.Run);
+            if (InBase) //InBase true ise
+            {
+                ChangePlayerAnimation(PlayerAnimationStates.Run);
+                pistolGun.SetActive(false);
+            }
+            else if (!InBase)
+            {
+                ChangePlayerAnimation(PlayerAnimationStates.Gun);
+                pistolGun.SetActive(true);
+            }
+            
         }
 
         public void ChangePlayerAnimation(PlayerAnimationStates animType)

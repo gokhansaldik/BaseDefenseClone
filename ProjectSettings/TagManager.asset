@@ -25,6 +25,9 @@ TagManager:
   - MoneyWorker
   - Health
   - AmmoWorker
+  - RescuePerson
+  - BaseOutTrigger
+  - InBaseTrigger
   layers:
   - Default
   - TransparentFX

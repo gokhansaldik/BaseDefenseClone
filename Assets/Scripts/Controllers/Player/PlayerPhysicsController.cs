@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -34,6 +35,16 @@ namespace Controllers.Player
             {
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
+            }
+            else if (other.CompareTag("BaseOutTrigger"))
+            {
+                //playerManager.ChangePlayerAnimation(PlayerAnimationStates.Gun);
+                playerManager.InBase = false;
+            }
+            else if (other.CompareTag("InBaseTrigger"))
+            {
+                //playerManager.ChangePlayerAnimation(PlayerAnimationStates.Run);
+                playerManager.InBase = true;
             }
           
         }

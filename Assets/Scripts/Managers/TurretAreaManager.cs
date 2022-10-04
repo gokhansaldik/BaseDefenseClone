@@ -59,7 +59,10 @@ namespace Managers
         private void Awake()
         {
             _textParentGameObject = tmp.transform.parent.gameObject;
+            
         }
+
+        
 
         #region Event Subscription
 
@@ -101,11 +104,9 @@ namespace Managers
                     if (_scoreCache.MoneyScore > _remainingAmount)
                     {
                         StartCoroutine(Buy());
+                        
                     }
                     break;
-              
-
-                    
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -115,6 +116,7 @@ namespace Managers
         {
             StopAllCoroutines();
             IdleGameSignals.Instance.onTurretAreaBuyedItem?.Invoke(turretName, _payedAmount);
+           
             SaveSignals.Instance.onAreaDataSave?.Invoke();
         }
 
