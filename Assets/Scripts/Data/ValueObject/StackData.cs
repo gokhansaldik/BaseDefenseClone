@@ -10,28 +10,36 @@ namespace Data.ValueObject
         public float StackOffset = 0.01f;
         public AmmoStackData AmmoStackData;
     }
-        [Serializable]
-        public class AmmoStackData
-        {   
-            #region OffSet
-            [Space(15),Header("Offset")] 
-            [Range(0f, 1f)] public float OffsetX;
-            [Range(0f, 1f)] public float OffsetY;
-            [Range(0f, 1f)] public float OffsetZ;
-            [Space(15)]
-            #endregion
 
-            #region Data
+    [Serializable]
+    public class AmmoStackData
+    {
+        #region OffSet
 
-            [Header("Limit")] 
-            public int LimitX;
-            public int LimitY;
-            public int LimitZ;
-            [Space(15)]
+        [Space(15), Header("Offset")] [Range(0f, 1f)]
+        public float OffsetX;
 
-            #endregion 
-            public int StackLimit = 10;
-            public float AnimationDurition = 1;
-        }
-    
+        [Range(0f, 1f)] public float OffsetY;
+        [Range(0f, 1f)] public float OffsetZ;
+
+        [Space(15)]
+
+        #endregion
+
+        #region Data
+
+        [Header("Limit")]
+        public int LimitX;
+
+        public int LimitY;
+        public int LimitZ;
+
+        [Space(15)]
+
+        #endregion
+
+        public int StackLimit = 10;
+
+        public float AnimationDurition = 1;
+    }
 }

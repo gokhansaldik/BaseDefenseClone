@@ -6,6 +6,6 @@ namespace Data.ValueObject
     [Serializable]
     public class ItemPricesData
     {
-        public List<ItemPricesDataTwo> itemPrices;
+        public List<ItemPricesDataTwo> ItemPrices;
     }
 }

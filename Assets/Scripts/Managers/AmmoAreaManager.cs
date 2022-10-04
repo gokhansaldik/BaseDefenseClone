@@ -27,6 +27,7 @@ namespace Managers
         {
             UnSubscribeEvent();
         }
+
         #endregion
 
         private GameObject OnGetAmmo()
@@ -38,6 +39,5 @@ namespace Managers
             obj.SetActive(true);
             return obj;
         }
-
     }
 }

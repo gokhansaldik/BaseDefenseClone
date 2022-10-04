@@ -17,7 +17,7 @@ namespace Commands.Pool
 
         #endregion
 
-        public PoolAddCommand(ref CD_Pool cdPool, ref Transform managertransform,ref GameObject gameObject)
+        public PoolAddCommand(ref CD_Pool cdPool, ref Transform managertransform, ref GameObject gameObject)
         {
             _cdPool = cdPool;
             _gameObject = gameObject;

@@ -15,7 +15,7 @@ namespace Controllers.Collectable
 
         #endregion
 
-        public void Playanim(CollectableAnimationStates animationStates)
+        public void PlayAnim(CollectableAnimationStates animationStates)
         {
             collectableAnimatorController.SetTrigger(animationStates.ToString());
         }

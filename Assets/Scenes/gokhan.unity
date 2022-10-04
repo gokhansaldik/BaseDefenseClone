@@ -232,28 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels:
   - {fileID: 2708654388693129161}
---- !u!114 &242409677 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6559040527650955970, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
-  m_PrefabInstance: {fileID: 8136845164196701542}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8ef3c57e3a34d89b2091a7ba07991cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &242409680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 567447064880676502, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
-  m_PrefabInstance: {fileID: 8136845164196701542}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e18d795a9e45b2bba788c1e80a792a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &416183110
 GameObject:
   m_ObjectHideFlags: 0
@@ -10823,10 +10801,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 567447064880676502, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
-      propertyPath: _healthManager
-      value: 
-      objectReference: {fileID: 242409677}
     - target: {fileID: 960112551587447475, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_Name
       value: level 0
@@ -10835,10 +10809,6 @@ PrefabInstance:
       propertyPath: healthImage
       value: 
       objectReference: {fileID: 1363090039}
-    - target: {fileID: 6559040527650955970, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
-      propertyPath: _playerManager
-      value: 
-      objectReference: {fileID: 242409680}
     - target: {fileID: 7443049332994691448, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_RootOrder
       value: 7

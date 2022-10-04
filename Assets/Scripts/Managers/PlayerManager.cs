@@ -45,7 +45,7 @@ namespace Managers
             SendPlayerDataToControllers();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             BaseHealthUpgrade();
            _healthManager.healthImage.fillAmount = Convert.ToSingle(_healthManager.CurrentHealth) / Convert.ToSingle(_healthManager.healthInfo.HealthData.maxHealth);
@@ -171,7 +171,7 @@ namespace Managers
         {
             if (InBase && _healthManager.CurrentHealth <100)
             {
-                _healthManager.CurrentHealth++;
+                _healthManager.CurrentHealth++ ;
             }
             
         }

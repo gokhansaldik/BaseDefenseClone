@@ -5,7 +5,15 @@ namespace Class
 {
     public class CharacterAnimation
     {
+        #region Self Variables
+
+        #region Private Variables
+
         private Animator _animator;
+
+        #endregion
+
+        #endregion
 
         public CharacterAnimation(IEnemyController enemy)
         {
@@ -14,13 +22,13 @@ namespace Class
 
         public void MoveAnimation(float moveSpeed)
         {
-            if (_animator.GetFloat("moveSpeed")==moveSpeed) return;
-           _animator.SetFloat("moveSpeed",moveSpeed,0.1f,Time.deltaTime);
+            if (_animator.GetFloat("moveSpeed") == moveSpeed) return;
+            _animator.SetFloat("moveSpeed", moveSpeed, 0.1f, Time.deltaTime);
         }
 
         public void AttackAnim(bool canAttack)
         {
-            _animator.SetBool("isAttack",canAttack);
+            _animator.SetBool("isAttack", canAttack);
         }
     }
 }

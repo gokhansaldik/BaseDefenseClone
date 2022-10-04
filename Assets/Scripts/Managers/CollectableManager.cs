@@ -19,7 +19,7 @@ namespace Managers
 
         public void SetAnim(CollectableAnimationStates states)
         {
-            collectableAnimationController.Playanim(states);
+            collectableAnimationController.PlayAnim(states);
         }
     }
 }

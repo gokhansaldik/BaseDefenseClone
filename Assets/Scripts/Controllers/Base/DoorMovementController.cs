@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Base
@@ -14,7 +13,7 @@ namespace Controllers.Base
 
         #endregion
 
-        private PlayerManager _playerManager;
+        //private PlayerManager _playerManager; //TODO : Silebilirsin ise yaramiyor.
 
         #endregion
 
@@ -28,7 +27,7 @@ namespace Controllers.Base
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player")|| other.CompareTag("MoneyWorker"))
+            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
             {
                 CloseDoDoor();
             }

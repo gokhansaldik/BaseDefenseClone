@@ -1,5 +1,6 @@
 namespace Enums
 {
+    
     public enum EnemyAnimationStates
     {
         Walk,

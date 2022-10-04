@@ -109,12 +109,12 @@ namespace Managers
                 if (itemLevels[i] == 0)
                 {
                     levelTxt[i].text = "LOCKED";
-                    upgradeTxt[i].text = "BUY\n" + _data.itemPrices[i].prices[itemLevels[i]];
+                    upgradeTxt[i].text = "BUY\n" + _data.ItemPrices[i].Prices[itemLevels[i]];
                 }
                 else
                 {
                     levelTxt[i].text = "LEVEL " + itemLevels[i].ToString();
-                    upgradeTxt[i].text = "UPGRADE\n" + _data.itemPrices[i].prices[itemLevels[i]];
+                    upgradeTxt[i].text = "UPGRADE\n" + _data.ItemPrices[i].Prices[itemLevels[i]];
                 }
             }
         }

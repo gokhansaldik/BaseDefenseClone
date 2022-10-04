@@ -1,11 +1,10 @@
-using System;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Base
 {
     public class InOutBaseController : MonoBehaviour
     {
+        // TODO: Silebilirsin ise yaramiyor.
         // [SerializeField] private PlayerManager playerManager;
         //
         // private void OnTriggerEnter(Collider other)

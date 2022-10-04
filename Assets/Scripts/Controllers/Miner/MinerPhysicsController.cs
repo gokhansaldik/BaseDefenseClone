@@ -15,7 +15,6 @@ namespace Controllers.Miner
 
         #endregion
 
-
         private void OnTriggerEnter(Collider other)
         {
             minerManager.CurrentState.CollisionState(other);

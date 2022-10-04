@@ -22,7 +22,7 @@ namespace Commands.Level
 
         public void Execute(int _levelId)
         {
-            // TODO: sahne resources cekme.
+            // TODO: sahne resources cekmiyoruz.
             //Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {_levelId}"),_levelHolder.transform);
         }
     }

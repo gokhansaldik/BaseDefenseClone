@@ -2,7 +2,7 @@ namespace Interface
 {
     public interface IHealth
     {
-         bool IsDead { get; }
-         void TakeDamage(int damage);
+        bool IsDead { get; }
+        void TakeDamage(int damage);
     }
 }

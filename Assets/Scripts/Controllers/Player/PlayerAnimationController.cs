@@ -10,7 +10,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private Animator playerAnimatorController;
-        
+
         #endregion
 
         #endregion

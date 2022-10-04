@@ -53,7 +53,8 @@ namespace Controllers.Player
         private void IdleMove()
         {
             Vector3 velocity = rigidBody.velocity;
-            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,_movementDirection.z * _playerMovementData.IdleSpeed);
+            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,
+                _movementDirection.z * _playerMovementData.IdleSpeed);
             rigidBody.velocity = velocity;
             if (_movementDirection != Vector3.zero)
             {
@@ -94,7 +95,8 @@ namespace Controllers.Player
             _isReadyToMove = false;
         }
 
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.JoystickMovement;
+        public void UpdateIdleInputValue(IdleInputParams inputParam) =>
+            _movementDirection = inputParam.JoystickMovement;
 
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
     }

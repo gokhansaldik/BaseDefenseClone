@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Data.ValueObject;
-using Datas.ValueObject;
 using Enums;
 using Managers;
 using Signals;
@@ -22,7 +21,8 @@ namespace Commands.Stack
 
         #endregion
 
-        public CollectableRemoveOnStackCommand(ref List<GameObject> stackList, ref StackManager manager,ref StackData stackData)
+        public CollectableRemoveOnStackCommand(ref List<GameObject> stackList, ref StackManager manager,
+            ref StackData stackData)
         {
             _stackList = stackList;
             _manager = manager;
