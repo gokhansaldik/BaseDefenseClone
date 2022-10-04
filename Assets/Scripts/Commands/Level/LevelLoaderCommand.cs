@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Android;
 
 namespace Commands.Level
 {
@@ -21,7 +22,8 @@ namespace Commands.Level
 
         public void Execute(int _levelId)
         {
-            Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {_levelId}"),_levelHolder.transform);
+            // TODO: sahne resources cekme.
+            //Object.Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {_levelId}"),_levelHolder.transform);
         }
     }
 }

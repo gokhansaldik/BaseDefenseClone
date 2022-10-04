@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using Controllers.UI;
 using Data.UnityObject;
 using Interface;
 using UnityEngine;
@@ -18,7 +20,11 @@ namespace Managers
         private void Awake()
         {
             _currentHealth = healthInfo.HealthData.maxHealth;
+          // healthImage = GameObject.FindGameObjectWithTag("Health");
+          //healthImage = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
+
         }
+        
 
         public void TakeDamage(int damage)
         {
@@ -26,7 +32,7 @@ namespace Managers
             if(IsDead) return;
             _currentHealth -= damage;
             //OnTakeHit?.Invoke(_currentHealth,healthInfo.HealthData.maxHealth);
-           healthImage.fillAmount = Convert.ToSingle(_currentHealth) / Convert.ToSingle(healthInfo.HealthData.maxHealth);
+            healthImage.fillAmount = Convert.ToSingle(_currentHealth) / Convert.ToSingle(healthInfo.HealthData.maxHealth);
            
         }
         private void OnTakeHit(int currentHealth, int maxHealth)

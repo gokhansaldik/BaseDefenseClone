@@ -7,7 +7,7 @@ namespace Controllers.UI
 {
     public class HealthBarController : MonoBehaviour
     {
-       [SerializeField] private Image healthImage;
+       public Image healthImage;
        public HealthManager _healthManager;
        private void OnEnable()
        {

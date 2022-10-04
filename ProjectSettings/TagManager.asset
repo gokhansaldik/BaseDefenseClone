@@ -23,6 +23,8 @@ TagManager:
   - BulletBox
   - TurretStack
   - MoneyWorker
+  - Health
+  - AmmoWorker
   layers:
   - Default
   - TransparentFX

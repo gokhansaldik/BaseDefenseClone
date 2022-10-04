@@ -8,6 +8,7 @@ namespace er
     {
         [SerializeField] private NavMeshAgent aiNavmesh;
         public List<Collectable> MoneyList;
+        //public List<Collectable> AmmoList;
         public void CollectMoney()
         {
             if (MoneyList != null)
@@ -16,6 +17,14 @@ namespace er
             }
             
         }
+
+        // public void CollectAmmo()
+        // {
+        //     if (AmmoList != null)
+        //     {
+        //         aiNavmesh.SetDestination(AmmoList[0].transform.position);
+        //     }
+        // }
         
         
     }

@@ -9,6 +9,7 @@ namespace er
         private AiBase Worker;
         // Money uzerinde olarak kullaniliyor
         [SerializeField] private AiManager aiManager;
+      //  [SerializeField] private GameObject ammoArea;
         private void OnEnable()
         {
             if (aiManager.MoneyWorker != null)
@@ -17,6 +18,13 @@ namespace er
                 Worker.MoneyList.Add(this);
                 Worker.CollectMoney();
             }
+
+            // if (aiManager.AmmoWorker != null)
+            // {
+            //     Worker = aiManager.AmmoWorker[aiManager.AmmoWorker.Count];
+            //     Worker.AmmoList.Add(this);
+            //     Worker.CollectAmmo();
+            // }
             
         }
 
@@ -32,6 +40,15 @@ namespace er
                 }
                 
             }
+            // else if (other.CompareTag("AmmoWorker"))
+            // {
+            //     transform.parent = other.transform;
+            //     Worker.AmmoList.Remove(this);
+            //     if (Worker.AmmoList != null)
+            //     {
+            //         Worker.CollectAmmo();
+            //     }
+            // }
         }
     }
 }
