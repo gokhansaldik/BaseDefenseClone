@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Controllers.Enemy;
+using Enums;
 using Extentions;
 using Signals;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Managers
         [SerializeField] private int maxCountOnGame = 40;
         [SerializeField] private List<EnemyController> enemies;
         [SerializeField] private HealthManager _healthManager;
+        
         public bool CanSpawn => maxCountOnGame > enemies.Count;
         
         #region Event Subscriptions
@@ -57,5 +59,7 @@ namespace Managers
         {
             enemies.Remove(enemyController);
         }
+
+        
     }
 }

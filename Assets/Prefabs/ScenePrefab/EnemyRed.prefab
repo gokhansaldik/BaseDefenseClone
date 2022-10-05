@@ -124,8 +124,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 1171607654039790534}
   - {fileID: 7252018768188815149}
+  - {fileID: 1171607654039790534}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,6 +211,7 @@ MonoBehaviour:
   healthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
   CurrentHealth: 0
   _playerManager: {fileID: 0}
+  enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!1 &390624702487656339
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1171607654039790534}
   - component: {fileID: 5089716431287122364}
+  - component: {fileID: 2954878444245197890}
   m_Layer: 0
   m_Name: EnemyMesh
   m_TagString: Untagged
@@ -556,7 +558,7 @@ Transform:
   - {fileID: 7419675386837606353}
   - {fileID: 647241552363425715}
   m_Father: {fileID: 7017616792382255882}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5089716431287122364
 Animator:
@@ -577,6 +579,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2954878444245197890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948284407686887804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c6620b376d44a096f03e3e651e9249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnimationController: {fileID: 5089716431287122364}
 --- !u!1 &1971744021928652062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1829,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7017616792382255882}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4697932685459562734
 MonoBehaviour:
@@ -1829,6 +1844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthManager: {fileID: 2030663694255757740}
+  enemyMaterial: {fileID: 2100000, guid: 8d369e01365ef09488f16da69d8abdc9, type: 2}
 --- !u!136 &5712841251931688830
 CapsuleCollider:
   m_ObjectHideFlags: 0
