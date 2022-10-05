@@ -1,4 +1,6 @@
+using System;
 using DG.Tweening;
+using er;
 using UnityEngine;
 
 namespace Controllers.Base
@@ -10,12 +12,15 @@ namespace Controllers.Base
         #region Serialized Variables
 
         [SerializeField] private GameObject baseDoor;
-
+        
         #endregion
-
+        
+        
         //private PlayerManager _playerManager; //TODO : Silebilirsin ise yaramiyor.
 
         #endregion
+
+        
 
         private void OnTriggerEnter(Collider other)
         {
@@ -30,6 +35,11 @@ namespace Controllers.Base
             if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
             {
                 CloseDoDoor();
+                if (other.CompareTag("MoneyWorker"))
+                {
+                   // other.GetComponent<AiBase>().CollectMoney();
+                }
+                
             }
         }
 

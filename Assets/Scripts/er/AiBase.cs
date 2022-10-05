@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,21 +6,38 @@ namespace er
 {
     public class AiBase : MonoBehaviour
     {
-        [SerializeField] private Animator moneyWorkerAnimator;
-        [SerializeField] private NavMeshAgent aiNavmesh;
+        [SerializeField] protected Animator moneyWorkerAnimator;
+        [SerializeField] protected NavMeshAgent aiNavmesh;
+
         public List<Collectable> MoneyList;
-        //public List<Collectable> AmmoList;
-        public void CollectMoney()
+        
+        public List<Collectable> AmmoList;
+
+        [SerializeField] protected Transform BaseInTransform;
+        [SerializeField] protected Transform BaseTurretTransform;
+
+        public int MoneyWorkerCollectLimit = 10;
+        public int AmmoWorkerCollectLimit = 10;
+
+        public List<Collectable> CollectedMoneyList;
+        public List<Collectable> CollectedAmmoList;
+        
+        
+        
+        //[SerializeField] private Transform InBaseTransform;
+        public virtual void Collect()
         { 
-           
-            if (MoneyList != null)
-            {
-                aiNavmesh.SetDestination(MoneyList[0].transform.position);
-            }
             
         }
 
-        private void Update()
+      
+
+        // private void Start()
+        // {
+        //     GoToBase();
+        // }
+
+        protected void Update()
         {
             if (MoneyList.Count > 0)
             {
@@ -40,13 +55,11 @@ namespace er
             if (moneyWorkerAnimator.GetFloat("Speed") == Speed) ;
              moneyWorkerAnimator.SetFloat("Speed",Speed,2f,Time.deltaTime);
         }
-        // public void CollectAmmo()
-        // {
-        //     if (AmmoList != null)
-        //     {
-        //         aiNavmesh.SetDestination(AmmoList[0].transform.position);
-        //     }
-        // }
+       
+        public void GoToTarget(Transform target)
+        {
+            aiNavmesh.SetDestination(target.position);
+        }
         
         
     }
