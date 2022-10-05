@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolDataList:
   - PoolType: 4
-    Pref: {fileID: 0}
+    Pref: {fileID: 386080801345270624, guid: 32018e8e6d05bdf43b41b3fae4b3d098, type: 3}
     ObjectCount: 0
   - PoolType: 1
     Pref: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9, type: 3}
@@ -25,3 +25,6 @@ MonoBehaviour:
   - PoolType: 3
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100
+  - PoolType: 5
+    Pref: {fileID: 3144460793676792330, guid: 40510f3509813264bba6e898eb993ce4, type: 3}
+    ObjectCount: 20

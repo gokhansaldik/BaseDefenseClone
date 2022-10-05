@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2030663694255757740}
   m_Layer: 0
   m_Name: EnemyRed
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,9 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2a47f4c2475a5459b40cf1f83289d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   EnemyTarget: {fileID: 0}
-  _healthManager: {fileID: 0}
+  playerPrefab: {fileID: 0}
 --- !u!114 &2030663694255757740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef3c57e3a34d89b2091a7ba07991cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthImage: {fileID: 0}
   healthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
+  CurrentHealth: 0
+  _playerManager: {fileID: 0}
 --- !u!1 &390624702487656339
 GameObject:
   m_ObjectHideFlags: 0

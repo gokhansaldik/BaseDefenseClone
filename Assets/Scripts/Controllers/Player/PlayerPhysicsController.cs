@@ -43,6 +43,10 @@ namespace Controllers.Player
             {
                 playerManager.InBase = true;
             }
+            // else if (other.CompareTag("Enemy"))
+            // {
+            //     playerManager.Shoot();
+            // }
         }
 
         private void OnTriggerStay(Collider other)

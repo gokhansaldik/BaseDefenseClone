@@ -10,7 +10,7 @@ namespace Signals
     public class EnemySignals : MonoSingleton<EnemySignals>
     {
         public UnityAction onPlayerDamage = delegate { };  // Enemy Player damage attiginda tetiklenen signal.
+        public UnityAction<Transform> onEnemyDie = delegate { };
       
-        
     }
 }

@@ -18,6 +18,7 @@ namespace Managers
 
         public PlayerData PlayerData;
         public bool InBase = true;
+
         #endregion
 
         #region Seriliazed Variables
@@ -26,13 +27,16 @@ namespace Managers
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerStackController playerStackController;
         [SerializeField] private GameObject pistolGun;
+        //[SerializeField] private Transform shootTransform;
+        [SerializeField] private PlayerAimController playerAimController;
+
         #endregion
 
         #region Private Variables
 
         private PlayerData _playerData;
         private GameStatesType _states;
-        [SerializeField]private HealthManager _healthManager;
+        [SerializeField] private HealthManager _healthManager;
 
         #endregion
 
@@ -48,7 +52,8 @@ namespace Managers
         private void FixedUpdate()
         {
             BaseHealthUpgrade();
-           _healthManager.healthImage.fillAmount = Convert.ToSingle(_healthManager.CurrentHealth) / Convert.ToSingle(_healthManager.healthInfo.HealthData.maxHealth);
+            _healthManager.healthImage.fillAmount = Convert.ToSingle(_healthManager.CurrentHealth) /
+                                                    Convert.ToSingle(_healthManager.healthInfo.HealthData.maxHealth);
         }
 
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
@@ -68,6 +73,8 @@ namespace Managers
             InputSignals.Instance.onInputReleased += OnInputReleased;
             InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
+          //  IdleGameSignals.Instance.onGetPistolAmmo += OnGetPistolAmmo;
+          EnemySignals.Instance.onEnemyDie += playerAimController.OnRemoveFromTargetList;
         }
 
         private void UnsubscribeEvents()
@@ -78,6 +85,8 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= OnInputReleased;
             InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
+           // IdleGameSignals.Instance.onGetPistolAmmo -= OnGetPistolAmmo;
+           EnemySignals.Instance.onEnemyDie -= playerAimController.OnRemoveFromTargetList;
         }
 
         private void OnDisable()
@@ -119,8 +128,6 @@ namespace Managers
             playerMovementController.DeactivateMovement();
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
             pistolGun.SetActive(false);
-           
-           
         }
 
         private void ActivateMovement()
@@ -128,18 +135,14 @@ namespace Managers
             playerMovementController.ActivateMovement();
             if (InBase) //InBase true ise
             {
-                
                 ChangePlayerAnimation(PlayerAnimationStates.Run);
                 pistolGun.SetActive(false);
-               
-
             }
             else if (!InBase)
             {
                 ChangePlayerAnimation(PlayerAnimationStates.Gun);
                 pistolGun.SetActive(true);
             }
-            
         }
 
         public void ChangePlayerAnimation(PlayerAnimationStates animType)
@@ -156,7 +159,7 @@ namespace Managers
         {
             playerStackController.MoneyAddStack(obj);
         }
-        
+
         private void OnLevelFailed() => playerMovementController.IsReadyToPlay(false);
 
         private void OnReset()
@@ -169,11 +172,28 @@ namespace Managers
 
         public void BaseHealthUpgrade()
         {
-            if (InBase && _healthManager.CurrentHealth <100)
+            if (InBase && _healthManager.CurrentHealth < 100)
             {
-                _healthManager.CurrentHealth++ ;
+                _healthManager.CurrentHealth++;
             }
-            
         }
+
+        // public void Shoot()
+        // {
+        //     IdleGameSignals.Instance.onGetPistolAmmo();
+        // }
+        //
+        // private GameObject OnGetPistolAmmo()
+        // {
+        //     var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Ammo);
+        //     if (obj == null)
+        //     {
+        //         return null;
+        //     }
+        //
+        //     obj.transform.position = shootTransform.transform.position;
+        //     obj.SetActive(true);
+        //     return obj;
+        // }
     }
 }

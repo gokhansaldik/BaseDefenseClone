@@ -1207,6 +1207,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1439244913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3292031505493558338, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+  m_PrefabInstance: {fileID: 8136845164196701542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1526692995 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3251570157598833347, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
@@ -10856,6 +10861,10 @@ PrefabInstance:
       propertyPath: aiManager
       value: 
       objectReference: {fileID: 1012199088}
+    - target: {fileID: 567447064880676502, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: shootTransform
+      value: 
+      objectReference: {fileID: 1439244913}
     - target: {fileID: 642978068141917634, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: aiManager
       value: 
@@ -10928,6 +10937,10 @@ PrefabInstance:
       propertyPath: aiManager
       value: 
       objectReference: {fileID: 1012199088}
+    - target: {fileID: 3617859247418428175, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: currentBullet
+      value: 
+      objectReference: {fileID: 7889090308824191980, guid: 90337fc70025ec24e9a85d7afb03c8ba, type: 3}
     - target: {fileID: 3853095414759200037, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_IsActive
       value: 0

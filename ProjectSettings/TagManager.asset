@@ -28,6 +28,8 @@ TagManager:
   - RescuePerson
   - BaseOutTrigger
   - InBaseTrigger
+  - PistolBullet
+  - SMGBullet
   layers:
   - Default
   - TransparentFX

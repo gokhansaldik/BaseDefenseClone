@@ -96,7 +96,7 @@ namespace Controllers.Player
                 obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.2f).OnComplete(() =>
                 {
                     PoolSignals.Instance.onSendPool?.Invoke(obj,
-                        PoolType.Bullet);
+                        PoolType.BulletBox);
                 });
             }
         }

@@ -3,9 +3,10 @@ namespace Enums
     public enum PoolType
     {
         Collectable,
-        Bullet,
+        BulletBox,
         Money,
         Diamond,
         Enemy,
+        Ammo
     }
 }
