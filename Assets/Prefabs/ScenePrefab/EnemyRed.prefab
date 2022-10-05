@@ -1793,6 +1793,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7252018768188815149}
+  - component: {fileID: 4697932685459562734}
+  - component: {fileID: 5712841251931688830}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -1814,6 +1816,33 @@ Transform:
   m_Father: {fileID: 7017616792382255882}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4697932685459562734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778433773933211991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba708e7cb565483c9763d8c405af7d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 2030663694255757740}
+--- !u!136 &5712841251931688830
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778433773933211991}
+  m_Material: {fileID: 13400000, guid: e4f9ee99ffc204d4799e5347c41847b9, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.24887286
+  m_Height: 1.5068148
+  m_Direction: 1
+  m_Center: {x: -0.0065401644, y: 0.7634074, z: 0}
 --- !u!1 &7080805726829229799
 GameObject:
   m_ObjectHideFlags: 0

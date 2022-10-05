@@ -22,7 +22,7 @@ namespace Controllers.Enemy
         #region Serialized Variables
 
         [SerializeField] private Transform playerPrefab;
-
+       
         #endregion
 
 
@@ -80,12 +80,6 @@ namespace Controllers.Enemy
             Animation.MoveAnimation(0f);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                EnemySignals.Instance.onPlayerDamage();
-            }
-        }
+        
     }
 }
