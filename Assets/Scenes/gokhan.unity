@@ -997,7 +997,6 @@ GameObject:
   - component: {fileID: 1363090038}
   - component: {fileID: 1363090040}
   - component: {fileID: 1363090039}
-  - component: {fileID: 1363090041}
   m_Layer: 5
   m_Name: Health
   m_TagString: Health
@@ -1062,20 +1061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363090037}
   m_CullTransparentMesh: 1
---- !u!114 &1363090041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363090037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f30805b9de0c740b32a65c8ac78136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthImage: {fileID: 1363090039}
-  _healthManager: {fileID: 0}
 --- !u!1 &1411125956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6553caf5d4c946e6af3f848fbc772c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1601331128 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4568245111070245290, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+  m_PrefabInstance: {fileID: 8136845164196701542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1628736466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1439,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0fbcdd72b9a5f74cb920ec35473ccb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2091440211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6678932621566460220, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+  m_PrefabInstance: {fileID: 8136845164196701542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f6008ae5be4f499aed489d3916df5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2102894179
@@ -10805,10 +10806,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: level 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1302645390174332098, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: AmmoWorker.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302645390174332098, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: MoneyWorker.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302645390174332098, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: MoneyWorker.Array.data[0]
+      value: 
+      objectReference: {fileID: 2091440211}
+    - target: {fileID: 1302645390174332098, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: MoneyWorker.Array.data[1]
+      value: 
+      objectReference: {fileID: 2091440211}
+    - target: {fileID: 1974188524045820007, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6559040527650955970, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: healthImage
       value: 
       objectReference: {fileID: 1363090039}
+    - target: {fileID: 6678932621566460220, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: moneyWorkerAnimator
+      value: 
+      objectReference: {fileID: 1601331128}
     - target: {fileID: 7443049332994691448, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_RootOrder
       value: 7
