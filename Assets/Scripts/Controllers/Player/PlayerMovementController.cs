@@ -9,15 +9,17 @@ namespace Controllers.Player
     {
         #region Self Variables
 
+        public Transform Target;
+        
         #region Serialized Variables
 
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private GameStatesType gameStatesType;
-
+        
         #endregion
 
         #region Private Variables
-
+        
         private PlayerMovementData _playerMovementData;
         private bool _isReadyToMove;
         private bool _isReadyToPlay;
@@ -52,15 +54,26 @@ namespace Controllers.Player
 
         private void IdleMove()
         {
+            
             Vector3 velocity = rigidBody.velocity;
             velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,
                 _movementDirection.z * _playerMovementData.IdleSpeed);
             rigidBody.velocity = velocity;
-            if (_movementDirection != Vector3.zero)
+            if (Target == null)
             {
-                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-                transform.rotation = toRotation;
+                if (_movementDirection != Vector3.zero)
+                {
+                
+                    Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+                    transform.rotation = toRotation;
+                }
             }
+            else
+            {
+                transform.LookAt(Target);
+                Debug.Log("lookat CALisi");
+            }
+            
         }
 
         private void Stop()

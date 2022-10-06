@@ -14,18 +14,23 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
+
         [SerializeField] private List<Transform> targetList;
+
         //[SerializeField] private Transform playerRotatablePart;
         [SerializeField] private Transform currentTarget;
         [SerializeField] private Transform targetGameObject;
 
         [SerializeField] private GameObject currentBullet;
         [SerializeField] private Transform nisangah;
+        [SerializeField] private PlayerMovementController playerMovementController;
 
         #region Private Variables
+
         //private AllGunsData _data;
 
         #endregion
+
         #endregion
 
         #endregion
@@ -40,8 +45,8 @@ namespace Controllers.Player
         {
             //_data = GetData();
         }
-       // private AllGunsData GetData() => Resources.Load<CD_Gun>("Data/CD_Gun").Data;
-       // private GameObject GetBullet() => Resources.Load<GameObject>("Bullets/" + manager.CurrentGunId.ToString());
+        // private AllGunsData GetData() => Resources.Load<CD_Gun>("Data/CD_Gun").Data;
+        // private GameObject GetBullet() => Resources.Load<GameObject>("Bullets/" + manager.CurrentGunId.ToString());
 
 
         private void Start()
@@ -49,18 +54,13 @@ namespace Controllers.Player
             StartCoroutine(Shoot());
             //currentBullet = GetBullet();
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
             {
-                if (targetList.Contains(other.transform))
-                {
-                    return;
-                }
                 targetList.Add(other.transform);
-                return;
             }
-
         }
 
         private void OnTriggerExit(Collider other)
@@ -68,21 +68,21 @@ namespace Controllers.Player
             if (other.CompareTag("Enemy"))
             {
                 targetList.Remove(other.transform);
-                return;
             }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (targetList.Count > 0)
             {
-                
                 currentTarget = targetList[0];
-                if (currentTarget.Equals(null))
-                {
-                    targetList.RemoveAt(0);
-                    return;
-                }
+
+                playerMovementController.Target = currentTarget;
+                // if (currentTarget.Equals(null))
+                // {
+                //     targetList.RemoveAt(0);
+                //     return;
+                // }
                 targetGameObject.position = currentTarget.position;
             }
 
@@ -90,7 +90,7 @@ namespace Controllers.Player
             {
                 //targetGameObject.localPosition = Vector3.MoveTowards(targetGameObject.transform.localPosition, new Vector3(0, 7.5f, 10f), 1f);
                 targetGameObject.localPosition = new Vector3(0, 7.5f, 10f);
-
+                playerMovementController.Target = null;
             }
         }
 
@@ -101,13 +101,13 @@ namespace Controllers.Player
             //     //just wait
             // }
 
-             if (targetList.Count > 0)
+            if (targetList.Count > 0)
             {
                 Instantiate(currentBullet, nisangah.transform.position, nisangah.rotation);
             }
+
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(Shoot());
-
         }
 
         public void OnRemoveFromTargetList(Transform deadEnemy)
@@ -121,8 +121,12 @@ namespace Controllers.Player
         public void SetGunSettings(Transform nisangah)
         {
             this.nisangah = nisangah;
-            
-            
+        }
+
+        public void AimAt(Transform target)
+        {
+            transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z),
+                transform.up);
         }
     }
 }

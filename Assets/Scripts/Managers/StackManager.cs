@@ -20,6 +20,7 @@ namespace Managers
 
         [Header("Data")] public StackData StackData;
         public bool LerpOk;
+        public List<GameObject> _stackList = new List<GameObject>();
 
         #endregion
 
@@ -36,7 +37,7 @@ namespace Managers
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
-        [ShowInInspector] private List<GameObject> _stackList = new List<GameObject>();
+
         private int _numOfItemsHolding = 0;
         private Stack<Transform> _moneyTransform = new Stack<Transform>();
 
@@ -60,11 +61,9 @@ namespace Managers
         private void SubscribeEvents()
         {
             StackSignals.Instance.onAddInStack += OnAddInStack;
+            StackSignals.Instance.onCollectablePlayerMiner += OnCollectablePlayerMiner;
             StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
-
             StackSignals.Instance.onGetStackList += OnGetStackList;
-
-       
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -73,12 +72,12 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onAddInStack -= OnAddInStack;
+            StackSignals.Instance.onCollectablePlayerMiner -= OnCollectablePlayerMiner;
             StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
 
             StackSignals.Instance.onGetStackList -= OnGetStackList;
 
 
-           
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
@@ -107,9 +106,9 @@ namespace Managers
             _collectableAddOnStackCommand =
                 new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList);
-            _collectableRemoveOnStackCommand = new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager, ref StackData);
+            _collectableRemoveOnStackCommand =
+                new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager, ref StackData);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
-            
         }
 
 
@@ -143,7 +142,7 @@ namespace Managers
         {
             _collectableAnimSetCommand.Execute(obj, animationStates);
         }
-        
+
 
         private void FindPlayer()
         {
@@ -158,6 +157,18 @@ namespace Managers
             {
                 CollectableAnimSet(obj, CollectableAnimationStates.Run);
             }
+        }
+
+        private void OnCollectablePlayerMiner()
+        {
+            
+                if (_stackList.Count >= 0)
+                {
+                    var lastHostage = _stackList[0];
+                    _stackList.Remove(lastHostage);
+                }
+            
+            //_stackList.Clear();
         }
 
 

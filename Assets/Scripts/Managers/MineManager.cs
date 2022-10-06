@@ -4,6 +4,7 @@ using Datas.ValueObject;
 using DG.Tweening;
 using Enums;
 using Signals;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ namespace Managers
 
         [SerializeField] private List<GameObject> targetList;
         [SerializeField] private GameObject diamondHolder;
-
+        public TextMeshPro minerCountText;
         #endregion
 
         #region Private Variables
@@ -27,7 +28,7 @@ namespace Managers
         private float _directY;
         private float _directZ;
         private float _directX;
-
+       
         #endregion
 
         #endregion

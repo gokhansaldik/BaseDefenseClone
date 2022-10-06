@@ -178,6 +178,11 @@ namespace Managers
             }
         }
 
+        public void CollectableAddMine()
+        {
+            
+        }
+
         // public void Shoot()
         // {
         //     IdleGameSignals.Instance.onGetPistolAmmo();
