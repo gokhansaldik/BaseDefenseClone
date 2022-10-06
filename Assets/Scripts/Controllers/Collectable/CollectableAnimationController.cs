@@ -1,4 +1,5 @@
 using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Collectable
@@ -18,6 +19,16 @@ namespace Controllers.Collectable
         public void PlayAnim(CollectableAnimationStates animationStates)
         {
             collectableAnimatorController.SetTrigger(animationStates.ToString());
+        }
+        public void SetAnimState(CollectableAnimationStates animState)
+        {
+            collectableAnimatorController.SetTrigger(animState.ToString());
+        }
+
+        public void SetSpeedVariable(float speed)
+        {
+            collectableAnimatorController.SetFloat("Speed", speed);
+           // StackSignals.Instance.onCollectablePlayerTaken.Invoke();
         }
     }
 }

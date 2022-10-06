@@ -1,5 +1,6 @@
 using System;
 using Controllers.Mine;
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Controllers.Collectable
         [SerializeField] private GameObject miner;
         [SerializeField] private StackManager stackManager;
         [SerializeField] private MinePhysicsController minePhysicsController;
+        [SerializeField] private CollectableManager collectableManager;
         #endregion
 
         #endregion
@@ -34,7 +36,15 @@ namespace Controllers.Collectable
                 
                 StackSignals.Instance.onCollectablePlayerMiner.Invoke();
             }
+
+            if (other.CompareTag("Player") && collectableManager.IsTaken == false)
+            {
+               // StackSignals.Instance.onCollectablePlayerTaken.Invoke();
+                collectableManager.SetAnimState(CollectableAnimationStates.Taken);
+                collectableManager.IsTaken = true;
+            }
         }
+       
         // private void RemoveStackCollectable(GameObject gameObject)
         // {
         //     // if (stackManager._stackList.Count >0)

@@ -10,5 +10,8 @@ namespace Signals
         public UnityAction<GameObject> onRemoveInStack = delegate { };
         public UnityAction<GameObject> onGetStackList = delegate { };
         public UnityAction onCollectablePlayerMiner = delegate { };
+        public UnityAction onCollectablePlayerTaken = delegate {  };
+        public UnityAction onCollectableUpSpeed = delegate {  };
+        public UnityAction onCollectableUpDown = delegate {  };
     }
 }

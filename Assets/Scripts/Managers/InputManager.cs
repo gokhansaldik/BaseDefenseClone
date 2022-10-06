@@ -71,6 +71,7 @@ namespace Managers
                 _isTouching = false;
                 InputSignals.Instance.onInputReleased?.Invoke();
                 _stackManager.LerpOk = false;
+                //StackSignals.Instance.onCollectableUpDown?.Invoke();
 
                 //_stackManager.CollectableAnimSet(obj, CollectableAnimationStates.Idle);
             }
@@ -84,6 +85,7 @@ namespace Managers
                     {
                         isFirstTimeTouchTaken = true;
                         InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                        
                     }
 
                     _mousePosition = Input.mousePosition;
@@ -97,7 +99,7 @@ namespace Managers
                 if (Input.GetMouseButton(0))
                 {
                     _stackManager.LerpOk = true;
-
+                    
                     //_stackManager.CollectableAnimSet(obj, CollectableAnimationStates.Run);
                     if (_isTouching)
                     {
@@ -106,7 +108,7 @@ namespace Managers
                             _joystickPosition = new Vector3(floatingJoystick.Horizontal, 0, floatingJoystick.Vertical);
 
                             _moveVector = _joystickPosition;
-
+                            
                             InputSignals.Instance.onJoystickDragged?.Invoke(new IdleInputParams()
                             {
                                 JoystickMovement = _moveVector

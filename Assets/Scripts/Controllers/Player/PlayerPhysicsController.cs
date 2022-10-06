@@ -1,3 +1,4 @@
+using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-
+        
         #endregion
 
         #region Private Variables
@@ -28,6 +29,7 @@ namespace Controllers.Player
             {
                 StackSignals.Instance.onAddInStack?.Invoke(other.gameObject.transform.parent.gameObject);
                 other.gameObject.tag = "Collected";
+                StackSignals.Instance.onCollectablePlayerTaken?.Invoke();
             }
 
             else if (other.CompareTag("CollectableMoney"))

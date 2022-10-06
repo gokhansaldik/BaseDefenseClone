@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commands.Stack;
+using Controllers.Collectable;
 using Data.UnityObject;
 using Data.ValueObject;
 using Datas.ValueObject;
@@ -21,9 +22,10 @@ namespace Managers
         [Header("Data")] public StackData StackData;
         public bool LerpOk;
         public List<GameObject> _stackList = new List<GameObject>();
-
+        
         #endregion
 
+        private CollectableManager _collectableManager;
         #region Serilazible Variables
 
         [SerializeField] private StackManager stackManager;
@@ -37,7 +39,7 @@ namespace Managers
         private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
-
+        
         private int _numOfItemsHolding = 0;
         private Stack<Transform> _moneyTransform = new Stack<Transform>();
 
@@ -49,6 +51,7 @@ namespace Managers
         {
             GetReferences();
             Init();
+           
         }
 
         #region Event Subscription
@@ -64,6 +67,7 @@ namespace Managers
             StackSignals.Instance.onCollectablePlayerMiner += OnCollectablePlayerMiner;
             StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
             StackSignals.Instance.onGetStackList += OnGetStackList;
+            
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -74,9 +78,8 @@ namespace Managers
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onCollectablePlayerMiner -= OnCollectablePlayerMiner;
             StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
-
+           
             StackSignals.Instance.onGetStackList -= OnGetStackList;
-
 
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -119,17 +122,28 @@ namespace Managers
             if (LerpOk == true)
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
-                SetAllCollectableAnim(CollectableAnimationStates.Run);
+                //SetAllCollectableAnim(CollectableAnimationStates.Run);
+               // OnCollectablePlayerTaken();
+              // _collectableManager.SetUpSpeedCollectable();
+              //StackSignals.Instance.onCollectableUpSpeed.Invoke();
+              StackSignals.Instance.onCollectableUpSpeed.Invoke();
+              
             }
             else if (LerpOk == false)
             {
-                SetAllCollectableAnim(CollectableAnimationStates.Idle);
+                //SetAllCollectableAnim(CollectableAnimationStates.Idle);
+            // _collectableManager.SetDownSpeedCollectable();
+            StackSignals.Instance.onCollectableUpDown.Invoke();
             }
         }
+
+       
 
         public void AddInStack(GameObject obj)
         {
             _collectableAddOnStackCommand.Execute(obj);
+            
+
         }
 
         public void SetAllCollectableAnim(CollectableAnimationStates states)
@@ -138,8 +152,11 @@ namespace Managers
                 CollectableAnimSet(t, states);
         }
 
+       
+
         public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
         {
+            
             _collectableAnimSetCommand.Execute(obj, animationStates);
         }
 
@@ -155,7 +172,7 @@ namespace Managers
             AddInStack(obj);
             if (LerpOk == true)
             {
-                CollectableAnimSet(obj, CollectableAnimationStates.Run);
+                CollectableAnimSet(obj, CollectableAnimationStates.Taken);
             }
         }
 
