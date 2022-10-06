@@ -1,4 +1,5 @@
 using System;
+using Controllers.Mine;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Controllers.Collectable
         [SerializeField] private GameObject collectablePlayer;
         [SerializeField] private GameObject miner;
         [SerializeField] private StackManager stackManager;
+        [SerializeField] private MinePhysicsController minePhysicsController;
         #endregion
 
         #endregion
@@ -22,7 +24,7 @@ namespace Controllers.Collectable
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("MineArea"))
+            if (other.CompareTag("MineArea")&& minePhysicsController._minerCount <5)
             {
                 //stackManager.RemoveStackCollectable();
                 collectablePlayer.SetActive(false);

@@ -19,7 +19,7 @@ namespace Managers
         [SerializeField] private FloatingJoystick floatingJoystick;
         [SerializeField] private GameStatesType currentGameState;
         [SerializeField] private StackManager _stackManager;
-
+        
         #endregion
 
         #region Private Variables
@@ -67,6 +67,7 @@ namespace Managers
 
             if (Input.GetMouseButtonUp(0))
             {
+                
                 _isTouching = false;
                 InputSignals.Instance.onInputReleased?.Invoke();
                 _stackManager.LerpOk = false;
@@ -76,15 +77,18 @@ namespace Managers
 
             if (Input.GetMouseButtonDown(0))
             {
-                _isTouching = true;
-                InputSignals.Instance.onInputTaken?.Invoke();
-                if (!isFirstTimeTouchTaken)
-                {
-                    isFirstTimeTouchTaken = true;
-                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
-                }
+                
+                    _isTouching = true;
+                    InputSignals.Instance.onInputTaken?.Invoke();
+                    if (!isFirstTimeTouchTaken)
+                    {
+                        isFirstTimeTouchTaken = true;
+                        InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                    }
 
-                _mousePosition = Input.mousePosition;
+                    _mousePosition = Input.mousePosition;
+                
+                
             }
 
 

@@ -3,6 +3,7 @@ using Data.ValueObject;
 using Managers;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -22,8 +23,9 @@ namespace Controllers.Player
         [SerializeField] private Transform targetGameObject;
 
         [SerializeField] private GameObject currentBullet;
-        [SerializeField] private Transform nisangah;
+        [SerializeField] private Transform sight;
         [SerializeField] private PlayerMovementController playerMovementController;
+       
 
         #region Private Variables
 
@@ -75,8 +77,8 @@ namespace Controllers.Player
         {
             if (targetList.Count > 0)
             {
+               
                 currentTarget = targetList[0];
-
                 playerMovementController.Target = currentTarget;
                 // if (currentTarget.Equals(null))
                 // {
@@ -103,7 +105,10 @@ namespace Controllers.Player
 
             if (targetList.Count > 0)
             {
-                Instantiate(currentBullet, nisangah.transform.position, nisangah.rotation);
+                
+                    Instantiate(currentBullet, sight.transform.position, sight.rotation);
+                
+                
             }
 
             yield return new WaitForSeconds(0.2f);
@@ -120,7 +125,7 @@ namespace Controllers.Player
 
         public void SetGunSettings(Transform nisangah)
         {
-            this.nisangah = nisangah;
+            this.sight = nisangah;
         }
 
         public void AimAt(Transform target)

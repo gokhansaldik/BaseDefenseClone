@@ -10,19 +10,16 @@ namespace Controllers.Mine
         public int _minerCount;
         [SerializeField] private MineManager mineManager;
         [SerializeField] private StackManager stackManager;
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     if (other.CompareTag("Collected") )//&& _minerCount <= 4
-        //     {
-        //         //_minerCount++;
-        //          mineManager.minerCountText.text = _minerCount.ToString();
-        //          //RemoveStackCollectable(other.gameObject);
-        //         // StackSignals.Instance.onRemoveInStack.Invoke(other.gameObject);
-        //         //Debug.Log("Girdik");
-        //         //RemoveStackCollectable();
-        //     }
-        //     
-        // }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Collected") && _minerCount <5)
+            {
+                _minerCount++;
+                 mineManager.minerCountText.text = _minerCount.ToString() + "/"+"5";
+               
+            }
+            
+        }
        
         
         // private void OnTriggerEnter(Collider other)

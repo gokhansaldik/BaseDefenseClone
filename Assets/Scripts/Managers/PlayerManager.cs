@@ -26,7 +26,7 @@ namespace Managers
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerStackController playerStackController;
-        [SerializeField] private GameObject pistolGun;
+        public GameObject pistolGun;
         //[SerializeField] private Transform shootTransform;
         [SerializeField] private PlayerAimController playerAimController;
 

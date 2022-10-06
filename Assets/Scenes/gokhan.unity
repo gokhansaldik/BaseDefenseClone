@@ -166,6 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b0a8407dc3d794db44f492c967255d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &109132558 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6146516577437348903, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+  m_PrefabInstance: {fileID: 8136845164196701542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190787525
 GameObject:
   m_ObjectHideFlags: 0
@@ -10931,6 +10936,10 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 1630297764927060125, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 1924313063503558780, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.99
@@ -10987,10 +10996,18 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 2558132750306391824, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 2837825663954545862, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 2837825663954545862, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 2977074330467270777, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -11011,6 +11028,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3617859247418428175, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: sight
+      value: 
+      objectReference: {fileID: 109132558}
     - target: {fileID: 3617859247418428175, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: playerMovementController
       value: 
@@ -11051,14 +11072,26 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 5467177017505355867, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 5810288987422882776, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 5810288987422882776, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 5994447334885761182, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 5994447334885761182, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 6559040527650955970, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: healthImage
       value: 
@@ -11091,6 +11124,10 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 7227360432561042218, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: minePhysicsController
+      value: 
+      objectReference: {fileID: 1560019788}
     - target: {fileID: 7443049332994691448, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -11162,6 +11199,14 @@ PrefabInstance:
     - target: {fileID: 8417885103357805839, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789055997631322371, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_text
+      value: 0/5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789055997631322371, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_fontSize
+      value: 12.3
       objectReference: {fileID: 0}
     - target: {fileID: 9223181946486861937, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_LocalPosition.x
