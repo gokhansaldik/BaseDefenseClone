@@ -30,6 +30,8 @@ TagManager:
   - InBaseTrigger
   - PistolBullet
   - SMGBullet
+  - TurretPhysics
+  - TurretOwner
   layers:
   - Default
   - TransparentFX
