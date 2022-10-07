@@ -1,15 +1,12 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace er
+namespace Inheritance
 {
     public class Collectable : MonoBehaviour
     {
-        private AiBase Worker;
-       
+        private AiBase _worker;
         // Money uzerinde olarak kullaniliyor
-        
         [SerializeField] private AiManager aiManager;
      
         private void OnEnable()
@@ -22,28 +19,24 @@ namespace er
             {
                 if (aiManager.MoneyWorker != null)
                 { 
-                    Worker = aiManager.MoneyWorker[Random.Range(0,aiManager.MoneyWorker.Count)];
-                    Worker.MoneyList.Add(this);
-                    Worker.Collect();
+                    _worker = aiManager.MoneyWorker[Random.Range(0,aiManager.MoneyWorker.Count)];
+                    _worker.MoneyList.Add(this);
+                    _worker.Collect();
                 }
             }
-            
         }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("MoneyWorker"))
             {
                 transform.parent = other.transform;
-                Worker.MoneyList.Remove(this);
-                Worker.CollectedMoneyList.Add(this);
-                if (Worker.MoneyList != null)
+                _worker.MoneyList.Remove(this);
+                _worker.CollectedMoneyList.Add(this);
+                if (_worker.MoneyList != null)
                 {
-                    Worker.Collect();
+                    _worker.Collect();
                 }
-                
             }
-           
         }
     }
 }

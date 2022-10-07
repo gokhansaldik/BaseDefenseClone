@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Signals;
 using UnityEngine;
 using Enums;
@@ -15,7 +13,6 @@ namespace Controllers.Store
         [SerializeField] private UIPanels releatedPanel;
 
         #endregion
-
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -26,7 +23,6 @@ namespace Controllers.Store
                 return;
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))

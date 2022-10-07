@@ -207,9 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef3c57e3a34d89b2091a7ba07991cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 0}
-  healthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
+  HealthImage: {fileID: 0}
   CurrentHealth: 0
+  HealthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
   _playerManager: {fileID: 0}
   enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!1 &390624702487656339

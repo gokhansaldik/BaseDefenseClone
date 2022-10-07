@@ -14,16 +14,13 @@ namespace Commands.Pool
         private Transform _managerTransform;
 
         #endregion
-
         #endregion
-
         public PoolAddCommand(ref CD_Pool cdPool, ref Transform managertransform, ref GameObject gameObject)
         {
             _cdPool = cdPool;
             _gameObject = gameObject;
             _managerTransform = managertransform;
         }
-
         public void Execute()
         {
             var pooldata = _cdPool.PoolDataList;

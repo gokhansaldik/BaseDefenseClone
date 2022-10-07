@@ -1,4 +1,3 @@
-using Abstract;
 using Enums;
 using Interface;
 using Managers;
@@ -19,7 +18,6 @@ namespace StateMachine.Miner
         private NavMeshAgent _navmeshAgent;
 
         #endregion
-
         #endregion
 
         public GoStackingState(MinerManager minerManager, ref NavMeshAgent navmeshAgent)
@@ -27,18 +25,16 @@ namespace StateMachine.Miner
             _minerManager = minerManager;
             _navmeshAgent = navmeshAgent;
         }
-
+        #region States
         public void EnterState()
         {
             _navmeshAgent.SetDestination(_minerManager.Stack.transform.position);
             _minerManager.SetTriggerAnim(MinerAnimType.Run);
             _minerManager.SetAnimLayer(AnimationLayerType.UpperBody, 1);
         }
-
         public void UpdateState()
         {
         }
-
         public void CollisionState(Collider other)
         {
             if (other.CompareTag("MineWareHouse"))
@@ -46,17 +42,15 @@ namespace StateMachine.Miner
                 PushDiamondOnStack();
             }
         }
-
         private void PushDiamondOnStack()
         {
             IdleGameSignals.Instance.onAddDiamondStack?.Invoke(_minerManager.transform.gameObject);
             SwitchState();
         }
-
-
         public void SwitchState()
         {
             _minerManager.SwitchState(MinerStatesType.GoDigging);
         }
+        #endregion
     }
 }

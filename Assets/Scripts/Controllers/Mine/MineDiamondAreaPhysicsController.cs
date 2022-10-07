@@ -12,16 +12,13 @@ namespace Controllers.Mine
         [SerializeField] private MineManager mineManager;
       
         #endregion
-
         #endregion
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") )
             {
-               
                 mineManager.StartCollectDiamond(other.gameObject);
-              
             }
         }
     }

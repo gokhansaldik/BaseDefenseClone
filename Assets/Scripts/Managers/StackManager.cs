@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commands.Stack;
-using Controllers.Collectable;
 using Data.UnityObject;
 using Data.ValueObject;
-using Datas.ValueObject;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
-
 
 namespace Managers
 {
@@ -18,204 +14,128 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
-        [Header("Data")] public StackData StackData;
-        public bool LerpOk;
-        public List<GameObject> _stackList = new List<GameObject>();
         
-        #endregion
+        public StackData StackData;
+        public bool LerpStatus;
+        public List<GameObject> StackList = new List<GameObject>();
 
-        private CollectableManager _collectableManager;
-        #region Serilazible Variables
+        #endregion
+        
+        #region Serialized Variables
 
         [SerializeField] private StackManager stackManager;
-
+        
         #endregion
 
         #region Private Variables
 
         private CollectableAddOnStackCommand _collectableAddOnStackCommand;
         private StackLerpMovementCommand _stackLerpMovementCommand;
-        private CollectableRemoveOnStackCommand _collectableRemoveOnStackCommand;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
-        
-        private int _numOfItemsHolding = 0;
-        private Stack<Transform> _moneyTransform = new Stack<Transform>();
 
         #endregion
-
         #endregion
 
         private void Awake()
         {
             GetReferences();
             Init();
-           
         }
-
         #region Event Subscription
-
         private void OnEnable()
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
             StackSignals.Instance.onAddInStack += OnAddInStack;
             StackSignals.Instance.onCollectablePlayerMiner += OnCollectablePlayerMiner;
-            StackSignals.Instance.onRemoveInStack += _collectableRemoveOnStackCommand.Execute;
-            StackSignals.Instance.onGetStackList += OnGetStackList;
-            
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
-
-
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onAddInStack -= OnAddInStack;
             StackSignals.Instance.onCollectablePlayerMiner -= OnCollectablePlayerMiner;
-            StackSignals.Instance.onRemoveInStack -= _collectableRemoveOnStackCommand.Execute;
-           
-            StackSignals.Instance.onGetStackList -= OnGetStackList;
-
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-
         #endregion
-
         private StackData GetStackData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").StackData;
         }
-
-
         private void GetReferences()
         {
             StackData = GetStackData();
         }
-
-
         private void Init()
         {
-            _collectableAddOnStackCommand =
-                new CollectableAddOnStackCommand(ref stackManager, ref _stackList, ref StackData);
-            _stackLerpMovementCommand = new StackLerpMovementCommand(ref _stackList);
-            _collectableRemoveOnStackCommand =
-                new CollectableRemoveOnStackCommand(ref _stackList, ref stackManager, ref StackData);
+            _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref StackList, ref StackData);
+            _stackLerpMovementCommand = new StackLerpMovementCommand(ref StackList);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
         }
-
-
         private void Update()
         {
-            if (!_playerManager)
-                return;
-            if (LerpOk == true)
+            if (LerpStatus)
             {
                 _stackLerpMovementCommand.Execute(ref _playerManager);
-                //SetAllCollectableAnim(CollectableAnimationStates.Run);
-               // OnCollectablePlayerTaken();
-              // _collectableManager.SetUpSpeedCollectable();
-              //StackSignals.Instance.onCollectableUpSpeed.Invoke();
-              StackSignals.Instance.onCollectableUpSpeed.Invoke();
-              
+                StackSignals.Instance.onCollectableUpSpeed.Invoke();
             }
-            else if (LerpOk == false)
+            else if (!LerpStatus)
             {
-                //SetAllCollectableAnim(CollectableAnimationStates.Idle);
-            // _collectableManager.SetDownSpeedCollectable();
-            StackSignals.Instance.onCollectableUpDown.Invoke();
+                StackSignals.Instance.onCollectableUpDown.Invoke();
             }
         }
-
-       
-
-        public void AddInStack(GameObject obj)
+        private void AddInStack(GameObject obj)
         {
             _collectableAddOnStackCommand.Execute(obj);
-            
-
         }
-
-        public void SetAllCollectableAnim(CollectableAnimationStates states)
-        {
-            foreach (var t in _stackList)
-                CollectableAnimSet(t, states);
-        }
-
-       
-
-        public void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
-        {
-            
-            _collectableAnimSetCommand.Execute(obj, animationStates);
-        }
-
-
+      
         private void FindPlayer()
         {
             if (!_playerManager) _playerManager = FindObjectOfType<PlayerManager>().transform;
         }
-
-
         private void OnAddInStack(GameObject obj)
         {
             AddInStack(obj);
-            if (LerpOk == true)
+            if (LerpStatus)
             {
                 CollectableAnimSet(obj, CollectableAnimationStates.Taken);
             }
         }
-
+        private void CollectableAnimSet(GameObject obj, CollectableAnimationStates animationStates)
+        {
+            _collectableAnimSetCommand.Execute(obj, animationStates);
+        }
         private void OnCollectablePlayerMiner()
         {
-            
-                if (_stackList.Count >= 0)
-                {
-                    var lastHostage = _stackList[0];
-                    _stackList.Remove(lastHostage);
-                }
-            
-            //_stackList.Clear();
+            if (StackList.Count >= 0)
+            {
+                var lastHostage = StackList[0];
+                StackList.Remove(lastHostage);
+            }
         }
-
-
-        private void OnGetStackList(GameObject _stackListObj)
-        {
-            CollectableAnimSet(_stackListObj, CollectableAnimationStates.Run);
-            AddInStack(_stackListObj);
-        }
-
-
         private async void ClearStackManager()
         {
-            var _items = stackManager.transform.childCount;
-            for (var i = 0; i < _stackList.Count; i++)
+            for (var i = 0; i < StackList.Count; i++)
             {
                 PoolSignals.Instance.onSendPool?.Invoke(stackManager.transform.GetChild(0).gameObject,
                     PoolType.Collectable);
             }
-
-            _stackList.Clear();
-            _stackList.TrimExcess();
+            StackList.Clear();
+            StackList.TrimExcess();
             await Task.Delay(100);
         }
-
         private void OnPlay()
         {
             FindPlayer();
         }
-
-
         private void OnReset()
         {
             ClearStackManager();

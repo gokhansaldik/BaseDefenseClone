@@ -12,9 +12,7 @@ namespace Controllers.Base
         [SerializeField] private RoomManager roomManager;
 
         #endregion
-
         #endregion
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -22,7 +20,6 @@ namespace Controllers.Base
                 roomManager.BuyAreaEnter();
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))

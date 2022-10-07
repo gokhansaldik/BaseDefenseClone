@@ -22,14 +22,12 @@ namespace Controllers.Spawner
         private float _currentTime = 0f;
 
         #endregion
-
         #endregion
 
         private void Start()
         {
             _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }
-
         private void Update()
         {
             _currentTime += Time.deltaTime;
@@ -38,7 +36,6 @@ namespace Controllers.Spawner
                 SpawnEnemy();
             }
         }
-
         private void SpawnEnemy()
         {
             EnemyController enemyController = Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position,

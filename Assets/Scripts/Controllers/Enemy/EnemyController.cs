@@ -1,7 +1,6 @@
 using Class;
 using Interface;
 using Managers;
-using Signals;
 using StateMachine;
 using StateMachine.Enemy;
 using UnityEngine;
@@ -32,16 +31,13 @@ namespace Controllers.Enemy
         private StateMachinee _stateMachine;
 
         #endregion
-
         #endregion
 
         public IMover Mover { get; private set; }
         public CharacterAnimation Animation { get; private set; }
-
         public bool CanAttack => Vector3.Distance(playerPrefab.position, this.transform.position) <=
                                  _navMeshAgent.stoppingDistance &&
                                  _navMeshAgent.velocity == Vector3.zero;
-
         private void Awake()
         {
             Mover = new EnemyMovementController(this);
@@ -50,16 +46,13 @@ namespace Controllers.Enemy
             playerPrefab = FindObjectOfType<PlayerManager>().transform;
             _stateMachine = new StateMachinee();
         }
-
         private void Start()
         {
             ChaseState chaseState = new ChaseState(this, playerPrefab);
             AttackState attackState = new AttackState(this);
-
             DeadState deadState = new DeadState();
             _stateMachine.AddState(chaseState, attackState, () => CanAttack);
             _stateMachine.AddState(attackState, chaseState, () => !CanAttack);
-
             _stateMachine.SetState(chaseState);
         }
 
@@ -79,7 +72,5 @@ namespace Controllers.Enemy
         {
             Animation.MoveAnimation(0f);
         }
-
-        
     }
 }

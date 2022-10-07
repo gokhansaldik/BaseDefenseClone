@@ -1,5 +1,4 @@
-using er;
-
+using Inheritance;
 
 namespace StateMachine.Worker.Ammo
 {
@@ -12,12 +11,10 @@ namespace StateMachine.Worker.Ammo
             {
                 aiNavmesh.SetDestination(AmmoList[0].transform.position);
             }
-
             if (CollectedAmmoList.Count >= AmmoWorkerCollectLimit)
             {
                 GoToTarget(BaseTurretTransform);
             }
-           
         }
     }
 }

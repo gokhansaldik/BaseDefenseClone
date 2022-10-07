@@ -27,20 +27,14 @@ namespace Controllers.Player
 
         private PlayerStackData _playerStackData;
         private int _currentStackLevel;
-
         private float _directY;
 
         #endregion
-
         #endregion
-
-
         public void SetStackData(PlayerStackData data)
         {
             _playerStackData = data;
         }
-
-
         public void MoneyAddStack(GameObject obj)
         {
             if (obj == null) return;
@@ -48,8 +42,6 @@ namespace Controllers.Player
             obj.transform.SetParent(moneyStackHolder.transform);
             SetObjectPosition(obj);
         }
-
-
         private void SetObjectPosition(GameObject obj)
         {
             obj.transform.DOLocalRotate(Vector3.zero, _playerStackData.AnimationDurition);
@@ -59,7 +51,6 @@ namespace Controllers.Player
             _directY = MoneyStackList.Count % _playerStackData.StackLimit * _playerStackData.StackoffsetY;
             _currentStackLevel = MoneyStackList.Count / _playerStackData.StackLimit;
         }
-
         public void MoneyLeaving(GameObject target)
         {
             int limit = MoneyStackList.Count;
@@ -76,12 +67,10 @@ namespace Controllers.Player
                     PoolSignals.Instance.onSendPool?.Invoke(obj,
                         PoolType.Money);
                 });
-
                 ScoreSignals.Instance.onSetScore?.Invoke(PayType.Money, MoneyStackList.Count);
                 SaveSignals.Instance.onScoreSave?.Invoke();
             }
         }
-
         public void BulletBoxLeaving(GameObject target)
         {
             int limit = MoneyStackList.Count;

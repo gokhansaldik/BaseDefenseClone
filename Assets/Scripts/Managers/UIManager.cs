@@ -18,6 +18,7 @@ namespace Managers
         [SerializeField] private List<GameObject> panels;
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TextMeshProUGUI gemText;
+        [SerializeField]private StoreUIController storeUIController;
 
         #endregion
 
@@ -25,19 +26,19 @@ namespace Managers
 
         private UIPanelController _uiPanelController;
         private ScoreDataParams _scoreData;
-        [SerializeField]private StoreUIController _storeUIController;
        
         #endregion
-
         #endregion
 
         private void Awake()
         {
+            GetReferences();
+        }
+        private void GetReferences()
+        {
             _uiPanelController = new UIPanelController();
         }
-
         #region Event Subscriptions
-
         private void OnEnable()
         {
             SubscribeEvents();
@@ -49,7 +50,6 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             ScoreSignals.Instance.onSetScoreToUI += OnSetScoreText;
-            
             UISignals.Instance.onOpenStorePanel += OnOpenStorePanel;
             UISignals.Instance.onCloseStorePanel += OnCloseStorePanel;
         }
@@ -60,7 +60,6 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             ScoreSignals.Instance.onSetScoreToUI -= OnSetScoreText;
-            
             UISignals.Instance.onOpenStorePanel -= OnOpenStorePanel;
             UISignals.Instance.onCloseStorePanel -= OnCloseStorePanel;
         }
@@ -69,44 +68,38 @@ namespace Managers
         {
             UnsubscribeEvents();
         }
-
         #endregion
-
         private void OnOpenPanel(UIPanels panelParam)
         {
             _uiPanelController.OpenUIPanel(panelParam, panels);
         }
-
         private void OnClosePanel(UIPanels panelParam)
         {
             _uiPanelController.CloseUIPanel(panelParam, panels);
         }
-
         private void OnSetScoreText()
         {
             _scoreData = ScoreSignals.Instance.onScoreData();
             moneyText.text = _scoreData.MoneyScore.ToString();
             gemText.text = _scoreData.GemScore.ToString();
         }
-
         private void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.ScorePanel);
         }
-
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();
         }
         private void OnOpenStorePanel(UIPanels panelParam)
         {
-            _storeUIController.OpenStoreMenu(panelParam);
+            storeUIController.OpenStoreMenu(panelParam);
         }
         private void OnCloseStorePanel(UIPanels panelParam)
         {
-            _storeUIController.CloseStoreMenu(panelParam);
+            storeUIController.CloseStoreMenu(panelParam);
         }
     }
 }

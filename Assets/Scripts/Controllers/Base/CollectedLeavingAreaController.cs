@@ -12,14 +12,11 @@ namespace Controllers.Base
         [SerializeField] private PlayerStackController _playerStackController;
 
         #endregion
-
         #endregion
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("CollectedMoney"))
             {
-                //TODO : money 2. girme bugu
                 _playerStackController.MoneyLeaving(other.gameObject);
             }
             else if (other.CompareTag("BulletBox"))

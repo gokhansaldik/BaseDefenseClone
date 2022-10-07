@@ -30,47 +30,41 @@ namespace Managers
         private float _directX;
        
         #endregion
-
         #endregion
-
         private void Awake()
+        {
+            GetReferences();
+        }
+        private void GetReferences()
         {
             _data = GetMineData();
         }
-
         private MineStackData GetMineData() => Resources.Load<CD_Mine>("Data/CD_MineData").MineStackData;
 
         #region Event Subscription
-
         private void OnEnable()
         {
             SubscribeEvent();
         }
-
         private void SubscribeEvent()
         {
             IdleGameSignals.Instance.onGetMineTarget += OnGetMineTarget;
             IdleGameSignals.Instance.onGetMineStackTarget += OnGetMineStackTarget;
             IdleGameSignals.Instance.onAddDiamondStack += OnAddDiamondStack;
         }
-
         private void UnSubscribeEvent()
         {
             IdleGameSignals.Instance.onGetMineTarget -= OnGetMineTarget;
             IdleGameSignals.Instance.onGetMineStackTarget -= OnGetMineStackTarget;
             IdleGameSignals.Instance.onAddDiamondStack -= OnAddDiamondStack;
         }
-
         private void OnDisable()
         {
             UnSubscribeEvent();
         }
-
         #endregion
-
         private GameObject OnGetMineTarget() => targetList[Random.Range(0, targetList.Count)];
         private GameObject OnGetMineStackTarget() => diamondHolder;
-
         public void StartCollectDiamond(GameObject target)
         {
             int limit = _diamondList.Count;
@@ -86,13 +80,10 @@ namespace Managers
                         PoolSignals.Instance.onSendPool?.Invoke(obj,
                             PoolType.Diamond);
                     });
-
                 ScoreSignals.Instance.onSetScore?.Invoke(PayType.Gem, _diamondList.Count);
             }
-
             SaveSignals.Instance.onScoreSave?.Invoke();
         }
-
         private void OnAddDiamondStack(GameObject target)
         {
             var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Diamond);
@@ -103,12 +94,11 @@ namespace Managers
             obj.SetActive(true);
             _diamondList.Add(obj);
         }
-
         private void SetObjPosition(GameObject obj)
         {
-            _directX = ((int)(_diamondList.Count % _data.LimitX)) * _data.OffsetX;
-            _directY = ((int)(_diamondList.Count / (_data.LimitX * _data.LimitZ))) * _data.OffsetY;
-            _directZ = ((int)(_diamondList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
+            _directX = ((_diamondList.Count % _data.LimitX)) * _data.OffsetX;
+            _directY = (_diamondList.Count / (_data.LimitX * _data.LimitZ)) * _data.OffsetY;
+            _directZ = ((_diamondList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
             obj.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
         }
     }

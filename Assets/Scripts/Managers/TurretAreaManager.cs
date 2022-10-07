@@ -4,7 +4,6 @@ using Data.ValueObject;
 using Enums;
 using Keys;
 using Signals;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -14,33 +13,10 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-
-        public int PayedAmount
-        {
-            get => _payedAmount;
-            set
-            {
-                _payedAmount = value;
-                _remainingAmount = _turretData.Cost - _payedAmount;
-                if (_remainingAmount == 0)
-                {
-                    _textParentGameObject.SetActive(false);
-                    //TODO : turret icin karakter acilacak.
-                }
-                else
-                {
-                    SetText(_remainingAmount);
-                }
-            }
-        }
-
-        #endregion
-
-        #region SerializeField Variables
+        #region Serialized Variables
 
         [SerializeField] private TurretNameEnum turretName;
-        [SerializeField] private TextMeshPro tmp;
+        [SerializeField] private TextMeshPro textMeshPro;
 
         #endregion
 
@@ -52,18 +28,34 @@ namespace Managers
         private ScoreDataParams _scoreCache;
         private GameObject _textParentGameObject;
 
+        private int PayedAmount
+        {
+            get => _payedAmount;
+            set
+            {
+                _payedAmount = value;
+                _remainingAmount = _turretData.Cost - _payedAmount;
+                if (_remainingAmount == 0)
+                {
+                    _textParentGameObject.SetActive(false);
+                }
+                else
+                {
+                    SetText(_remainingAmount);
+                }
+            }
+        }
         #endregion
-
         #endregion
 
         private void Awake()
         {
-            _textParentGameObject = tmp.transform.parent.gameObject;
-            
+            GetReferences();
         }
-
-        
-
+        private void GetReferences()
+        {
+            _textParentGameObject = textMeshPro.transform.parent.gameObject;
+        }
         #region Event Subscription
 
         private void OnEnable()
@@ -88,13 +80,11 @@ namespace Managers
         }
 
         #endregion
-
         private void OnSetData()
         {
             _turretData = IdleGameSignals.Instance.onTurretData(turretName);
             PayedAmount = IdleGameSignals.Instance.onPayedTurretData(turretName);
         }
-
         public void BuyAreaEnter()
         {
             _scoreCache = ScoreSignals.Instance.onScoreData();
@@ -104,22 +94,18 @@ namespace Managers
                     if (_scoreCache.MoneyScore > _remainingAmount)
                     {
                         StartCoroutine(Buy());
-                        
                     }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-
         public void BuyAreaExit()
         {
             StopAllCoroutines();
             IdleGameSignals.Instance.onTurretAreaBuyedItem?.Invoke(turretName, _payedAmount);
-           
             SaveSignals.Instance.onAreaDataSave?.Invoke();
         }
-
         private IEnumerator Buy()
         {
             var waitForSecond = new WaitForSeconds(0.05f);
@@ -127,21 +113,14 @@ namespace Managers
             {
                 PayedAmount++;
                 ScoreSignals.Instance.onSetScore?.Invoke(_turretData.PayType, -1);
-
                 SaveSignals.Instance.onScoreSave?.Invoke();
                 yield return waitForSecond;
             }
-
             IdleGameSignals.Instance.onTurretAreaBuyedItem?.Invoke(turretName, _payedAmount);
-
-            // SaveSignals.Instance.onAreaDataSave?.Invoke();
         }
-
-        private void SetText(int remainingAmound)
+        private void SetText(int remainingAmount)
         {
-            tmp.text = remainingAmound.ToString();
+            textMeshPro.text = remainingAmount.ToString();
         }
-
-        
     }
 }

@@ -6,11 +6,22 @@ namespace Signals
 {
     public class LevelSignals : MonoSingleton<LevelSignals>
     {
+        #region Level Initialize Signals
+
         public UnityAction onLevelInitialize = delegate { };
-        public UnityAction onClearActiveLevel = delegate { };
+
+        #endregion
+
+        #region Level Failed Signals
+
         public UnityAction onLevelFailed = delegate { };
-        public UnityAction onNextLevel = delegate { };
-        public UnityAction onRestartLevel = delegate { };
-        public Func<int> onGetLevelID = delegate { return 0;};
+
+        #endregion
+
+        #region Get LevelId Signals
+
+        public Func<int> onGetLevelID = delegate { return 0; };
+
+        #endregion
     }
 }

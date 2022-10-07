@@ -24,7 +24,6 @@ namespace Managers
         private Transform _playerManager;
 
         #endregion
-
         #endregion
 
         private void Awake()
@@ -32,92 +31,58 @@ namespace Managers
             GetReferences();
             GetInitialPosition();
         }
-
-        private void GetReferences()
-        {
-            _animator = GetComponent<Animator>();
-        }
-
         private void Start()
         {
             SetPlayerFollow();
         }
-
+        private void GetReferences()
+        {
+            _animator = GetComponent<Animator>();
+        }
         #region Event Subscriptions
-
         private void OnEnable()
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
         }
-
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-
         #endregion
-
         private void GetInitialPosition()
         {
             _initalPosition = transform.GetChild(0).localPosition;
         }
-
         private void MoveToInitialPosition()
         {
             transform.GetChild(0).localPosition = _initalPosition;
         }
-
         private void SetPlayerFollow()
         {
             _playerManager = FindObjectOfType<PlayerManager>().transform;
             OnSetCameraTarget(_playerManager);
         }
-
         private void OnSetCameraTarget(Transform _target)
         {
             stateDrivenCamera.Follow = _target;
         }
-
-        private void SetCameraState(CameraStatesType cameraState)
-        {
-            _animator.SetTrigger(cameraState.ToString());
-        }
-
-        private void OnGetGameState(GameStatesType states)
-        {
-            switch (states)
-            {
-                case GameStatesType.Idle:
-                    SetCameraState(CameraStatesType.Idle);
-                    break;
-                case GameStatesType.IdleFinish:
-                    SetCameraState(CameraStatesType.IdleFinish);
-                    break;
-            }
-        }
-
         private void OnPlay()
         {
             SetPlayerFollow();
             GetInitialPosition();
         }
-
         private void OnReset()
         {
             stateDrivenCamera.Follow = null;

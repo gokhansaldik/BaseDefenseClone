@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretName: 0
-  tmp: {fileID: 5566578280129173990}
+  textMeshPro: {fileID: 5566578280129173990}
 --- !u!1 &5605907393567484292
 GameObject:
   m_ObjectHideFlags: 0

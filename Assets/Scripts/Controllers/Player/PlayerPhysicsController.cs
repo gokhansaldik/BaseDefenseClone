@@ -1,4 +1,3 @@
-using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -20,9 +19,7 @@ namespace Controllers.Player
         private int _timer;
 
         #endregion
-
         #endregion
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("CollectablePlayer"))
@@ -31,7 +28,6 @@ namespace Controllers.Player
                 other.gameObject.tag = "Collected";
                 StackSignals.Instance.onCollectablePlayerTaken?.Invoke();
             }
-
             else if (other.CompareTag("CollectableMoney"))
             {
                 playerManager.AddStack(other.gameObject);
@@ -45,12 +41,7 @@ namespace Controllers.Player
             {
                 playerManager.InBase = true;
             }
-            // else if (other.CompareTag("Enemy"))
-            // {
-            //     playerManager.Shoot();
-            // }
         }
-
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("AmmoArea"))

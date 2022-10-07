@@ -26,9 +26,7 @@ namespace Controllers.Player
         private Vector3 _movementDirection;
 
         #endregion
-
         #endregion
-
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
@@ -54,10 +52,8 @@ namespace Controllers.Player
 
         private void IdleMove()
         {
-            
             Vector3 velocity = rigidBody.velocity;
-            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,
-                _movementDirection.z * _playerMovementData.IdleSpeed);
+            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y, _movementDirection.z * _playerMovementData.IdleSpeed);
             rigidBody.velocity = velocity;
             if (Target == null)
             {
@@ -71,17 +67,13 @@ namespace Controllers.Player
             else
             {
                 transform.LookAt(Target);
-                Debug.Log("lookat CALisi");
             }
-            
         }
-
         private void Stop()
         {
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
         }
-
         public void MovementReset()
         {
             Stop();
@@ -90,27 +82,20 @@ namespace Controllers.Player
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.identity;
         }
-
         public void OnReset()
         {
             DOTween.KillAll();
         }
-
         public void SetMovementData(PlayerMovementData movementData) => _playerMovementData = movementData;
-
         public void ActivateMovement()
         {
             _isReadyToMove = true;
         }
-
         public void DeactivateMovement()
         {
             _isReadyToMove = false;
         }
-
-        public void UpdateIdleInputValue(IdleInputParams inputParam) =>
-            _movementDirection = inputParam.JoystickMovement;
-
+        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.JoystickMovement;
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
     }
 }

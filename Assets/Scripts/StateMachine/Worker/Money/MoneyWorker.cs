@@ -1,5 +1,4 @@
-using er;
-
+using Inheritance;
 
 namespace StateMachine.Worker.Money
 {
@@ -12,7 +11,7 @@ namespace StateMachine.Worker.Money
             {
                 aiNavmesh.SetDestination(MoneyList[0].transform.position);
             }
-            if (CollectedMoneyList.Count >= MoneyWorkerCollectLimit )
+            if (CollectedMoneyList.Count >= MoneyWorkerCollectLimit)
             {
                 GoToTarget(BaseInTransform);
             }

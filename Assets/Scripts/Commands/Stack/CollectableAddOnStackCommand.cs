@@ -14,12 +14,9 @@ namespace Commands.Stack
         private readonly StackManager _stackManager;
         private readonly List<GameObject> _stackList;
         private readonly StackData _stackData;
-       // private PlayerManager _playerManager; //TODO: Silebilirsin ise yaramiyor.
-
+        
         #endregion
-
         #endregion
-
         public CollectableAddOnStackCommand(ref StackManager stackManager, ref List<GameObject> stackList,
             ref StackData stackData)
         {
@@ -27,7 +24,6 @@ namespace Commands.Stack
             _stackManager = stackManager;
             _stackData = stackData;
         }
-
         public void Execute(GameObject _obj)
         {
             _obj.transform.parent = _stackManager.transform;

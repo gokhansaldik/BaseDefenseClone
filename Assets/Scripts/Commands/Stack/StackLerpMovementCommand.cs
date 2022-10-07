@@ -17,12 +17,10 @@ namespace Commands.Stack
         #endregion
 
         #endregion
-
         public StackLerpMovementCommand(ref List<GameObject> stackList)
         {
             _stackList = stackList;
         }
-
         public void Execute(ref Transform _playerTransform)
         {
             _positionHistory.Insert(0, _playerTransform.position);

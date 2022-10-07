@@ -1,34 +1,37 @@
 using System;
-using System.Reflection;
 using Controllers.Enemy;
-using Controllers.UI;
 using Data.UnityObject;
 using Enums;
 using Interface;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Managers
 {
     public class HealthManager : MonoBehaviour, IHealth
     {
-        public Image healthImage;
+        #region Self Variables
 
-        [SerializeField] public CD_Health healthInfo;
-        public int CurrentHealth;
+        #region Public Variables
+
         public bool IsDead => CurrentHealth <= 0;
+        public Image HealthImage;
+        public int CurrentHealth;
+        public CD_Health HealthInfo;
 
-        [SerializeField] private PlayerManager _playerManager;
+        #endregion
+
+        #region Serialized Variables
+
+        [SerializeField] private PlayerManager playerManager;
         [SerializeField] private EnemyAnimationController enemyAnimationController;
-        // public event UnityAction<int, int> OnTakeHit;
+
+        #endregion
+        #endregion
         private void Awake()
         {
-            CurrentHealth = healthInfo.HealthData.maxHealth;
-            // healthImage = GameObject.FindGameObjectWithTag("Health");
-            //healthImage = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
+            CurrentHealth = HealthInfo.HealthData.maxHealth;
         }
-
         public void EnemyAnim()
         {
             if (IsDead)
@@ -36,27 +39,16 @@ namespace Managers
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
             }
         }
-        
-
         public void TakeDamage(int damage)
         {
-            // Player can dusuren fonksiyon.
             if (IsDead)
             {
-                _playerManager.ChangePlayerAnimation(PlayerAnimationStates.Death);
+                playerManager.ChangePlayerAnimation(PlayerAnimationStates.Death);
             }
 
             CurrentHealth -= damage;
-            //OnTakeHit?.Invoke(_currentHealth,healthInfo.HealthData.maxHealth);
-            healthImage.fillAmount =
-                Convert.ToSingle(CurrentHealth) / Convert.ToSingle(healthInfo.HealthData.maxHealth);
-        }
-        
-        
-        private void OnTakeHit(int currentHealth, int maxHealth)
-        {
-            //Convert.ToSingle(currentHealth) / Convert.ToString(maxHealt);
-            healthImage.fillAmount = Convert.ToSingle(currentHealth) / Convert.ToSingle(maxHealth);
+            HealthImage.fillAmount =
+                Convert.ToSingle(CurrentHealth) / Convert.ToSingle(HealthInfo.HealthData.maxHealth);
         }
     }
 }

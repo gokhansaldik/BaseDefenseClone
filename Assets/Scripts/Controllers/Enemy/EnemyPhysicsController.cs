@@ -7,8 +7,16 @@ namespace Controllers.Enemy
 {
     public class EnemyPhysicsController : MonoBehaviour
     {
-        [SerializeField] private HealthManager healthManager;
+        #region Self Variables
+
+        #region Serialized Variables
+
         [SerializeField] private Material enemyMaterial;
+        [SerializeField] private HealthManager healthManager;
+        
+        #endregion
+
+        #endregion
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -21,13 +29,7 @@ namespace Controllers.Enemy
                 {
                     healthManager.CurrentHealth -= 10;
                     var parent = gameObject.transform.parent;
-                   // parent.DOMove(new Vector3(0,0,parent.position.z-0.01f),1f); //TODO: Geri tepme ama bug var
-                   parent.DOShakePosition(0.15f, new Vector3(0, 0, 0.2f), 10, 90);
-                   
-                   // if (healthManager.CurrentHealth <=0)
-                   // {
-                   //     enemyMaterial.DOColor(Color.black, 0.2f);
-                   // }
+                    parent.DOShakePosition(0.15f, new Vector3(0, 0, 0.2f), 10, 90);
                    healthManager.EnemyAnim();
                 }
                 

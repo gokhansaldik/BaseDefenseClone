@@ -2,41 +2,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace er
+namespace Inheritance
 {
     public class AiBase : MonoBehaviour
     {
-        [SerializeField] protected Animator moneyWorkerAnimator;
-        [SerializeField] protected NavMeshAgent aiNavmesh;
+        #region Self Variables
 
-        public List<Collectable> MoneyList;
-        
-        public List<Collectable> AmmoList;
+        #region Public Variables
 
-        [SerializeField] protected Transform BaseInTransform;
-        [SerializeField] protected Transform BaseTurretTransform;
-
-        public int MoneyWorkerCollectLimit = 10;
         public int AmmoWorkerCollectLimit = 10;
-
-        public List<Collectable> CollectedMoneyList;
+        public List<Collectable> AmmoList;
         public List<Collectable> CollectedAmmoList;
         
+        public int MoneyWorkerCollectLimit = 10;
+        public List<Collectable> MoneyList;
+        public List<Collectable> CollectedMoneyList;
         
+        #endregion
         
-        //[SerializeField] private Transform InBaseTransform;
+        #region Serialized Variables
+        
+        [SerializeField] protected Animator moneyWorkerAnimator;
+        [SerializeField] protected NavMeshAgent aiNavmesh;
+        [SerializeField] protected Transform BaseTurretTransform;
+        [SerializeField] protected Transform BaseInTransform;
+
+        #endregion
+
+        #endregion
         public virtual void Collect()
         { 
             
         }
-
-      
-
-        // private void Start()
-        // {
-        //     GoToBase();
-        // }
-
         protected void Update()
         {
             if (MoneyList.Count > 0)
@@ -47,20 +44,15 @@ namespace er
             {
                 MoneyWorkerMoveAnimation(0f);
             }
-            
         }
-
         public void MoneyWorkerMoveAnimation(float Speed)
         {
             if (moneyWorkerAnimator.GetFloat("Speed") == Speed) ;
              moneyWorkerAnimator.SetFloat("Speed",Speed,2f,Time.deltaTime);
         }
-       
         public void GoToTarget(Transform target)
         {
             aiNavmesh.SetDestination(target.position);
         }
-        
-        
     }
 }

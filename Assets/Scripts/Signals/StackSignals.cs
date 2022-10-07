@@ -6,12 +6,10 @@ namespace Signals
 {
     public class StackSignals : MonoSingleton<StackSignals>
     {
-        public UnityAction<GameObject> onAddInStack = delegate { };
-        public UnityAction<GameObject> onRemoveInStack = delegate { };
-        public UnityAction<GameObject> onGetStackList = delegate { };
-        public UnityAction onCollectablePlayerMiner = delegate { };
-        public UnityAction onCollectablePlayerTaken = delegate {  };
-        public UnityAction onCollectableUpSpeed = delegate {  };
-        public UnityAction onCollectableUpDown = delegate {  };
+        public UnityAction<GameObject> onAddInStack = delegate { }; 
+        public UnityAction onCollectablePlayerMiner = delegate { }; 
+        public UnityAction onCollectablePlayerTaken = delegate { }; 
+        public UnityAction onCollectableUpSpeed = delegate { }; 
+        public UnityAction onCollectableUpDown = delegate { }; 
     }
 }
