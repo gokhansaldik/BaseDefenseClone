@@ -47,8 +47,7 @@ namespace Managers
             }
 
             CurrentHealth -= damage;
-            HealthImage.fillAmount =
-                Convert.ToSingle(CurrentHealth) / Convert.ToSingle(HealthInfo.HealthData.maxHealth);
+            HealthImage.fillAmount = Convert.ToSingle(CurrentHealth) / Convert.ToSingle(HealthInfo.HealthData.maxHealth);
         }
     }
 }

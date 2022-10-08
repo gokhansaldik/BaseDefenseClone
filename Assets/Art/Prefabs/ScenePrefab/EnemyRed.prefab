@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTarget: {fileID: 0}
   playerPrefab: {fileID: 0}
+  money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
 --- !u!114 &2030663694255757740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ MonoBehaviour:
   HealthImage: {fileID: 0}
   CurrentHealth: 0
   HealthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
-  _playerManager: {fileID: 0}
+  playerManager: {fileID: 0}
   enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!1 &390624702487656339
 GameObject:
@@ -1843,8 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba708e7cb565483c9763d8c405af7d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthManager: {fileID: 2030663694255757740}
   enemyMaterial: {fileID: 2100000, guid: 8d369e01365ef09488f16da69d8abdc9, type: 2}
+  healthManager: {fileID: 2030663694255757740}
 --- !u!136 &5712841251931688830
 CapsuleCollider:
   m_ObjectHideFlags: 0

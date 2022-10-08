@@ -1,6 +1,7 @@
 using Class;
 using Interface;
 using Managers;
+using Signals;
 using StateMachine;
 using StateMachine.Enemy;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Controllers.Enemy
         #region Serialized Variables
 
         [SerializeField] private Transform playerPrefab;
-       
+        [SerializeField] private GameObject money;
         #endregion
 
 
@@ -32,7 +33,8 @@ namespace Controllers.Enemy
 
         #endregion
         #endregion
-
+      
+       
         public IMover Mover { get; private set; }
         public CharacterAnimation Animation { get; private set; }
         public bool CanAttack => Vector3.Distance(playerPrefab.position, this.transform.position) <=
@@ -71,6 +73,11 @@ namespace Controllers.Enemy
         private void LateUpdate()
         {
             Animation.MoveAnimation(0f);
+        }
+        private void OnEnemyToMoney()
+        {
+            this.gameObject.SetActive(false);
+            money.SetActive(true);
         }
     }
 }

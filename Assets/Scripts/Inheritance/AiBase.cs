@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Controllers.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,7 @@ namespace Inheritance
         [SerializeField] protected NavMeshAgent aiNavmesh;
         [SerializeField] protected Transform BaseTurretTransform;
         [SerializeField] protected Transform BaseInTransform;
-
+       
         #endregion
 
         #endregion

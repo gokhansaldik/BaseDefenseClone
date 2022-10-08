@@ -37,6 +37,7 @@ namespace Controllers.Bullet
             if (other.CompareTag("Enemy"))
             {
                 Destroy(gameObject);
+              
                 return;
             }
         }

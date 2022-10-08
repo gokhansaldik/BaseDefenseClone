@@ -43,7 +43,7 @@ namespace Controllers.Player
             obj.transform.SetParent(moneyStackHolder.transform);
             SetObjectPosition(obj);
         }
-        private void SetObjectPosition(GameObject obj)
+        public void SetObjectPosition(GameObject obj)
         {
             obj.transform.DOLocalRotate(Vector3.zero, _playerStackData.AnimationDurition);
             obj.transform.DOLocalMove(

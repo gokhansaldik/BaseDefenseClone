@@ -8,6 +8,7 @@ namespace Signals
     {
         public UnityAction onPlayerDamage = delegate { };  
         public UnityAction<Transform> onEnemyDie = delegate { };
+        //public UnityAction onEnemyToMoney= delegate { };
       
     }
 }

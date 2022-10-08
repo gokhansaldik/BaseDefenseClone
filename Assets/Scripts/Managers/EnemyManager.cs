@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Controllers.Enemy;
 using Extentions;
 using Signals;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Managers
@@ -20,7 +21,7 @@ namespace Managers
         [SerializeField] private int maxCountOnGame = 40;
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private List<EnemyController> enemies;
-
+        
         #endregion
         #endregion
         private void Awake()
@@ -35,24 +36,29 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage += OnPlayerDamage;
+           
         }
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage -= OnPlayerDamage;
-        }
-        private void OnPlayerDamage()
-        {
-            healthManager.TakeDamage(2);
+            
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+        private void OnPlayerDamage()
+        {
+            healthManager.TakeDamage(2);
+        }
+       
         #endregion
         public void AddEnemyController(EnemyController enemyController)
         {
             enemyController.transform.parent = this.transform;
             enemies.Add(enemyController);
         }
+
+        
     }
 }

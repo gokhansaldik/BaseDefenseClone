@@ -30,8 +30,11 @@ namespace Controllers.Enemy
                     healthManager.CurrentHealth -= 10;
                     var parent = gameObject.transform.parent;
                     parent.DOShakePosition(0.15f, new Vector3(0, 0, 0.2f), 10, 90);
-                   healthManager.EnemyAnim();
+                    //parent.DOPunchPosition(new Vector3(0, 0, 0.5f), 2f, 1, 2f, true);
+                    healthManager.EnemyAnim();
                 }
+
+             
                 
             }
         }

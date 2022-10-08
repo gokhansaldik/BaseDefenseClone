@@ -1,3 +1,5 @@
+using Controllers.Player;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,7 +10,7 @@ namespace Inheritance
         private AiBase _worker;
         // Money uzerinde olarak kullaniliyor
         [SerializeField] private AiManager aiManager;
-     
+        [SerializeField] private PlayerStackController playerStackController;
         private void OnEnable()
         {
             if (CompareTag("BulletBox"))
@@ -32,6 +34,7 @@ namespace Inheritance
                 transform.parent = other.transform;
                 _worker.MoneyList.Remove(this);
                 _worker.CollectedMoneyList.Add(this);
+                playerStackController.SetObjectPosition(gameObject);
                 if (_worker.MoneyList != null)
                 {
                     _worker.Collect();
