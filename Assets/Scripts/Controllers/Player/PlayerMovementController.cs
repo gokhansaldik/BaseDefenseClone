@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Enums;
 using Keys;
@@ -24,6 +25,7 @@ namespace Controllers.Player
         private bool _isReadyToMove;
         private bool _isReadyToPlay;
         private Vector3 _movementDirection;
+        private bool _playerUseTurret;
 
         #endregion
         #endregion
@@ -49,6 +51,8 @@ namespace Controllers.Player
             else
                 Stop();
         }
+
+        
 
         private void IdleMove()
         {

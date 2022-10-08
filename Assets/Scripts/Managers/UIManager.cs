@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Controllers.UI;
 using Enums;
@@ -5,6 +7,7 @@ using Keys;
 using Signals;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Managers
@@ -19,7 +22,7 @@ namespace Managers
         [SerializeField] private TextMeshProUGUI moneyText;
         [SerializeField] private TextMeshProUGUI gemText;
         [SerializeField]private StoreUIController storeUIController;
-
+        [SerializeField] private GameObject loadingImage;
         #endregion
 
         #region Private Variables
@@ -33,10 +36,12 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
+            StartCoroutine(LoadImage());
         }
         private void GetReferences()
         {
             _uiPanelController = new UIPanelController();
+            
         }
         #region Event Subscriptions
         private void OnEnable()
@@ -101,5 +106,12 @@ namespace Managers
         {
             storeUIController.CloseStoreMenu(panelParam);
         }
+
+        IEnumerator LoadImage()
+        {
+            yield return new WaitForSeconds(2f);
+            loadingImage.SetActive(false);
+            
+        } 
     }
 }

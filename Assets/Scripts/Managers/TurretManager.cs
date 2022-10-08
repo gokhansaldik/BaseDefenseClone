@@ -25,7 +25,8 @@ namespace Managers
 
         [SerializeField] private Transform turretPlayerParentObj;
         [SerializeField] private Transform turretRotatableObj;
-
+        [SerializeField] private GameObject playerObject;
+        [SerializeField] private GameObject ownerObject;
         #endregion
 
         #region Private Variables
@@ -78,16 +79,20 @@ namespace Managers
         public void PlayerUseTurret(Transform player)
         {
             IsPlayerUsing = true;
+            //playerObject.SetActive(false);
+            //ownerObject.SetActive(true);
             player.parent = turretPlayerParentObj;
             //player.transform.DOMove(turretOwner.position, 1f);
             player.transform.position = turretPlayerParentObj.position;
             player.transform.rotation = turretPlayerParentObj.rotation;
+           
         }
 
         public void PlayerLeaveTurret(Transform player)
         {
             IsPlayerUsing = false;
-
+           // ownerObject.SetActive(false);
+            //playerObject.SetActive(true);
             player.parent = null;
         }
 
@@ -114,7 +119,7 @@ namespace Managers
                 PlayerSignals.Instance.onPlayerUseTurret?.Invoke(false);
             }
 
-            turretRotatableObj.rotation = Quaternion.Euler(new Vector3(0, 30 * _xValue * -1, 0)); //slerp
+            turretRotatableObj.rotation = Quaternion.Euler(new Vector3(0, 30 * _xValue * -1, 0));
         }
     }
 }
