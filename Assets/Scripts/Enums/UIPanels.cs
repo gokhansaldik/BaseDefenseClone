@@ -9,5 +9,6 @@ namespace Enums
         ScorePanel,
         IdlePanel,
         GunStorePanel,
+        WorkerStorePanel,
     }
 }

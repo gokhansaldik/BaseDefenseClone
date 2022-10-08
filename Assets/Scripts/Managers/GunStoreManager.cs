@@ -18,6 +18,7 @@ namespace Managers
         [SerializeField] private List<TextMeshProUGUI> levelTxt;
         [SerializeField] private List<TextMeshProUGUI> upgradeTxt;
         [SerializeField] private List<int> itemLevels;
+        [SerializeField] private UIPanels releatedPanel;
 
         #endregion
         
@@ -64,9 +65,10 @@ namespace Managers
             }
             itemLevels = levels;
         }
+        
         public void CloseBtn()
         {
-            UISignals.Instance.onCloseStorePanel?.Invoke(UIPanels.GunStorePanel);
+            UISignals.Instance.onCloseStorePanel?.Invoke(releatedPanel);
         }
     }
 }

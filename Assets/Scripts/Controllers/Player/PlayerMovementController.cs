@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Enums;
 using Keys;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -16,7 +17,7 @@ namespace Controllers.Player
 
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private GameStatesType gameStatesType;
-        
+        [SerializeField] private PlayerManager playerManager;
         #endregion
 
         #region Private Variables
@@ -51,9 +52,7 @@ namespace Controllers.Player
             else
                 Stop();
         }
-
         
-
         private void IdleMove()
         {
             Vector3 velocity = rigidBody.velocity;
@@ -73,6 +72,8 @@ namespace Controllers.Player
                 transform.LookAt(Target);
             }
         }
+
+      
         private void Stop()
         {
             rigidBody.velocity = Vector3.zero;
@@ -86,20 +87,12 @@ namespace Controllers.Player
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.identity;
         }
-        public void OnReset()
-        {
-            DOTween.KillAll();
-        }
+        public void OnReset() => DOTween.KillAll();
         public void SetMovementData(PlayerMovementData movementData) => _playerMovementData = movementData;
-        public void ActivateMovement()
-        {
-            _isReadyToMove = true;
-        }
-        public void DeactivateMovement()
-        {
-            _isReadyToMove = false;
-        }
+        public void ActivateMovement() =>_isReadyToMove = true;
+        public void DeactivateMovement() =>_isReadyToMove = false;
         public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.JoystickMovement;
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
+       
     }
 }

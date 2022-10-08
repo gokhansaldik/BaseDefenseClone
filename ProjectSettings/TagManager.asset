@@ -32,6 +32,7 @@ TagManager:
   - SMGBullet
   - TurretPhysics
   - TurretOwner
+  - Turret
   layers:
   - Default
   - TransparentFX

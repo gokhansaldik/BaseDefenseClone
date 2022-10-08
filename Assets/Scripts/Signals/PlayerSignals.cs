@@ -7,5 +7,6 @@ namespace Signals
     public class PlayerSignals : MonoSingleton<PlayerSignals>
     {
         public UnityAction<bool> onPlayerUseTurret = delegate { };
+        public UnityAction<GameObject> onPlayerReachTurretAmmoArea = delegate { };
     }
 }

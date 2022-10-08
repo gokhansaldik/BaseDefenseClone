@@ -1,8 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commands.Stack;
+using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -14,17 +17,17 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-        
+        public List<GameObject> CollectableStack = new List<GameObject>();
         public StackData StackData;
         public bool LerpStatus;
         public List<GameObject> StackList = new List<GameObject>();
-
+        public ItemAddOnStackCommand ItemAddOnStack;
         #endregion
         
         #region Serialized Variables
 
         [SerializeField] private StackManager stackManager;
-        
+        [SerializeField] private PlayerStackController playerStackController;
         #endregion
 
         #region Private Variables
@@ -33,6 +36,9 @@ namespace Managers
         private StackLerpMovementCommand _stackLerpMovementCommand;
         private CollectableAnimSetCommand _collectableAnimSetCommand;
         private Transform _playerManager;
+        private bool _isReleasingAmmo = false;
+        private StackData _stackData;
+
 
         #endregion
         #endregion
@@ -53,6 +59,7 @@ namespace Managers
             StackSignals.Instance.onCollectablePlayerMiner += OnCollectablePlayerMiner;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
+           PlayerSignals.Instance.onPlayerReachTurretAmmoArea += OnReleaseAmmosToTurretArea;
         }
         private void UnsubscribeEvents()
         {
@@ -60,6 +67,7 @@ namespace Managers
             StackSignals.Instance.onCollectablePlayerMiner -= OnCollectablePlayerMiner;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+           PlayerSignals.Instance.onPlayerReachTurretAmmoArea -= OnReleaseAmmosToTurretArea;
         }
         private void OnDisable()
         {
@@ -79,6 +87,7 @@ namespace Managers
             _collectableAddOnStackCommand = new CollectableAddOnStackCommand(ref stackManager, ref StackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref StackList);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
+            ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
         }
         private void Update()
         {
@@ -140,5 +149,31 @@ namespace Managers
         {
             ClearStackManager();
         }
+
+      
+        private void OnReleaseAmmosToTurretArea(GameObject releaseObject)
+        {
+            if (_isReleasingAmmo)
+            {
+                return;
+            }
+            _isReleasingAmmo = true;
+            ItemAddOnStack.ResetTowerCount();
+            StartCoroutine(ReleaseAmmoToTurret(releaseObject));
+        }
+        private IEnumerator ReleaseAmmoToTurret(GameObject releaseObject)
+        {
+            foreach (var i in playerStackController.MoneyStackList)
+            {
+                i.tag = "BulletBox";
+                yield return new WaitForSeconds(0.05f);
+                i.transform.parent = releaseObject.transform;
+                i.transform.position = releaseObject.transform.position;
+            }
+            playerStackController.MoneyStackList.Clear();
+            _isReleasingAmmo = false;
+
+        }
+
     }
 }

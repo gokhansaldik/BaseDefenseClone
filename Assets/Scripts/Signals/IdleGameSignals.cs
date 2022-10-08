@@ -30,7 +30,10 @@ namespace Signals
         public Func<TurretNameEnum, TurretData> onTurretData = delegate { return default; };
         public Func<TurretNameEnum, int> onPayedTurretData = delegate { return default; };
         public UnityAction<TurretNameEnum, int> onTurretAreaBuyedItem = delegate { };
-
+        public UnityAction<GameObject> onPlayerInTurret = delegate { };
+        public UnityAction<GameObject> onPlayerOutTurret = delegate { };
+        public UnityAction<GameObject, GameObject> onSendAmmoInStack=delegate{};
+        public UnityAction<GameObject> onAddBulletBoxStack = delegate { };
         #endregion
     }
 }

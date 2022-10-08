@@ -27,5 +27,11 @@ namespace Signals
         public UnityAction<List<int>> onChangeGunLevels;
 
         #endregion
+
+        #region Worker Signals
+
+        public UnityAction<List<int>> onInitializeWorkerUpgrades = delegate { };
+        
+        #endregion
     }
 }

@@ -1,4 +1,10 @@
 using System.Collections.Generic;
+using Commands.Stack;
+using Controllers.Turret;
+using Data.UnityObject;
+using Data.ValueObject;
+using DG.Tweening;
+using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -14,24 +20,32 @@ namespace Managers
 
         public bool HasOwner = false;
         public bool IsPlayerUsing = false;
-
+        public GameObject PlayerHandle;
         public List<Transform> AmmoBoxList = new List<Transform>();
-
+        public TurretStateType TurretType = TurretStateType.None;
         #endregion
 
         #region Serialized Variables
-
+        [SerializeField] private GameObject turret;
        // [SerializeField] private TurretRangeController rangeController;
 
         [SerializeField] private Transform turretPlayerParentObj;
         [SerializeField] private Transform turretRotatableObj;
         [SerializeField] private GameObject playerObject;
         [SerializeField] private GameObject ownerObject;
+        [SerializeField] private TurretMovementController turretMovementController;
+        private List<GameObject> _bulletBoxList;
+        private TurretData _data;
+        //private TurretStackSetPosCommand _turretStackSetPosCommand;
+        
         #endregion
 
         #region Private Variables
 
         private float _xValue, _zValue;
+        private float _directY;
+        private float _directZ;
+        private float _directX;
 
         #endregion
 
@@ -39,12 +53,21 @@ namespace Managers
 
         private void Awake()
         {
+            _bulletBoxList= new List<GameObject>();
             Init();
+            _data = GetTurretData();
         }
 
         private void Init()
         {
+            //var manager = this;
+            //_turretStackSetPosCommand = new TurretStackSetPosCommand(ref _bulletBoxList, ref _data);
+            //_turretBulletBoxAddCommand = new TurretBulletBoxAddCommand(ref _bulletBoxList, ref _data, ref stackHolder, ref manager);
         }
+        // private void TurretRotation()
+        // {
+        //     turret.transform.rotation.y 
+        // }
 
         // public Material GetMaterial() => Resources.Load<Material>("Materials/TurretFloor/" +
         //                                                           (LevelSignals.Instance.onGetCurrentModdedLevel() + 1)
@@ -60,13 +83,19 @@ namespace Managers
         private void SubscribeEvents()
         {
             //PlayerSignals.Instance.onEnemyDie += rangeController.OnRemoveFromTargetList;
-            InputSignals.Instance.onInputDragged += OnInputDragged;
+            InputSignals.Instance.onJoystickDragged += OnInputDragged;
+            IdleGameSignals.Instance.onAddBulletBoxStack += OnAddBulletBoxStack;
+            //IdleGameSignals.Instance.onPlayerInTurret += OnPlayerInTurret;
+            //IdleGameSignals.Instance.onPlayerOutTurret += OnPlayerOutTurret;
         }
 
         private void UnsubscribeEvents()
         {
             //PlayerSignals.Instance.onEnemyDie -= rangeController.OnRemoveFromTargetList;
-            InputSignals.Instance.onInputDragged -= OnInputDragged;
+            InputSignals.Instance.onJoystickDragged -= OnInputDragged;
+            //IdleGameSignals.Instance.onPlayerInTurret -= OnPlayerInTurret;
+            //IdleGameSignals.Instance.onPlayerOutTurret -= OnPlayerOutTurret;
+            IdleGameSignals.Instance.onAddBulletBoxStack -= OnAddBulletBoxStack;
         }
 
         private void OnDisable()
@@ -76,6 +105,7 @@ namespace Managers
 
         #endregion
 
+        private TurretData GetTurretData() => Resources.Load<CD_TurretData>("Data/CD_TurretData").Data;
         public void PlayerUseTurret(Transform player)
         {
             IsPlayerUsing = true;
@@ -91,15 +121,18 @@ namespace Managers
         public void PlayerLeaveTurret(Transform player)
         {
             IsPlayerUsing = false;
-           // ownerObject.SetActive(false);
+            //ownerObject.SetActive(false);
             //playerObject.SetActive(true);
             player.parent = null;
         }
 
-        public void OnInputDragged(InputParams param)
+        public void OnInputDragged(IdleInputParams data)
         {
-            _xValue = param.XValue;
-            _zValue = param.ZValue;
+            //turretMovementController.SetTurnValue(data);
+            // _xValue = data.XValue;
+            // _zValue = data.ZValue;
+            _xValue = data.JoystickMovement.x;
+            _zValue = data.JoystickMovement.z;
         }
 
         private void FixedUpdate()
@@ -108,18 +141,48 @@ namespace Managers
             {
                 return;
             }
-
             if (_xValue.Equals(0))
             {
                 return;
             }
-
-            if (_zValue < -0.9f)
+            if (_xValue < -0.9f)
             {
                 PlayerSignals.Instance.onPlayerUseTurret?.Invoke(false);
             }
-
             turretRotatableObj.rotation = Quaternion.Euler(new Vector3(0, 30 * _xValue * -1, 0));
         }
+        // private void OnPlayerInTurret(GameObject target)
+        // {
+        //     if (target==gameObject)
+        //     {
+        //         TurretType = TurretStateType.PlayerIn;
+        //     }
+        // }
+        // private void OnPlayerOutTurret(GameObject IsCheck)
+        // {
+        //     if (TurretType==TurretStateType.PlayerIn && IsCheck==gameObject)
+        //     {
+        //         TurretType = TurretStateType.None;
+        //     }
+        // }
+        public void OnAddBulletBoxStack(GameObject target)
+        {
+           
+          
+            SetObjPosition(target);
+            
+        }
+        public void SetObjPosition(GameObject bulletBox)
+        {
+            //_turretStackSetPosCommand.Execute(bulletBox);
+            _directX = ((AmmoBoxList.Count % _data.LimitX)) * _data.OffsetX;
+                _directY = (AmmoBoxList.Count / (_data.LimitX * _data.LimitZ)) * _data.OffsetY;
+                _directZ = ((AmmoBoxList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
+                bulletBox.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
+            
+        }
+
+       
     }
+   
 }

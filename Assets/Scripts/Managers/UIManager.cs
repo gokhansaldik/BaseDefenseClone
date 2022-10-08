@@ -111,7 +111,6 @@ namespace Managers
         {
             yield return new WaitForSeconds(2f);
             loadingImage.SetActive(false);
-            
         } 
     }
 }

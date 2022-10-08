@@ -11,5 +11,6 @@ namespace Signals
         public UnityAction onCollectablePlayerTaken = delegate { }; 
         public UnityAction onCollectableUpSpeed = delegate { }; 
         public UnityAction onCollectableUpDown = delegate { }; 
+        
     }
 }

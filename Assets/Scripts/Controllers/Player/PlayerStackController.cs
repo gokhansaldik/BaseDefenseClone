@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Enums;
@@ -28,7 +29,7 @@ namespace Controllers.Player
         private PlayerStackData _playerStackData;
         private int _currentStackLevel;
         private float _directY;
-
+       
         #endregion
         #endregion
         public void SetStackData(PlayerStackData data)
@@ -89,5 +90,18 @@ namespace Controllers.Player
                 });
             }
         }
+        // public GameObject SendBulletBox()
+        // {
+        //     if (MoneyStackList.Count > 0)
+        //     {
+        //         var obj = MoneyStackList[MoneyStackList.Count - 1];
+        //         MoneyStackList.Remove(obj);
+        //         MoneyStackList.TrimExcess();
+        //         //PoolSignals.Instance.onSendPool?.Invoke(obj,PoolType.BulletBox);
+        //         return obj;
+        //     }
+        //     return null;
+        // }
+        
     }
 }
