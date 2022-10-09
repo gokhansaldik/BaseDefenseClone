@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Managers;
 using Signals;
@@ -13,10 +14,16 @@ namespace Controllers.Enemy
 
         [SerializeField] private Material enemyMaterial;
         [SerializeField] private HealthManager healthManager;
-        
+        private ParticleSystem enemyBlood;
         #endregion
 
         #endregion
+
+        private void Start()
+        {
+            enemyBlood = GetComponent<ParticleSystem>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -32,6 +39,7 @@ namespace Controllers.Enemy
                     parent.DOShakePosition(0.15f, new Vector3(0, 0, 0.2f), 10, 90);
                     //parent.DOPunchPosition(new Vector3(0, 0, 0.5f), 2f, 1, 2f, true);
                     healthManager.EnemyAnim();
+                    enemyBlood.Play();
                 }
 
             }

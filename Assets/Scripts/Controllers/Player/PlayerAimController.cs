@@ -1,6 +1,8 @@
 using Managers;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -18,6 +20,8 @@ namespace Controllers.Player
         [SerializeField] private GameObject currentBullet;
         [SerializeField] private Transform sight;
         [SerializeField] private PlayerMovementController playerMovementController;
+        //[SerializeField] private ParticleManager particleManager;
+        private ParticleSystem _gunParticle;
 
         #endregion
 
@@ -26,6 +30,7 @@ namespace Controllers.Player
         private void Start()
         {
             StartCoroutine(Shoot());
+            _gunParticle = GetComponent<ParticleSystem>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -67,9 +72,14 @@ namespace Controllers.Player
             {
                 Instantiate(currentBullet, sight.transform.position, sight.rotation);
                 AimAt(targetList[0]);
+                _gunParticle.Play();
+               // ParticleSignals.Instance.onPlayParticle?.Invoke(ParticleType.BulletImpact,sight.transform.position,sight.rotation);
             }
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(Shoot());
+            
+            
+            
         }
         public void OnRemoveFromTargetList(Transform deadEnemy)
         {
@@ -80,8 +90,7 @@ namespace Controllers.Player
         }
         public void AimAt(Transform target)
         {
-            transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z),
-                transform.up);
+            transform.LookAt(new Vector3(target.position.x, target.position.y + 0.3f, target.position.z), transform.up);
         }
     }
 }

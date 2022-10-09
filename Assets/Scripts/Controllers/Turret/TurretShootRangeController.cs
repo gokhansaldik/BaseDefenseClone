@@ -25,6 +25,7 @@ namespace Controllers.Turret
         #region Private Variables
         //private AllGunsData _data;
         private int _firedBulletIndex = 0;
+        private ParticleSystem _turretParticle;
         #endregion
         #endregion
 
@@ -34,6 +35,7 @@ namespace Controllers.Turret
         private void Awake()
         {
             Init();
+            _turretParticle = GetComponent<ParticleSystem>();
         }
 
         private void Init()
@@ -97,10 +99,11 @@ namespace Controllers.Turret
 
         private IEnumerator Shoot()
         {
-            if ((manager.HasOwner || manager.IsPlayerUsing) && targetList.Count > 0 && manager.AmmoBoxList.Count > 0)
+            if ((manager.HasOwner || manager.IsPlayerUsing) && targetList.Count > 0 )//&& manager.AmmoBoxList.Count > 0
             {
-                UseAmmo();
+                //UseAmmo();
                 Instantiate(currentBullet, nisangah.transform.position, nisangah.rotation);
+                _turretParticle.Play();
             }
             yield return new WaitForSeconds(1f);
             StartCoroutine(Shoot());
