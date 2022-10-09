@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using Controllers.Player;
+using DG.Tweening;
+using Enums;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -55,5 +58,25 @@ namespace Inheritance
         {
             aiNavmesh.SetDestination(target.position);
         }
+        // public void MoneyLeaving(GameObject target)
+        // {
+        //     int limit = CollectedMoneyList.Count;
+        //     for (int i = 0; i < limit; i++)
+        //     {
+        //         var obj = CollectedMoneyList[0];
+        //         CollectedMoneyList.RemoveAt(0);
+        //         CollectedMoneyList.TrimExcess();
+        //         obj.transform.parent = target.transform;
+        //         obj.transform.DOLocalMove(
+        //             new Vector3(Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f)), 0.5f);
+        //         obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.2f).OnComplete(() =>
+        //         {
+        //             // PoolSignals.Instance.onSendPool?.Invoke(obj,
+        //             //     PoolType.Money);
+        //         });
+        //         ScoreSignals.Instance.onSetScore?.Invoke(PayType.Money, CollectedMoneyList.Count);
+        //         SaveSignals.Instance.onScoreSave?.Invoke();
+        //     }
+        // }
     }
 }

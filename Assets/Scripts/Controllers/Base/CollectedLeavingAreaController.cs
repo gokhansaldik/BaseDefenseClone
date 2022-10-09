@@ -18,8 +18,8 @@ namespace Controllers.Base
             if (other.CompareTag("CollectedMoney"))
             {
                 _playerStackController.MoneyLeaving(other.gameObject);
-            }
-            else if (other.CompareTag("BulletBox"))
+            } 
+            if (other.CompareTag("BulletBox"))
             {
                 _playerStackController.BulletBoxLeaving(other.gameObject);
             }
