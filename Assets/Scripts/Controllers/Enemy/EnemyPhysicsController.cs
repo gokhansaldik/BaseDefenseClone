@@ -34,8 +34,6 @@ namespace Controllers.Enemy
                     healthManager.EnemyAnim();
                 }
 
-             
-                
             }
         }
     }

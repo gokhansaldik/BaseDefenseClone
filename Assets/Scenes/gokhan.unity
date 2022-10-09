@@ -13672,6 +13672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1081673534, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: stackManager
+      value: 
+      objectReference: {fileID: 817862041}
     - target: {fileID: 1560019788, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: stackManager
       value: 
@@ -13696,6 +13700,10 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 3495540108718843468, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 3496125502099815280, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: stackManager
       value: 

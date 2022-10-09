@@ -54,11 +54,16 @@ namespace Controllers.Player
             {
                 targetGameObject.localPosition = new Vector3(0, 7.5f, 10f);
                 playerMovementController.Target = null;
+                
             }
         }
         private IEnumerator Shoot()
         {
-            if (targetList.Count > 0)
+            if (manager.PlayerDead|| manager.InBase)
+            {
+                //do nothing
+            }
+           else if (targetList.Count > 0)
             {
                 Instantiate(currentBullet, sight.transform.position, sight.rotation);
                 AimAt(targetList[0]);

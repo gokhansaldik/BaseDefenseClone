@@ -30,6 +30,7 @@ namespace StateMachine.Enemy
         public void OnExit()
         {
             _enemyController.Animation.MoveAnimation(0.5f);
+            _enemyController.Mover.MoveAction(_enemyController.transform.position,0f);
         }
 
         public void Tick()

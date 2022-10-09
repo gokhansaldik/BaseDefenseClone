@@ -20,6 +20,7 @@ namespace Managers
         public PlayerData PlayerData;
         public bool InBase = true;
         public GameObject PistolGun;
+        public bool PlayerDead = false;
         
 
         #endregion
@@ -33,6 +34,9 @@ namespace Managers
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private TurretManager turretManager;
         [SerializeField] private Rigidbody PlayerRigidbody;
+        [SerializeField] private Transform playerTransform;
+        [SerializeField] private Transform respawnPointTransform;
+        
         #endregion
 
         #region Private Variables
@@ -130,6 +134,14 @@ namespace Managers
             {
                 healthManager.CurrentHealth++;
             }
+        }
+
+        public IEnumerator PlayerRespawn()
+        {
+            yield return new WaitForSeconds(2.5f);
+            playerTransform.transform.position = respawnPointTransform.transform.position;
+            ChangePlayerAnimation(PlayerAnimationStates.Idle);
+
         }
 
         // public IEnumerator SendBulletBox(GameObject target)

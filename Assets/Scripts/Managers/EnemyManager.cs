@@ -49,7 +49,13 @@ namespace Managers
         }
         private void OnPlayerDamage()
         {
-            healthManager.TakeDamage(2);
+            // if (healthManager.CurrentHealth >0)
+            // { 
+                healthManager.TakeDamage(2);
+            //}
+               
+            
+           
         }
        
         #endregion
