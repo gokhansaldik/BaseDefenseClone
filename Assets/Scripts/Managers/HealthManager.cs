@@ -25,7 +25,8 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        
+
+        private EnemyManager enemyManager;
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private EnemyAnimationController enemyAnimationController;
 
@@ -36,20 +37,22 @@ namespace Managers
         private void Awake()
         {
             CurrentHealth = HealthInfo.HealthData.maxHealth;
+            //enemyManager = FindObjectOfType<EnemyManager>();
         }
         
         public void EnemyAnim()
         {
             if (IsDead)
             {
+                //var enemy = enemyManager.enemies[0];
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
-                //EnemyDestroy();
+                EnemyDestroy();
                 //Destroy(gameObject);
                 //enemyController.OnEnemyToMoney();
                 
-                Instantiate(money, new Vector3(transform.position.x,0,transform.position.z), transform.rotation);
+                Instantiate(money, new Vector3(transform.position.x,0.073f,transform.position.z), transform.rotation);
                 //InstantiateMoney();
-                
+                //enemyManager.enemies.Remove(enemy);
                 //gameObject.SetActive(false);
                 //EnemySignals.Instance.onEnemyToMoney?.Invoke();
             }
@@ -80,7 +83,7 @@ namespace Managers
         // }
         private IEnumerator EnemyDestroy()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.3f);
             gameObject.SetActive(false);
         }
 
