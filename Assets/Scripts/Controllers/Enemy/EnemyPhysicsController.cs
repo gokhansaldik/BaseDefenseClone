@@ -1,4 +1,5 @@
 using System;
+using Controllers.Player;
 using DG.Tweening;
 using Managers;
 using Signals;
@@ -15,6 +16,9 @@ namespace Controllers.Enemy
         [SerializeField] private Material enemyMaterial;
         [SerializeField] private HealthManager healthManager;
         private ParticleSystem enemyBlood;
+        [SerializeField] private EnemyController enemyController;
+        [SerializeField] private EnemyManager enemyManager;
+       
         #endregion
 
         #endregion
@@ -40,6 +44,12 @@ namespace Controllers.Enemy
                     //parent.DOPunchPosition(new Vector3(0, 0, 0.5f), 2f, 1, 2f, true);
                     healthManager.EnemyAnim();
                     enemyBlood.Play();
+                }
+
+                if (healthManager.CurrentHealth <= 0)
+                {
+                    // enemyManager.enemies.Remove();,
+                    // enemyManager.enemies.Remove(enemyController.transform);
                 }
 
             }

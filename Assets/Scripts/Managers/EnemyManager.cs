@@ -20,7 +20,7 @@ namespace Managers
 
         [SerializeField] private int maxCountOnGame = 40;
         [SerializeField] private HealthManager healthManager;
-        [SerializeField] private List<EnemyController> enemies;
+        public List<EnemyController> enemies;
         
         #endregion
         #endregion
@@ -37,10 +37,12 @@ namespace Managers
         {
             EnemySignals.Instance.onPlayerDamage += OnPlayerDamage;
            
+           
         }
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage -= OnPlayerDamage;
+            
             
         }
         private void OnDisable()
@@ -53,18 +55,13 @@ namespace Managers
             // { 
                 healthManager.TakeDamage(2);
             //}
-               
-            
-           
         }
-       
         #endregion
         public void AddEnemyController(EnemyController enemyController)
         {
             enemyController.transform.parent = this.transform;
             enemies.Add(enemyController);
         }
-
         
     }
 }

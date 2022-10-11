@@ -109,21 +109,22 @@ namespace Managers
         public void PlayerUseTurret(Transform player)
         {
             IsPlayerUsing = true;
-            //playerObject.SetActive(false);
-            //ownerObject.SetActive(true);
+            playerObject.SetActive(false);
             player.parent = turretPlayerParentObj;
             //player.transform.DOMove(turretOwner.position, 1f);
             player.transform.position = turretPlayerParentObj.position;
             player.transform.rotation = turretPlayerParentObj.rotation;
+            ownerObject.SetActive(true);
            
         }
 
         public void PlayerLeaveTurret(Transform player)
         {
             IsPlayerUsing = false;
-            //ownerObject.SetActive(false);
-            //playerObject.SetActive(true);
             player.parent = null;
+            ownerObject.SetActive(false);
+            playerObject.SetActive(true);
+            
         }
 
         public void OnInputDragged(IdleInputParams data)

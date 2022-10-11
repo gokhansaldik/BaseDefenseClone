@@ -20,11 +20,11 @@ MonoBehaviour:
     Pref: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9, type: 3}
     ObjectCount: 40
   - PoolType: 2
-    Pref: {fileID: 0}
+    Pref: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
     ObjectCount: 0
   - PoolType: 3
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100
   - PoolType: 5
-    Pref: {fileID: 3144460793676792330, guid: 40510f3509813264bba6e898eb993ce4, type: 3}
+    Pref: {fileID: 7889090308824191980, guid: 90337fc70025ec24e9a85d7afb03c8ba, type: 3}
     ObjectCount: 20

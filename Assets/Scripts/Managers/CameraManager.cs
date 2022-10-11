@@ -22,6 +22,7 @@ namespace Managers
         private Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Idle;
         private Transform _playerManager;
+        [SerializeField] Transform _turretOwnerTransform;
 
         #endregion
         #endregion
@@ -49,12 +50,14 @@ namespace Managers
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            PlayerSignals.Instance.onPlayerUseTurret += OnPlayerUseTurret;
         }
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
+            PlayerSignals.Instance.onPlayerUseTurret -= OnPlayerUseTurret;
         }
         private void OnDisable()
         {
@@ -88,6 +91,18 @@ namespace Managers
             stateDrivenCamera.Follow = null;
             stateDrivenCamera.LookAt = null;
             MoveToInitialPosition();
+        }
+
+        private void OnPlayerUseTurret(bool turret)
+        {
+            if (turret)
+            {
+                OnSetCameraTarget(_turretOwnerTransform);
+            }
+            else
+            {
+                OnSetCameraTarget(_playerManager);
+            }
         }
     }
 }

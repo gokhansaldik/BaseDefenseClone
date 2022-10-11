@@ -1,4 +1,6 @@
+using System.Collections;
 using Class;
+using Enums;
 using Interface;
 using Managers;
 using Signals;
@@ -22,7 +24,7 @@ namespace Controllers.Enemy
         #region Serialized Variables
 
         [SerializeField] private Transform playerPrefab;
-        [SerializeField] private GameObject money;
+      
         #endregion
 
 
@@ -30,6 +32,7 @@ namespace Controllers.Enemy
 
         private NavMeshAgent _navMeshAgent;
         private StateMachinee _stateMachine;
+        private bool _isMoneyInstantiated = false;
 
         #endregion
         #endregion
@@ -56,6 +59,8 @@ namespace Controllers.Enemy
             DeadState deadState = new DeadState(this);
             _stateMachine.AddState(chaseState, attackState, () => CanAttack);
             _stateMachine.AddState(attackState, chaseState, () => !CanAttack);
+            
+            
             _stateMachine.SetState(chaseState);
         }
 
@@ -75,10 +80,59 @@ namespace Controllers.Enemy
         {
             Animation.MoveAnimation(0f);
         }
-        private void OnEnemyToMoney()
+        #region Event Subscription
+        private void OnEnable()
         {
-            this.gameObject.SetActive(false);
-            money.SetActive(true);
+            SubscribeEvents();
         }
+        private void SubscribeEvents()
+        {
+          
+        }
+        private void UnsubscribeEvents()
+        {
+            
+        }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+        #endregion
+        
+        // private IEnumerator DeactivateEnemy()
+        // {
+        //     InstantiateMoneys();
+        //     yield return new WaitForSeconds(2f);
+        //     EnemySignals.Instance.onEnemyToMoney?.Invoke();
+        //     gameObject.SetActive(false);
+        // }
+        // public void InstantiateMoneys()
+        // {
+        //     if (!_isMoneyInstantiated)
+        //     {
+        //         for (int i = 0; i < 3; i++)
+        //         {
+        //             //Instantiate(moneyPrefab, transform.position, transform.rotation);
+        //             GameObject tmp = PoolSignals.Instance.onGetPoolObject(PoolType.Money);
+        //             if (tmp == null)
+        //             {
+        //                 tmp = Instantiate(money, transform.position, transform.rotation);
+        //             }
+        //             tmp.transform.position = transform.position;
+        //             tmp.transform.rotation = transform.rotation;
+        //             tmp.SetActive(true);
+        //
+        //         }
+        //         _isMoneyInstantiated = true;
+        //        
+        //     }
+        // }
+       
+
+        // public void OnEnemyToMoney()
+        // {
+        //     this.gameObject.SetActive(false);
+        //     money.SetActive(true);
+        // }
     }
 }

@@ -125,8 +125,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 7252018768188815149}
   - {fileID: 1171607654039790534}
+  - {fileID: 7252018768188815149}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -156,10 +156,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e4f9ee99ffc204d4799e5347c41847b9, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.24887286
-  m_Height: 1.5068148
+  m_Radius: 0.24102353
+  m_Height: 1.680157
   m_Direction: 1
-  m_Center: {x: -0.0065401644, y: 0.7634074, z: 0}
+  m_Center: {x: 0.018066391, y: 0.70350635, z: 0}
 --- !u!195 &6689429572238986453
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -196,7 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTarget: {fileID: 0}
   playerPrefab: {fileID: 0}
-  money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
 --- !u!114 &2030663694255757740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +211,7 @@ MonoBehaviour:
   HealthImage: {fileID: 0}
   CurrentHealth: 0
   HealthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
+  money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
   playerManager: {fileID: 0}
   enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!114 &328580665966747405
@@ -573,7 +573,7 @@ Transform:
   - {fileID: 7419675386837606353}
   - {fileID: 647241552363425715}
   m_Father: {fileID: 7017616792382255882}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5089716431287122364
 Animator:
@@ -1846,7 +1846,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7017616792382255882}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4697932685459562734
 MonoBehaviour:
@@ -1862,6 +1862,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMaterial: {fileID: 2100000, guid: 8d369e01365ef09488f16da69d8abdc9, type: 2}
   healthManager: {fileID: 2030663694255757740}
+  enemyController: {fileID: 389220563691099979}
+  enemyManager: {fileID: 0}
 --- !u!136 &5712841251931688830
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1872,10 +1874,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e4f9ee99ffc204d4799e5347c41847b9, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.24887286
+  m_Radius: 0.47208026
   m_Height: 1.5393131
   m_Direction: 1
-  m_Center: {x: -0.0065401644, y: -0.031998992, z: 0}
+  m_Center: {x: -0.029915065, y: -0.031998992, z: 0}
 --- !u!199 &4456109178286485557
 ParticleSystemRenderer:
   serializedVersion: 6

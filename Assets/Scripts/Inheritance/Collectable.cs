@@ -15,7 +15,12 @@ namespace Inheritance
         {
             if (CompareTag("BulletBox"))
             {
-                
+                // if (aiManager.AmmoWorker != null)
+                // { 
+                //     _worker = aiManager.AmmoWorker[Random.Range(0,aiManager.AmmoWorker.Count)];
+                //     _worker.AmmoList.Add(this);
+                //     _worker.Collect();
+                // }
             }
             if (CompareTag("CollectableMoney"))
             {

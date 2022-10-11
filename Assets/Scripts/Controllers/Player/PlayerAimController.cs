@@ -14,7 +14,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private List<Transform> targetList;
+       public  List<Transform> targetList;
         [SerializeField] private Transform currentTarget;
         [SerializeField] private Transform targetGameObject;
         [SerializeField] private GameObject currentBullet;
@@ -47,7 +47,7 @@ namespace Controllers.Player
                 targetList.Remove(other.transform);
             }
         }
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (targetList.Count > 0)
             {
@@ -55,11 +55,16 @@ namespace Controllers.Player
                 playerMovementController.Target = currentTarget;
                 targetGameObject.position = currentTarget.position;
             }
-            else if (targetList.Count == 0)
+            // else if (targetList.Count == 0)
+            // {
+            //     targetGameObject.localPosition = new Vector3(0, 7.5f, 10f);
+            //     playerMovementController.Target = null;
+            //     
+            // }
+            else
             {
-                targetGameObject.localPosition = new Vector3(0, 7.5f, 10f);
+                //targetGameObject.localPosition = new Vector3(0, 7.5f, 10f); 
                 playerMovementController.Target = null;
-                
             }
         }
         private IEnumerator Shoot()
@@ -71,6 +76,7 @@ namespace Controllers.Player
            else if (targetList.Count > 0)
             {
                 Instantiate(currentBullet, sight.transform.position, sight.rotation);
+                //PoolSignals.Instance.onGetPoolObject(PoolType.Ammo);
                 AimAt(targetList[0]);
                 _gunParticle.Play();
                // ParticleSignals.Instance.onPlayParticle?.Invoke(ParticleType.BulletImpact,sight.transform.position,sight.rotation);
