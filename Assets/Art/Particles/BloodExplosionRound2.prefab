@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8925368928880036605}
   - component: {fileID: 8722389167040751333}
   - component: {fileID: 8721496539402933383}
-  - component: {fileID: 8920550955790883588}
   m_Layer: 0
   m_Name: BloodExplosionRound2
   m_TagString: Untagged
@@ -4804,21 +4803,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8920550955790883588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8919421965500154295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6394bbc6658dfc547a33fc53b866831c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitPositionAdjust: {x: 0, y: 0, z: 0}
-  particleStartSize: 1.5
-  burstCount: 1
 --- !u!1 &8920043038279537571
 GameObject:
   m_ObjectHideFlags: 0

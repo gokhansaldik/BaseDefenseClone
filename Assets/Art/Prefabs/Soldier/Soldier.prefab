@@ -1101,7 +1101,7 @@ GameObject:
   - component: {fileID: 8569984396846295445}
   - component: {fileID: 122885328128861229}
   - component: {fileID: 5656139921145801693}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: SoldierDetectionController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1596,7 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7912871537693382472}
   - component: {fileID: 7820662336288677291}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: SoldierPhysicController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

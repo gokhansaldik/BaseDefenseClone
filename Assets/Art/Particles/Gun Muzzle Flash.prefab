@@ -4885,7 +4885,6 @@ GameObject:
   - component: {fileID: 5620438775644714991}
   - component: {fileID: 5620438775644714985}
   - component: {fileID: 5620438775644714984}
-  - component: {fileID: 3234493849555379707}
   m_Layer: 0
   m_Name: Gun Muzzle Flash
   m_TagString: Untagged
@@ -9752,21 +9751,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3234493849555379707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5620438775644714990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6394bbc6658dfc547a33fc53b866831c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitPositionAdjust: {x: 0, y: 0, z: 0}
-  particleStartSize: 0.02
-  burstCount: 1
 --- !u!1 &5620438776203467090
 GameObject:
   m_ObjectHideFlags: 0
