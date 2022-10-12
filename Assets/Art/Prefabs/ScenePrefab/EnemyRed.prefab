@@ -196,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTarget: {fileID: 0}
   playerPrefab: {fileID: 0}
+  healthManager: {fileID: 2030663694255757740}
 --- !u!114 &2030663694255757740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c62c4706d9a47e5877a1e3a8c4014c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayTime: 20
+  _delayTime: 5
 --- !u!1 &390624702487656339
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,5 +30,7 @@ namespace Class
         {
             _animator.SetBool("isAttack", canAttack);
         }
+
+       
     }
 }

@@ -15,7 +15,8 @@ namespace Controllers.Enemy
         private IEnumerator DeadActionAsync()
         {
             yield return new WaitForSeconds(_delayTime);
-            //Destroy(this.gameObject);
+            
+            // Destroy(this.gameObject);
         }
 
     }
