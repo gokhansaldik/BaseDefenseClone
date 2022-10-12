@@ -1,6 +1,4 @@
-using System;
 using DG.Tweening;
-using Enums;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -40,15 +38,9 @@ namespace Controllers.Player
                 other.gameObject.tag = "CollectedMoney";
             }
 
-            if (other.CompareTag("BaseOutTrigger"))
-            {
-                playerManager.InBase = false;
-            }
+            if (other.CompareTag("BaseOutTrigger")) playerManager.InBase = false;
 
-            if (other.CompareTag("InBaseTrigger"))
-            {
-                playerManager.InBase = true;
-            }
+            if (other.CompareTag("InBaseTrigger")) playerManager.InBase = true;
 
             if (other.CompareTag("Turret"))
             {
@@ -56,17 +48,11 @@ namespace Controllers.Player
                 playerManager.transform.parent = newparent;
                 playerManager.transform.DOLocalMove(new Vector3(0, playerManager.transform.localPosition.y, 0), .5f);
                 playerManager.transform.DOLocalRotate(Vector3.zero, 0.5f);
-                //PlayerMovementStateType.Turret;
                 IdleGameSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
-
-                // CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
-                // CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
             }
             else if (other.CompareTag("TurretStack"))
             {
-                //Debug.Log("GirdikTurretStack");
                 PlayerSignals.Instance.onPlayerReachTurretAmmoArea?.Invoke(other.gameObject);
-                //playerManager.StartCoroutine(playerManager.SendBulletBox(other.gameObject));
             }
         }
 
@@ -81,7 +67,6 @@ namespace Controllers.Player
         {
             if (other.CompareTag("AmmoArea"))
             {
-                //TODO : player havaya kalkiyor .
                 if (_timer >= 10)
                 {
                     playerManager.AddStack(IdleGameSignals.Instance.onGetAmmo());

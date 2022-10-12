@@ -12,20 +12,17 @@ namespace Controllers.Turret
         [SerializeField] private TurretAreaManager manager;
 
         #endregion
+
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                manager.BuyAreaEnter();
-            }
+            if (other.CompareTag("Player")) manager.BuyAreaEnter();
         }
+
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                manager.BuyAreaExit();
-            }
+            if (other.CompareTag("Player")) manager.BuyAreaExit();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
+
         public int PayedAmount
         {
             get => _payedAmount;
@@ -34,8 +35,9 @@ namespace Managers
                 }
             }
         }
+
         #endregion
-        
+
         #region Serialized Variables
 
         [SerializeField] private GameObject area;
@@ -54,41 +56,41 @@ namespace Managers
         private GameObject _textParentGameObject;
 
         #endregion
+
         #endregion
+
         private void Awake()
         {
             _textParentGameObject = tmp.transform.parent.gameObject;
         }
+
         public void SetRoomData(RoomData roomData, int payedAmount)
         {
             _roomData = roomData;
             _isBase = roomData.Base;
-            if (!_isBase)
-            {
-                PayedAmount = payedAmount;
-            }
+            if (!_isBase) PayedAmount = payedAmount;
         }
+
         public void BuyAreaEnter()
         {
             _scoreCache = ScoreSignals.Instance.onScoreData();
             switch (_roomData.PayType)
             {
                 case PayType.Money:
-                    if (_scoreCache.MoneyScore > _remainingAmount)
-                    {
-                        StartCoroutine(Buy());
-                    }
+                    if (_scoreCache.MoneyScore > _remainingAmount) StartCoroutine(Buy());
 
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
         public void BuyAreaExit()
         {
             StopAllCoroutines();
             IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
         }
+
         private IEnumerator Buy()
         {
             var waitForSecond = new WaitForSeconds(0.05f);
@@ -98,8 +100,10 @@ namespace Managers
                 ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
                 yield return waitForSecond;
             }
+
             IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
         }
+
         private void SetText(int remainingAmound)
         {
             tmp.text = remainingAmound.ToString();

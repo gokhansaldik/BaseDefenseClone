@@ -212,7 +212,7 @@ MonoBehaviour:
   HealthImage: {fileID: 0}
   CurrentHealth: 0
   HealthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
-  money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
+  Money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
   playerManager: {fileID: 0}
   enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!114 &328580665966747405
@@ -227,7 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c62c4706d9a47e5877a1e3a8c4014c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayTime: 5
 --- !u!1 &390624702487656339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,10 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba708e7cb565483c9763d8c405af7d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaterial: {fileID: 2100000, guid: 8d369e01365ef09488f16da69d8abdc9, type: 2}
   healthManager: {fileID: 2030663694255757740}
-  enemyController: {fileID: 389220563691099979}
-  enemyManager: {fileID: 0}
 --- !u!136 &5712841251931688830
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1875,10 +1871,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: e4f9ee99ffc204d4799e5347c41847b9, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.47208026
+  m_Radius: 0.21879613
   m_Height: 1.5393131
   m_Direction: 1
-  m_Center: {x: -0.029915065, y: -0.031998992, z: 0}
+  m_Center: {x: -0.02991496, y: -0.031998992, z: -0.0034464002}
 --- !u!199 &4456109178286485557
 ParticleSystemRenderer:
   serializedVersion: 6

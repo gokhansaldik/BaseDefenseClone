@@ -16,16 +16,17 @@ namespace Controllers.Mine
         #region Serialized Variables
 
         [SerializeField] private MineManager mineManager;
-        [SerializeField] private StackManager stackManager;
 
         #endregion
+
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Collected") && MinerCount < 5)
             {
                 MinerCount++;
-                mineManager.minerCountText.text = MinerCount.ToString() + "/" + "5";
+                mineManager.minerCountText.text = MinerCount + "/" + "5";
             }
         }
     }

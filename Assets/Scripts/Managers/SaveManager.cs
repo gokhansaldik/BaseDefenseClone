@@ -16,13 +16,16 @@ namespace Managers
         private AreaDataParams _areaDataCache;
 
         #endregion
+
         #endregion
 
         #region Event Subscription
+
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             SaveSignals.Instance.onLevelSave += OnLevelSave;
@@ -32,6 +35,7 @@ namespace Managers
             SaveSignals.Instance.onLoadScoreData += OnLoadScoreData;
             SaveSignals.Instance.onLoadAreaData += OnLoadAreaData;
         }
+
         private void UnsubscribeEvents()
         {
             SaveSignals.Instance.onLevelSave -= OnLevelSave;
@@ -41,19 +45,23 @@ namespace Managers
             SaveSignals.Instance.onLoadScoreData -= OnLoadScoreData;
             SaveSignals.Instance.onLoadAreaData -= OnLoadAreaData;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
+
         private void OnLevelSave()
         {
             _levelCache = SaveSignals.Instance.onSaveLevelData();
             if (_levelCache != 0) ES3.Save("Level", _levelCache, "Level.es3");
         }
+
         private void OnScoreSave()
         {
-            _scoreDataCache = new ScoreDataParams()
+            _scoreDataCache = new ScoreDataParams
             {
                 MoneyScore = SaveSignals.Instance.onSaveScoreData().MoneyScore,
                 GemScore = SaveSignals.Instance.onSaveScoreData().GemScore
@@ -61,9 +69,10 @@ namespace Managers
             if (_scoreDataCache.MoneyScore != 0) ES3.Save("MoneyScore", _scoreDataCache.MoneyScore, "ScoreData.es3");
             if (_scoreDataCache.GemScore != 0) ES3.Save("GemScore", _scoreDataCache.GemScore, "ScoreData.es3");
         }
+
         private void OnAreaDataSave()
         {
-            _areaDataCache = new AreaDataParams()
+            _areaDataCache = new AreaDataParams
             {
                 RoomPayedAmount = SaveSignals.Instance.onSaveAreaData().RoomPayedAmount,
                 RoomTurretPayedAmount = SaveSignals.Instance.onSaveAreaData().RoomTurretPayedAmount
@@ -75,12 +84,14 @@ namespace Managers
                 ES3.Save("RoomTurretPayedAmound",
                     _areaDataCache.RoomTurretPayedAmount, "AreaData.es3");
         }
+
         private int OnLevelLoad()
         {
             return ES3.KeyExists("Level", "Level.es3")
                 ? ES3.Load<int>("Level", "Level.es3")
                 : 0;
         }
+
         private ScoreDataParams OnLoadScoreData()
         {
             return new ScoreDataParams
@@ -93,6 +104,7 @@ namespace Managers
                     : 1000
             };
         }
+
         private AreaDataParams OnLoadAreaData()
         {
             return new AreaDataParams

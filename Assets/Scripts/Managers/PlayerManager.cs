@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using Controllers.Player;
+using Data.UnityObject;
 using DG.Tweening;
 using Enums;
 using Keys;
 using Signals;
-using Data.UnityObject;
 using UnityEngine;
-
 
 namespace Managers
 {
@@ -20,8 +19,7 @@ namespace Managers
         public PlayerData PlayerData;
         public bool InBase = true;
         public GameObject PistolGun;
-        public bool PlayerDead = false;
-        
+        public bool PlayerDead;
 
         #endregion
 
@@ -32,11 +30,9 @@ namespace Managers
         [SerializeField] private PlayerStackController playerStackController;
         [SerializeField] private PlayerAimController playerAimController;
         [SerializeField] private HealthManager healthManager;
-        [SerializeField] private TurretManager turretManager;
-        [SerializeField] private Rigidbody PlayerRigidbody;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform respawnPointTransform;
-        
+
         #endregion
 
         #region Private Variables
@@ -45,6 +41,7 @@ namespace Managers
         private bool _playerUseTurret;
 
         #endregion
+
         #endregion
 
         private void Awake()
@@ -58,13 +55,18 @@ namespace Managers
             BaseHealthUpgrade();
             healthManager.HealthImage.fillAmount = Convert.ToSingle(healthManager.CurrentHealth) / Convert.ToSingle(healthManager.HealthInfo.HealthData.maxHealth);
         }
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
-        
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
+        }
+
         #region Event Subscription
+
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -74,8 +76,8 @@ namespace Managers
             InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             EnemySignals.Instance.onEnemyDie += playerAimController.OnRemoveFromTargetList;
-           // PlayerSignals.Instance.onPlayerUseTurret += OnPlayerUseTurret;
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -85,18 +87,16 @@ namespace Managers
             InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             EnemySignals.Instance.onEnemyDie -= playerAimController.OnRemoveFromTargetList;
-           // PlayerSignals.Instance.onPlayerUseTurret -= OnPlayerUseTurret;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
-        private void SetPlayerDataToControllers() => playerMovementController.SetMovementData(_playerData.playerMovementData);
-        private void OnPlay() => playerMovementController.IsReadyToPlay(true);
-        private void OnPointerDown() => ActivateMovement();
-        private void OnInputReleased() =>DeactivateMovement();
-        private void OnJoystickDragged(IdleInputParams inputParams) => playerMovementController.UpdateIdleInputValue(inputParams);
+
+        
         private void DeactivateMovement()
         {
             playerMovementController.DeactivateMovement();
@@ -117,10 +117,6 @@ namespace Managers
                 PistolGun.SetActive(true);
             }
         }
-        public void ChangePlayerAnimation(PlayerAnimationStates animType) => playerAnimationController.ChangeAnimationState(animType);
-        private void SendPlayerDataToControllers() => playerStackController.SetStackData(PlayerData.StackData);
-        public void AddStack(GameObject obj) =>playerStackController.MoneyAddStack(obj);
-        private void OnLevelFailed() => playerMovementController.IsReadyToPlay(false);
         private void OnReset()
         {
             playerMovementController.MovementReset();
@@ -130,39 +126,22 @@ namespace Managers
         }
         private void BaseHealthUpgrade()
         {
-            if (InBase && healthManager.CurrentHealth < 100)
-            {
-                healthManager.CurrentHealth++;
-            }
+            if (InBase && healthManager.CurrentHealth < 100) healthManager.CurrentHealth++;
         }
-
         public IEnumerator PlayerRespawn()
         {
             yield return new WaitForSeconds(2.5f);
             playerTransform.transform.position = respawnPointTransform.transform.position;
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
-
         }
-
-        // public IEnumerator SendBulletBox(GameObject target)
-        // {
-        //     var waiter = new WaitForSeconds(0.2f);
-        //     while (playerStackController.MoneyStackList.Count > 0)
-        //     {
-        //         // if (BaseSignals.Instance.onGetTurretLimit(target) > 0)
-        //             IdleGameSignals.Instance.onSendAmmoInStack?.Invoke(target, playerStackController.SendBulletBox());
-        //
-        //         yield return waiter;
-        //     }
-        // }
-
-        // private void OnPlayerUseTurret(bool value)
-        // {
-        //     _playerUseTurret = value;
-        //     if (turretManager.IsPlayerUsing)
-        //     {
-        //         PlayerRigidbody.velocity = Vector3.zero;
-        //     }
-        // }
+        private void SetPlayerDataToControllers() => playerMovementController.SetMovementData(_playerData.playerMovementData);
+        private void OnPlay() => playerMovementController.IsReadyToPlay(true);
+        private void OnPointerDown() => ActivateMovement();
+        private void OnInputReleased() => DeactivateMovement();
+        private void OnJoystickDragged(IdleInputParams inputParams) => playerMovementController.UpdateIdleInputValue(inputParams);
+        public void ChangePlayerAnimation(PlayerAnimationStates animType) => playerAnimationController.ChangeAnimationState(animType);
+        private void SendPlayerDataToControllers() => playerStackController.SetStackData(PlayerData.StackData);
+        public void AddStack(GameObject obj) => playerStackController.MoneyAddStack(obj);
+        private void OnLevelFailed() => playerMovementController.IsReadyToPlay(false);
     }
 }

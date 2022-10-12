@@ -14,37 +14,45 @@ namespace Managers
         #region Private Variables
 
         private ScoreDataParams _loadedScoreData;
-        private ScoreData _scoreData = new ScoreData();
+        private readonly ScoreData _scoreData = new ScoreData();
 
         #endregion
+
         #endregion
-        
+
         #region Event Subscriptions
+
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             SaveSignals.Instance.onSaveScoreData += OnGetSaveScoreData;
             ScoreSignals.Instance.onScoreData += OnGetScoreData;
             ScoreSignals.Instance.onSetScore += OnSetScore;
         }
+
         private void UnsubscribeEvents()
         {
             SaveSignals.Instance.onSaveScoreData -= OnGetSaveScoreData;
             ScoreSignals.Instance.onScoreData -= OnGetScoreData;
             ScoreSignals.Instance.onSetScore -= OnSetScore;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
+
         private void Start()
         {
             GetReferences();
         }
+
         private void GetReferences()
         {
             _loadedScoreData = SaveSignals.Instance.onLoadScoreData();
@@ -52,6 +60,7 @@ namespace Managers
             _scoreData.DiamondScore = _loadedScoreData.GemScore;
             ScoreSignals.Instance.onSetScoreToUI?.Invoke();
         }
+
         private void OnSetScore(PayType scoreType, int score)
         {
             switch (scoreType)
@@ -65,8 +74,10 @@ namespace Managers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(scoreType), scoreType, null);
             }
+
             ScoreSignals.Instance.onSetScoreToUI?.Invoke();
         }
+
         private ScoreDataParams OnGetSaveScoreData()
         {
             return new ScoreDataParams
@@ -75,6 +86,7 @@ namespace Managers
                 GemScore = _scoreData.DiamondScore
             };
         }
+
         private ScoreDataParams OnGetScoreData()
         {
             return new ScoreDataParams

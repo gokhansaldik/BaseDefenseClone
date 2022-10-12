@@ -12,7 +12,9 @@ namespace Controllers.Player
         [SerializeField] private Animator playerAnimatorController;
 
         #endregion
+
         #endregion
+
         public void ChangeAnimationState(PlayerAnimationStates type)
         {
             playerAnimatorController.Play(type.ToString());

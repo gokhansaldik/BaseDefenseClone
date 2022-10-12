@@ -10,7 +10,7 @@ namespace Controllers.Enemy
 
         #region Private Variables
 
-        private NavMeshAgent _navMeshAgent;
+        private readonly NavMeshAgent _navMeshAgent;
 
         #endregion
 

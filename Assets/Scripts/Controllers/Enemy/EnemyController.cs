@@ -1,10 +1,6 @@
-using System.Collections;
 using Class;
-using DG.Tweening;
-using Enums;
 using Interface;
 using Managers;
-using Signals;
 using StateMachine;
 using StateMachine.Enemy;
 using UnityEngine;
@@ -20,12 +16,14 @@ namespace Controllers.Enemy
 
         public GameObject EnemyTarget;
         public EnemyDeadController Dead { get; private set; }
+
         #endregion
 
         #region Serialized Variables
 
         [SerializeField] private Transform playerPrefab;
         [SerializeField] private HealthManager healthManager;
+
         #endregion
 
 
@@ -36,14 +34,17 @@ namespace Controllers.Enemy
         private bool _isMoneyInstantiated = false;
 
         #endregion
+
         #endregion
-      
-       
+
+
         public IMover Mover { get; private set; }
         public CharacterAnimation Animation { get; private set; }
-        public bool CanAttack => Vector3.Distance(playerPrefab.position, this.transform.position) <=
+
+        public bool CanAttack => Vector3.Distance(playerPrefab.position, transform.position) <=
                                  _navMeshAgent.stoppingDistance &&
                                  _navMeshAgent.velocity == Vector3.zero;
+
         private void Awake()
         {
             Mover = new EnemyMovementController(this);
@@ -53,11 +54,12 @@ namespace Controllers.Enemy
             _stateMachine = new StateMachinee();
             Dead = GetComponent<EnemyDeadController>();
         }
+
         private void Start()
         {
-            ChaseState chaseState = new ChaseState(this, playerPrefab);
-            AttackState attackState = new AttackState(this);
-            DeadState deadState = new DeadState(this);
+            var chaseState = new ChaseState(this, playerPrefab);
+            var attackState = new AttackState(this);
+            var deadState = new DeadState(this);
             _stateMachine.AddState(chaseState, attackState, () => CanAttack);
             _stateMachine.AddState(attackState, chaseState, () => !CanAttack);
             _stateMachine.SetState(chaseState);
@@ -66,23 +68,18 @@ namespace Controllers.Enemy
         private void Update()
         {
             if (Vector3.Distance(playerPrefab.position, transform.position) < 2 && healthManager.IsDead == false)
-            {
                 _stateMachine.Tick();
-            }
             else if (Vector3.Distance(playerPrefab.position, transform.position) > 2 && healthManager.IsDead == false)
-            {
                 Mover.MoveAction(EnemyTarget.transform.position, 10f);
-            }
             else
-            {
-                Mover.MoveAction(gameObject.transform.position,0);
-            }
+                Mover.MoveAction(gameObject.transform.position, 0);
+            
+            //gameObject.SetActive(false);  //TODO: setActive false veya destroy bug
         }
 
         private void LateUpdate()
         {
             Animation.MoveAnimation(0f);
         }
-        
     }
 }

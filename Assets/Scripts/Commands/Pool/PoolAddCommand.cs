@@ -9,18 +9,21 @@ namespace Commands.Pool
 
         #region Private Variables
 
-        private CD_Pool _cdPool;
+        private readonly CD_Pool _cdPool;
         private GameObject _gameObject;
-        private Transform _managerTransform;
+        private readonly Transform _managerTransform;
 
         #endregion
+
         #endregion
+
         public PoolAddCommand(ref CD_Pool cdPool, ref Transform managertransform, ref GameObject gameObject)
         {
             _cdPool = cdPool;
             _gameObject = gameObject;
             _managerTransform = managertransform;
         }
+
         public void Execute()
         {
             var pooldata = _cdPool.PoolDataList;

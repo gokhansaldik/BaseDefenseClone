@@ -14,7 +14,7 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-        
+
         public GameObject Target;
         public GameObject Stack;
         public IMinerStateMachine CurrentState;
@@ -38,11 +38,14 @@ namespace Managers
         private WaitState _wait;
 
         #endregion
+
         #endregion
+
         private void Awake()
         {
             GetReferences();
         }
+
         private void GetReferences()
         {
             _pickaxe = new PickaxeState(this);
@@ -51,16 +54,19 @@ namespace Managers
             _wait = new WaitState(this, ref agent);
             CurrentState = _goMine;
         }
+
         private void OnEnable()
         {
             Target = IdleGameSignals.Instance.onGetMineTarget();
             Stack = IdleGameSignals.Instance.onGetMineStackTarget();
             CurrentState.EnterState();
         }
+
         private void Update()
         {
             CurrentState.UpdateState();
         }
+
         public void SwitchState(MinerStatesType stateType)
         {
             switch (stateType)
@@ -83,20 +89,16 @@ namespace Managers
                     CurrentState = _wait;
                     break;
             }
+
             CurrentState.EnterState();
         }
-        public void SetTriggerAnim(MinerAnimType animType)
-        {
-            animationController.SetAnim(animType);
-        }
-        public void SetAnimLayer(AnimationLayerType type, float weight)
-        {
-            animationController.SetLayer(type, weight);
-        }
+        
         public IEnumerator DigDiamond()
         {
             yield return new WaitForSeconds(5);
             SwitchState(MinerStatesType.GoStacking);
         }
+        public void SetTriggerAnim(MinerAnimType animType) =>animationController.SetAnim(animType);
+        public void SetAnimLayer(AnimationLayerType type, float weight) =>animationController.SetLayer(type, weight);
     }
 }

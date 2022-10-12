@@ -36,31 +36,37 @@ namespace Managers
         private int _baseLevel;
 
         #endregion
+
         #endregion
-        
+
         #region Event Subscription
 
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             IdleGameSignals.Instance.onBaseAreaBuyedItem += OnSetAreaDatas;
             SaveSignals.Instance.onSaveAreaData += OnGetAreaDatas;
             IdleGameSignals.Instance.onTurretData += OnGetTurretData;
         }
+
         private void UnsubscribeEvents()
         {
             IdleGameSignals.Instance.onBaseAreaBuyedItem -= OnSetAreaDatas;
             SaveSignals.Instance.onSaveAreaData -= OnGetAreaDatas;
             IdleGameSignals.Instance.onTurretData -= OnGetTurretData;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
+
         private void Start()
         {
             _baseLevel = LevelSignals.Instance.onGetLevelID();
@@ -70,36 +76,41 @@ namespace Managers
             EmptyListChack();
             SetRoomData();
         }
+
         private void EmptyListChack()
         {
             if (!_areaDatas.RoomPayedAmount.IsNullOrEmpty()) return;
             _areaDatas.RoomPayedAmount = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
             _areaDatas.RoomTurretPayedAmount = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
         }
+
         private void SetRoomData()
         {
-            for (int i = 0; i < Rooms.Count; i++)
-            {
+            for (var i = 0; i < Rooms.Count; i++)
                 Rooms[i].SetRoomData(Data.BaseRoomData.BaseRooms[i], _areaDatas.RoomPayedAmount[i]);
-            }
         }
+
         private void OnSetAreaDatas()
         {
-            for (int i = 0; i < Rooms.Count; i++)
-            {
-                _areaDatas.RoomPayedAmount[i] = Rooms[i].PayedAmount;
-            }
+            for (var i = 0; i < Rooms.Count; i++) _areaDatas.RoomPayedAmount[i] = Rooms[i].PayedAmount;
+
             SaveSignals.Instance.onAreaDataSave?.Invoke();
             SaveSignals.Instance.onScoreSave?.Invoke();
         }
+
         private AreaDataParams OnGetAreaDatas()
         {
             return _areaDatas;
         }
+
         private void SetBaseLevelText()
         {
-            textMeshPro.text = "Base " + (SaveSignals.Instance.onLoadCurrentLevel() + 1).ToString();
+            textMeshPro.text = "Base " + (SaveSignals.Instance.onLoadCurrentLevel() + 1);
         }
-        private TurretData OnGetTurretData(TurretNameEnum turret) => Data.BaseRoomData.BaseRooms[(int)turret].TurretData;
+
+        private TurretData OnGetTurretData(TurretNameEnum turret)
+        {
+            return Data.BaseRoomData.BaseRooms[(int)turret].TurretData;
+        }
     }
 }

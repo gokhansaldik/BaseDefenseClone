@@ -9,7 +9,7 @@ namespace Class
 
         #region Private Variables
 
-        private Animator _animator;
+        private readonly Animator _animator;
 
         #endregion
 
@@ -30,7 +30,5 @@ namespace Class
         {
             _animator.SetBool("isAttack", canAttack);
         }
-
-       
     }
 }

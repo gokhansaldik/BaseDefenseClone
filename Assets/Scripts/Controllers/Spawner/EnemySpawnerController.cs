@@ -1,4 +1,3 @@
-using Controllers.Enemy;
 using Data.UnityObject;
 using Managers;
 using UnityEngine;
@@ -19,26 +18,26 @@ namespace Controllers.Spawner
         #region Private Variables
 
         private float _maxTime;
-        private float _currentTime = 0f;
+        private float _currentTime;
 
         #endregion
+
         #endregion
 
         private void Start()
         {
             _maxTime = spawnInfo.SpawnInfoData.RandomSpawnMaxTime;
         }
+
         private void Update()
         {
             _currentTime += Time.deltaTime;
-            if (_currentTime > _maxTime && EnemyManager.Instance.CanSpawn)
-            {
-                SpawnEnemy();
-            }
+            if (_currentTime > _maxTime && EnemyManager.Instance.CanSpawn) SpawnEnemy();
         }
+
         private void SpawnEnemy()
         {
-            EnemyController enemyController = Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position,
+            var enemyController = Instantiate(spawnInfo.SpawnInfoData.enemyPrefab, transform.position,
                 Quaternion.identity);
             EnemyManager.Instance.AddEnemyController(enemyController);
             enemyController.EnemyTarget = enemyTarget;

@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Enums;
 using Signals;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Controllers.Player
 {
@@ -30,13 +27,16 @@ namespace Controllers.Player
         private PlayerStackData _playerStackData;
         private int _currentStackLevel;
         private float _directY;
-       
+
         #endregion
+
         #endregion
+
         public void SetStackData(PlayerStackData data)
         {
             _playerStackData = data;
         }
+
         public void MoneyAddStack(GameObject obj)
         {
             if (obj == null) return;
@@ -45,7 +45,6 @@ namespace Controllers.Player
             MoneyStackList.Add(obj);
         }
 
-       
 
         public void SetObjectPosition(GameObject obj)
         {
@@ -56,10 +55,11 @@ namespace Controllers.Player
             _directY = MoneyStackList.Count % _playerStackData.StackLimit * _playerStackData.StackoffsetY;
             _currentStackLevel = MoneyStackList.Count / _playerStackData.StackLimit;
         }
+
         public void MoneyLeaving(GameObject target)
         {
-            int limit = MoneyStackList.Count;
-            for (int i = 0; i < limit; i++)
+            var limit = MoneyStackList.Count;
+            for (var i = 0; i < limit; i++)
             {
                 var obj = MoneyStackList[0];
                 MoneyStackList.RemoveAt(0);
@@ -76,10 +76,11 @@ namespace Controllers.Player
                 SaveSignals.Instance.onScoreSave?.Invoke();
             }
         }
+
         public void BulletBoxLeaving(GameObject target)
         {
-            int limit = MoneyStackList.Count;
-            for (int i = 0; i < limit; i++)
+            var limit = MoneyStackList.Count;
+            for (var i = 0; i < limit; i++)
             {
                 var obj = MoneyStackList[0];
                 MoneyStackList.RemoveAt(0);
@@ -94,18 +95,5 @@ namespace Controllers.Player
                 });
             }
         }
-        // public GameObject SendBulletBox()
-        // {
-        //     if (MoneyStackList.Count > 0)
-        //     {
-        //         var obj = MoneyStackList[MoneyStackList.Count - 1];
-        //         MoneyStackList.Remove(obj);
-        //         MoneyStackList.TrimExcess();
-        //         //PoolSignals.Instance.onSendPool?.Invoke(obj,PoolType.BulletBox);
-        //         return obj;
-        //     }
-        //     return null;
-        // }
-        
     }
 }

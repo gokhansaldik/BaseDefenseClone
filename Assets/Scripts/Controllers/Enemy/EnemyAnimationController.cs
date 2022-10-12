@@ -12,6 +12,7 @@ namespace Controllers.Enemy
         [SerializeField] private Animator enemyAnimationController;
 
         #endregion
+
         #endregion
 
         public void Playanim(EnemyAnimationStates animationStates)

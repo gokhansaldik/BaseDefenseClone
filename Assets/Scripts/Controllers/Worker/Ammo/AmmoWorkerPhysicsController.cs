@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -7,8 +6,22 @@ namespace Controllers.Worker.Ammo
 {
     public class AmmoWorkerPhysicsController : MonoBehaviour
     {
-        private int _timer;
+        #region Self Variables
+
+        #region Serialized Variables
+
         [SerializeField] private AmmoWorkerManager ammoWorkerManager;
+
+        #endregion
+
+        #region Private Variables
+
+        private int _timer;
+
+        #endregion
+
+        #endregion
+
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("AmmoArea"))

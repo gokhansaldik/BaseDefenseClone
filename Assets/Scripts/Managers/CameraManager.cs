@@ -13,6 +13,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
+        [SerializeField] private Transform _turretOwnerTransform;
 
         #endregion
 
@@ -22,7 +23,6 @@ namespace Managers
         private Animator _animator;
         private CameraStatesType _cameraStatesType = CameraStatesType.Idle;
         private Transform _playerManager;
-        [SerializeField] Transform _turretOwnerTransform;
 
         #endregion
         #endregion
@@ -40,11 +40,14 @@ namespace Managers
         {
             _animator = GetComponent<Animator>();
         }
+
         #region Event Subscriptions
+
         private void OnEnable()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
@@ -52,6 +55,7 @@ namespace Managers
             CoreGameSignals.Instance.onReset += OnReset;
             PlayerSignals.Instance.onPlayerUseTurret += OnPlayerUseTurret;
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
@@ -59,27 +63,20 @@ namespace Managers
             CoreGameSignals.Instance.onReset -= OnReset;
             PlayerSignals.Instance.onPlayerUseTurret -= OnPlayerUseTurret;
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+
         #endregion
-        private void GetInitialPosition()
-        {
-            _initalPosition = transform.GetChild(0).localPosition;
-        }
-        private void MoveToInitialPosition()
-        {
-            transform.GetChild(0).localPosition = _initalPosition;
-        }
+
+        
+
         private void SetPlayerFollow()
         {
             _playerManager = FindObjectOfType<PlayerManager>().transform;
             OnSetCameraTarget(_playerManager);
-        }
-        private void OnSetCameraTarget(Transform _target)
-        {
-            stateDrivenCamera.Follow = _target;
         }
         private void OnPlay()
         {
@@ -92,17 +89,15 @@ namespace Managers
             stateDrivenCamera.LookAt = null;
             MoveToInitialPosition();
         }
-
         private void OnPlayerUseTurret(bool turret)
         {
             if (turret)
-            {
                 OnSetCameraTarget(_turretOwnerTransform);
-            }
             else
-            {
                 OnSetCameraTarget(_playerManager);
-            }
         }
+        private void GetInitialPosition() => _initalPosition = transform.GetChild(0).localPosition;
+        private void MoveToInitialPosition() => transform.GetChild(0).localPosition = _initalPosition;
+        private void OnSetCameraTarget(Transform _target) => stateDrivenCamera.Follow = _target;
     }
 }

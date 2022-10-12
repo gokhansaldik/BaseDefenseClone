@@ -10,6 +10,7 @@ namespace Controllers.UI
         {
             panels[(int)panelParam].SetActive(true);
         }
+
         public void CloseUIPanel(UIPanels panelParam, List<GameObject> panels)
         {
             panels[(int)panelParam].SetActive(false);

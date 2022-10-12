@@ -1,6 +1,5 @@
 namespace Enums
 {
-    
     public enum CollectableAnimationStates
     {
         Terrifie,

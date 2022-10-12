@@ -7,31 +7,40 @@ namespace Inheritance
 {
     public class Collectable : MonoBehaviour
     {
-        private AiBase _worker;
-        // Money uzerinde olarak kullaniliyor
+        #region Self Variables
+
+        #region Serialized Variables
+
         [SerializeField] private AiManager aiManager;
         [SerializeField] private PlayerStackController playerStackController;
+
+        #endregion
+
+        #region Private Variables
+
+        private AiBase _worker;
+
+        #endregion
+
+        #endregion
+
         private void OnEnable()
         {
             if (CompareTag("BulletBox"))
             {
-                // if (aiManager.AmmoWorker != null)
-                // { 
-                //     _worker = aiManager.AmmoWorker[Random.Range(0,aiManager.AmmoWorker.Count)];
-                //     _worker.AmmoList.Add(this);
-                //     _worker.Collect();
-                // }
             }
+
             if (CompareTag("CollectableMoney"))
             {
                 if (aiManager.MoneyWorker != null)
-                { 
-                    _worker = aiManager.MoneyWorker[Random.Range(0,aiManager.MoneyWorker.Count)];
+                {
+                    _worker = aiManager.MoneyWorker[Random.Range(0, aiManager.MoneyWorker.Count)];
                     _worker.MoneyList.Add(this);
                     _worker.Collect();
                 }
             }
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("MoneyWorker"))

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
-using Signals;
-using UnityEngine;
 using Enums;
+using Signals;
 using TMPro;
-
+using UnityEngine;
 
 namespace Managers
 {
@@ -19,6 +18,7 @@ namespace Managers
         [SerializeField] private List<TextMeshProUGUI> upgradeTxt;
         [SerializeField] private List<int> itemLevels;
         [SerializeField] private UIPanels releatedPanel;
+
         #endregion
 
         private ItemPricesData _data;
@@ -30,12 +30,16 @@ namespace Managers
         {
             Init();
         }
+
         private void Init()
         {
             _data = GetData();
         }
-        private ItemPricesData GetData() =>
-            Resources.Load<CD_GunPrices>("Data/StoreBuyPrices/CD_WorkerUpgradePrices").Data;
+
+        private ItemPricesData GetData()
+        {
+            return Resources.Load<CD_GunPrices>("Data/StoreBuyPrices/CD_WorkerUpgradePrices").Data;
+        }
 
         private void Start()
         {
@@ -65,22 +69,23 @@ namespace Managers
         }
 
         #endregion
+
         private void OnGetItemLevels(List<int> levels)
         {
-            if (levels.Count.Equals(0))
-            {
-                levels = new List<int>() { 2, 0 };
-            }
+            if (levels.Count.Equals(0)) levels = new List<int> { 2, 0 };
+
             itemLevels = levels;
         }
+
         public void UpdateTexts()
         {
-            for (int i = 0; i < itemLevels.Count; i++) 
+            for (var i = 0; i < itemLevels.Count; i++)
             {
-                levelTxt[i].text = "LEVEL " + (itemLevels[i] + 1).ToString();
+                levelTxt[i].text = "LEVEL " + (itemLevels[i] + 1);
                 upgradeTxt[i].text = _data.ItemPrices[i].Prices[itemLevels[i]].ToString();
             }
         }
+
         public void CloseBtn()
         {
             UISignals.Instance.onCloseStorePanel?.Invoke(releatedPanel);

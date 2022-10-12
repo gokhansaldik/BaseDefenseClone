@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Controllers.Enemy;
 using Extentions;
 using Signals;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Managers
@@ -12,23 +11,28 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
+
         public bool CanSpawn => maxCountOnGame > enemies.Count;
-        
+
         #endregion
-        
+
         #region Serialized Variables
 
         [SerializeField] private int maxCountOnGame = 40;
         [SerializeField] private HealthManager healthManager;
         public List<EnemyController> enemies;
-        
+
         #endregion
+
         #endregion
+
         private void Awake()
         {
             enemies = new List<EnemyController>();
         }
+
         #region Event Subscriptions
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -36,40 +40,22 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage += OnPlayerDamage;
-            //EnemySignals.Instance.onEnemyDie += OnEnemyDie;
-
-
         }
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage -= OnPlayerDamage;
-            //EnemySignals.Instance.onEnemyDie -= OnEnemyDie;
-
-            
         }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
-        private void OnPlayerDamage()
-        {
-            // if (healthManager.CurrentHealth >0)
-            // { 
-                healthManager.TakeDamage(2);
-            //}
-        }
         #endregion
+        private void OnPlayerDamage() => healthManager.TakeDamage(2);
         public void AddEnemyController(EnemyController enemyController)
         {
-            enemyController.transform.parent = this.transform;
+            enemyController.transform.parent = transform;
             enemies.Add(enemyController);
         }
-        // private void OnEnemyDie(Transform diedEnemy)
-        // {
-        //     
-        //         enemies.Remove(this.gameObject.tra);
-        //     
-        // }
-        
     }
 }

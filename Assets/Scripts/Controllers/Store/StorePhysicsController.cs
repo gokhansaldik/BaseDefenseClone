@@ -1,6 +1,6 @@
+using Enums;
 using Signals;
 using UnityEngine;
-using Enums;
 
 namespace Controllers.Store
 {
@@ -13,6 +13,7 @@ namespace Controllers.Store
         [SerializeField] private UIPanels releatedPanel;
 
         #endregion
+
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -20,15 +21,14 @@ namespace Controllers.Store
             if (other.CompareTag("Player"))
             {
                 UISignals.Instance.onOpenStorePanel?.Invoke(releatedPanel);
-                return;
             }
         }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 UISignals.Instance.onCloseStorePanel?.Invoke(releatedPanel);
-                return;
             }
         }
     }

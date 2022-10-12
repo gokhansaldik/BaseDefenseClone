@@ -1,8 +1,6 @@
-using Managers;
 using System.Collections;
 using System.Collections.Generic;
-using Enums;
-using Signals;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -12,8 +10,9 @@ namespace Controllers.Player
         #region Self Variables
 
         public List<Transform> targetList;
-        
+
         #region Serialized Variables
+
         [SerializeField] private PlayerManager manager;
         [SerializeField] private Transform currentTarget;
 
@@ -23,7 +22,7 @@ namespace Controllers.Player
 
         [SerializeField] private PlayerMovementController playerMovementController;
 
-        //[SerializeField] private ParticleManager particleManager;
+
         private ParticleSystem _gunParticle;
 
         #endregion
@@ -38,18 +37,12 @@ namespace Controllers.Player
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy"))
-            {
-                targetList.Add(other.transform);
-            }
+            if (other.CompareTag("Enemy")) targetList.Add(other.transform);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Enemy"))
-            {
-                targetList.Remove(other.transform);
-            }
+            if (other.CompareTag("Enemy")) targetList.Remove(other.transform);
         }
 
         private void FixedUpdate()
@@ -60,15 +53,9 @@ namespace Controllers.Player
                 playerMovementController.Target = currentTarget;
                 targetGameObject.position = currentTarget.position;
             }
-            // else if (targetList.Count == 0)
-            // {
-            //     targetGameObject.localPosition = new Vector3(0, 7.5f, 10f);
-            //     playerMovementController.Target = null;
-            //     
-            // }
+
             else
             {
-                //targetGameObject.localPosition = new Vector3(0, 7.5f, 10f); 
                 playerMovementController.Target = null;
             }
         }
@@ -82,22 +69,16 @@ namespace Controllers.Player
             else if (targetList.Count > 0)
             {
                 Instantiate(currentBullet, sight.transform.position, sight.rotation);
-                //PoolSignals.Instance.onGetPoolObject(PoolType.Ammo);
                 AimAt(targetList[0]);
                 _gunParticle.Play();
-                // ParticleSignals.Instance.onPlayParticle?.Invoke(ParticleType.BulletImpact,sight.transform.position,sight.rotation);
             }
-
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             StartCoroutine(Shoot());
         }
 
         public void OnRemoveFromTargetList(Transform deadEnemy)
         {
-            if (targetList.Contains(deadEnemy))
-            {
-                targetList.Remove(deadEnemy);
-            }
+            if (targetList.Contains(deadEnemy)) targetList.Remove(deadEnemy);
         }
 
         public void AimAt(Transform target)

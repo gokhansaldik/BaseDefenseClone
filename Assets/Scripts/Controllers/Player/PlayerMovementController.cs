@@ -1,8 +1,6 @@
-using System;
 using DG.Tweening;
 using Enums;
 using Keys;
-using Managers;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -12,58 +10,55 @@ namespace Controllers.Player
         #region Self Variables
 
         public Transform Target;
-        
+
         #region Serialized Variables
 
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private GameStatesType gameStatesType;
-        [SerializeField] private PlayerManager playerManager;
+
         #endregion
 
         #region Private Variables
-        
+
         private PlayerMovementData _playerMovementData;
         private bool _isReadyToMove;
         private bool _isReadyToPlay;
         private Vector3 _movementDirection;
-        private bool _playerUseTurret;
 
         #endregion
+
         #endregion
+
         private void FixedUpdate()
         {
             if (_isReadyToPlay)
             {
                 if (_isReadyToMove)
                 {
-                    if (gameStatesType == GameStatesType.Idle)
-                    {
-                        IdleMove();
-                    }
+                    if (gameStatesType == GameStatesType.Idle) IdleMove();
                 }
                 else
                 {
-                    if (gameStatesType == GameStatesType.Idle)
-                    {
-                        Stop();
-                    }
+                    if (gameStatesType == GameStatesType.Idle) Stop();
                 }
             }
             else
+            {
                 Stop();
+            }
         }
-        
+
         private void IdleMove()
         {
-            Vector3 velocity = rigidBody.velocity;
-            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y, _movementDirection.z * _playerMovementData.IdleSpeed);
+            var velocity = rigidBody.velocity;
+            velocity = new Vector3(_movementDirection.x * _playerMovementData.IdleSpeed, velocity.y,
+                _movementDirection.z * _playerMovementData.IdleSpeed);
             rigidBody.velocity = velocity;
             if (Target == null)
             {
                 if (_movementDirection != Vector3.zero)
                 {
-                
-                    Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
+                    var toRotation = Quaternion.LookRotation(_movementDirection);
                     transform.rotation = toRotation;
                 }
             }
@@ -73,12 +68,13 @@ namespace Controllers.Player
             }
         }
 
-      
+
         private void Stop()
         {
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
         }
+
         public void MovementReset()
         {
             Stop();
@@ -87,12 +83,35 @@ namespace Controllers.Player
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.identity;
         }
-        public void OnReset() => DOTween.KillAll();
-        public void SetMovementData(PlayerMovementData movementData) => _playerMovementData = movementData;
-        public void ActivateMovement() =>_isReadyToMove = true;
-        public void DeactivateMovement() =>_isReadyToMove = false;
-        public void UpdateIdleInputValue(IdleInputParams inputParam) => _movementDirection = inputParam.JoystickMovement;
-        public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
-       
+
+        public void OnReset()
+        {
+            DOTween.KillAll();
+        }
+
+        public void SetMovementData(PlayerMovementData movementData)
+        {
+            _playerMovementData = movementData;
+        }
+
+        public void ActivateMovement()
+        {
+            _isReadyToMove = true;
+        }
+
+        public void DeactivateMovement()
+        {
+            _isReadyToMove = false;
+        }
+
+        public void UpdateIdleInputValue(IdleInputParams inputParam)
+        {
+            _movementDirection = inputParam.JoystickMovement;
+        }
+
+        public void IsReadyToPlay(bool state)
+        {
+            _isReadyToPlay = state;
+        }
     }
 }

@@ -11,18 +11,20 @@ namespace Managers
 
         #region Public Variables
 
-        public bool IsTaken = false;
-        
+        public bool IsTaken;
+
         #endregion
-        
+
         #region Serialized Variables
 
         [SerializeField] private CollectableAnimationController collectableAnimationController;
 
         #endregion
+
         #endregion
 
         #region Event Subscription
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -43,25 +45,16 @@ namespace Managers
         {
             UnsubscribeEvents();
         }
+
         #endregion
-        public void SetAnimState(CollectableAnimationStates states)
-        {
-            collectableAnimationController.SetAnimState(states);
-        }
         private void OnCollectablePlayerTaken()
         {
-            if (IsTaken)
-            {
-                SetAnimState(CollectableAnimationStates.Taken);
-            }
+            if (IsTaken) SetAnimState(CollectableAnimationStates.Taken);
         }
-        private void SetUpSpeedCollectable()
-        {
-            collectableAnimationController.SetSpeedVariable(1f);
-        }
-        private void SetDownSpeedCollectable()
-        {
-            collectableAnimationController.SetSpeedVariable(0f);
-        }
+
+        public void SetAnimState(CollectableAnimationStates states) => collectableAnimationController.SetAnimState(states);
+        private void SetUpSpeedCollectable()=>collectableAnimationController.SetSpeedVariable(1f);
+        private void SetDownSpeedCollectable()=> collectableAnimationController.SetSpeedVariable(0f);
+        
     }
 }

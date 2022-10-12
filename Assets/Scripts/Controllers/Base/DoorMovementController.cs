@@ -10,28 +10,21 @@ namespace Controllers.Base
         #region Serialized Variables
 
         [SerializeField] private GameObject baseDoor;
-        
+
         #endregion
+
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
-            {
-                OpenDoDoor();
-            }
+            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker")) OpenDoDoor();
         }
+
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker"))
-            {
-                CloseDoDoor();
-                if (other.CompareTag("MoneyWorker"))
-                {
-                  
-                }
-                
-            }
+            if (other.CompareTag("Player") || other.CompareTag("MoneyWorker")) CloseDoDoor();
         }
+
         private void OpenDoDoor()
         {
             baseDoor.transform.DOLocalRotate(new Vector3(0, 0, 90f), 2f);

@@ -5,7 +5,7 @@ namespace Controllers.Enemy
 {
     public class EnemyDeadController : MonoBehaviour
     {
-        [SerializeField] private float _delayTime = 5f;
+        private readonly float _delayTime = 5f;
 
         public void DeadAction()
         {
@@ -15,9 +15,8 @@ namespace Controllers.Enemy
         private IEnumerator DeadActionAsync()
         {
             yield return new WaitForSeconds(_delayTime);
-            
+
             // Destroy(this.gameObject);
         }
-
     }
 }

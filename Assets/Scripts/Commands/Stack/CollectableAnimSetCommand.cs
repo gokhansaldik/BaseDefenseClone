@@ -8,7 +8,7 @@ namespace Commands.Stack
     {
         public void Execute(GameObject collectable, CollectableAnimationStates states)
         {
-            CollectableManager _collectableManager = collectable.transform.GetComponent<CollectableManager>();
+            var _collectableManager = collectable.transform.GetComponent<CollectableManager>();
             _collectableManager.SetAnimState(states);
         }
     }
