@@ -180,6 +180,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a1315b978a7ef343b1c0c4ff14b5784, type: 3}
+--- !u!114 &90024157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2165406, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+  m_PrefabInstance: {fileID: 8136845164196701542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd2e3ae2b83d4d48be04e5536297e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &107611966
 GameObject:
   m_ObjectHideFlags: 0
@@ -14060,9 +14071,13 @@ PrefabInstance:
       propertyPath: stackManager
       value: 
       objectReference: {fileID: 817862041}
+    - target: {fileID: 3569025527744538124, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: turretShootRangeController
+      value: 
+      objectReference: {fileID: 90024157}
     - target: {fileID: 3853095414759200037, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4127789151770649072, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_Size.x

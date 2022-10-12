@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -39,10 +40,13 @@ namespace Controllers.Player
         public void MoneyAddStack(GameObject obj)
         {
             if (obj == null) return;
-            MoneyStackList.Add(obj);
             obj.transform.SetParent(moneyStackHolder.transform);
             SetObjectPosition(obj);
+            MoneyStackList.Add(obj);
         }
+
+       
+
         public void SetObjectPosition(GameObject obj)
         {
             obj.transform.DOLocalRotate(Vector3.zero, _playerStackData.AnimationDurition);

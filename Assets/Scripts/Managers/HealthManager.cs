@@ -6,6 +6,7 @@ using DG.Tweening;
 using Enums;
 using Interface;
 using System;
+using Signals;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,11 +47,12 @@ namespace Managers
             {
                 //var enemy = enemyManager.enemies[0];
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
-                EnemyDestroy();
+               // EnemyDestroy();
                 //Destroy(gameObject);
                 //enemyController.OnEnemyToMoney();
                 
                 Instantiate(money, new Vector3(transform.position.x,0.073f,transform.position.z), transform.rotation);
+                EnemySignals.Instance.onEnemyDie?.Invoke(enemyManager.transform);
                 //InstantiateMoney();
                 //enemyManager.enemies.Remove(enemy);
                 //gameObject.SetActive(false);
@@ -81,11 +83,11 @@ namespace Managers
         //     transform.parent.position = new Vector3(0, 0.4f, 0);
         //     playerManager.ChangePlayerAnimation(PlayerAnimationStates.Idle);
         // }
-        private IEnumerator EnemyDestroy()
-        {
-            yield return new WaitForSeconds(0.3f);
-            gameObject.SetActive(false);
-        }
+        // private IEnumerator EnemyDestroy()
+        // {
+        //     yield return new WaitForSeconds(0.3f);
+        //     gameObject.SetActive(false);
+        // }
 
         private void InstantiateMoney()
         {

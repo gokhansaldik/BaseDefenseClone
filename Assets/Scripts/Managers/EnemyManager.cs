@@ -36,13 +36,15 @@ namespace Managers
         private void SubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage += OnPlayerDamage;
-           
-           
+            //EnemySignals.Instance.onEnemyDie += OnEnemyDie;
+
+
         }
         private void UnsubscribeEvents()
         {
             EnemySignals.Instance.onPlayerDamage -= OnPlayerDamage;
-            
+            //EnemySignals.Instance.onEnemyDie -= OnEnemyDie;
+
             
         }
         private void OnDisable()
@@ -62,6 +64,12 @@ namespace Managers
             enemyController.transform.parent = this.transform;
             enemies.Add(enemyController);
         }
+        // private void OnEnemyDie(Transform diedEnemy)
+        // {
+        //     
+        //         enemies.Remove(this.gameObject.tra);
+        //     
+        // }
         
     }
 }

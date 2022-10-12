@@ -38,6 +38,8 @@ namespace Managers
         private TurretData _data;
         private TurretStackSetPosCommand _turretStackSetPosCommand;
         [SerializeField] private GameObject ammoBoxHolder;
+
+        [SerializeField] private TurretShootRangeController turretShootRangeController;
         //private TurretStackSetPosCommand _turretStackSetPosCommand;
         
         #endregion
@@ -90,6 +92,7 @@ namespace Managers
             IdleGameSignals.Instance.onAddBulletBoxStack += OnAddBulletBoxStack;
             //IdleGameSignals.Instance.onPlayerInTurret += OnPlayerInTurret;
             //IdleGameSignals.Instance.onPlayerOutTurret += OnPlayerOutTurret;
+            EnemySignals.Instance.onEnemyDie += turretShootRangeController.OnRemoveFromTargetList;
         }
 
         private void UnsubscribeEvents()
@@ -99,6 +102,7 @@ namespace Managers
             //IdleGameSignals.Instance.onPlayerInTurret -= OnPlayerInTurret;
             //IdleGameSignals.Instance.onPlayerOutTurret -= OnPlayerOutTurret;
             IdleGameSignals.Instance.onAddBulletBoxStack -= OnAddBulletBoxStack;
+            EnemySignals.Instance.onEnemyDie -= turretShootRangeController.OnRemoveFromTargetList;
             
         }
 
