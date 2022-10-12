@@ -99,9 +99,9 @@ namespace Controllers.Turret
 
         private IEnumerator Shoot()
         {
-            if ((manager.HasOwner || manager.IsPlayerUsing) && targetList.Count > 0 )//&& manager.AmmoBoxList.Count > 0
+            if ((manager.HasOwner || manager.IsPlayerUsing) && targetList.Count > 0 && manager.AmmoBoxList.Count > 0)//
             {
-                //UseAmmo();
+                UseAmmo();
                 Instantiate(currentBullet, nisangah.transform.position, nisangah.rotation);
                 _turretParticle.Play();
             }

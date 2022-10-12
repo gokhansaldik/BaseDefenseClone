@@ -14,7 +14,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-        
+
         #endregion
 
         #region Private Variables
@@ -22,7 +22,9 @@ namespace Controllers.Player
         private int _timer;
 
         #endregion
+
         #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("CollectablePlayer"))
@@ -31,30 +33,34 @@ namespace Controllers.Player
                 other.gameObject.tag = "Collected";
                 StackSignals.Instance.onCollectablePlayerTaken?.Invoke();
             }
-             if (other.CompareTag("CollectableMoney"))
+
+            if (other.CompareTag("CollectableMoney"))
             {
                 playerManager.AddStack(other.gameObject);
                 other.gameObject.tag = "CollectedMoney";
             }
-             if (other.CompareTag("BaseOutTrigger"))
+
+            if (other.CompareTag("BaseOutTrigger"))
             {
                 playerManager.InBase = false;
             }
-             if (other.CompareTag("InBaseTrigger"))
+
+            if (other.CompareTag("InBaseTrigger"))
             {
                 playerManager.InBase = true;
             }
+
             if (other.CompareTag("Turret"))
             {
                 var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
                 playerManager.transform.parent = newparent;
                 playerManager.transform.DOLocalMove(new Vector3(0, playerManager.transform.localPosition.y, 0), .5f);
-                playerManager.transform.DOLocalRotate(Vector3.zero, 0.5f) ;
+                playerManager.transform.DOLocalRotate(Vector3.zero, 0.5f);
                 //PlayerMovementStateType.Turret;
                 IdleGameSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
-                   
-               // CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
-               // CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+
+                // CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
+                // CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
             }
             else if (other.CompareTag("TurretStack"))
             {
@@ -68,7 +74,6 @@ namespace Controllers.Player
         {
             if (other.CompareTag("Turret"))
             {
-                
             }
         }
 

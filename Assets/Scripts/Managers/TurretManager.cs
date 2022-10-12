@@ -36,6 +36,8 @@ namespace Managers
         [SerializeField] private TurretMovementController turretMovementController;
         private List<GameObject> _bulletBoxList;
         private TurretData _data;
+        private TurretStackSetPosCommand _turretStackSetPosCommand;
+        [SerializeField] private GameObject ammoBoxHolder;
         //private TurretStackSetPosCommand _turretStackSetPosCommand;
         
         #endregion
@@ -60,6 +62,7 @@ namespace Managers
 
         private void Init()
         {
+            _turretStackSetPosCommand = new TurretStackSetPosCommand(ref _bulletBoxList, ref _data);
             //var manager = this;
             //_turretStackSetPosCommand = new TurretStackSetPosCommand(ref _bulletBoxList, ref _data);
             //_turretBulletBoxAddCommand = new TurretBulletBoxAddCommand(ref _bulletBoxList, ref _data, ref stackHolder, ref manager);
@@ -96,6 +99,7 @@ namespace Managers
             //IdleGameSignals.Instance.onPlayerInTurret -= OnPlayerInTurret;
             //IdleGameSignals.Instance.onPlayerOutTurret -= OnPlayerOutTurret;
             IdleGameSignals.Instance.onAddBulletBoxStack -= OnAddBulletBoxStack;
+            
         }
 
         private void OnDisable()
@@ -166,21 +170,37 @@ namespace Managers
         //         TurretType = TurretStateType.None;
         //     }
         // }
+      
+        
         public void OnAddBulletBoxStack(GameObject target)
         {
-           
-          
-            SetObjPosition(target);
+           // SetObjPosition(target);
+            var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
+            if (obj == null) return;
+            obj.transform.parent = ammoBoxHolder.transform;
+            obj.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 1,target.transform.position.z);
+            SetObjPosition(obj);
+            obj.SetActive(true);
+           // _diamondList.Add(obj);
             
         }
+        
+        // public void SetObjPosition(GameObject bulletBox)
+        // {
+        //     //_turretStackSetPosCommand.Execute(bulletBox);
+        //     _directX = ((AmmoBoxList.Count % _data.LimitX)) * _data.OffsetX;
+        //         _directY = (AmmoBoxList.Count / (_data.LimitX * _data.LimitZ)) * _data.OffsetY;
+        //         _directZ = ((AmmoBoxList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
+        //         bulletBox.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
+        //     
+        // }
         public void SetObjPosition(GameObject bulletBox)
         {
-            //_turretStackSetPosCommand.Execute(bulletBox);
+            // _turretStackSetPosCommand.Execute(bulletBox);
             _directX = ((AmmoBoxList.Count % _data.LimitX)) * _data.OffsetX;
-                _directY = (AmmoBoxList.Count / (_data.LimitX * _data.LimitZ)) * _data.OffsetY;
-                _directZ = ((AmmoBoxList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
-                bulletBox.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
-            
+            _directY = (AmmoBoxList.Count / (_data.LimitX * _data.LimitZ)) * _data.OffsetY;
+            _directZ = ((AmmoBoxList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
+            bulletBox.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
         }
 
        

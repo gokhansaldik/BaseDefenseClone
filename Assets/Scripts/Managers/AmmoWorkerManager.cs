@@ -11,6 +11,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Enums;
 using System.Collections;
+using Controllers.Worker.Ammo;
 using DG.Tweening;
 using Inheritance;
 
@@ -28,6 +29,7 @@ namespace Managers
 
         [SerializeField] private PlayerManager playerManager;
         //[SerializeField] private AiBase aiBase;
+        [SerializeField] private AmmoWorkerStackController ammoWorkerStackController;
         #endregion
 
         #region Private Variables
@@ -40,6 +42,7 @@ namespace Managers
         private Transform _selectedWayObject;
         private Transform _ammoManager;
         private int _timer;
+        private WorkerData _workerData;
 
         #endregion
 
@@ -53,9 +56,10 @@ namespace Managers
         {
             _ammoManager = GameObject.FindGameObjectWithTag("AmmoArea").transform;
             // _waysOnScene.Add(GameObject.FindGameObjectWithTag("0way").transform);
-
+            _workerData = GetWorkerData();
 
         }
+        private WorkerData GetWorkerData() => Resources.Load<CD_AmmoWorker>("Data/CD_AmmoWorker").WorkerData;
 
         private void Start()
         {
@@ -112,7 +116,7 @@ namespace Managers
                 _indeks = 0;
             }
         }
-
+        public void AddStack(GameObject obj) =>ammoWorkerStackController.MoneyAddStack(obj);
         private void SelectWay()
         {
             _selectedWay.Clear();
@@ -123,22 +127,22 @@ namespace Managers
         {
             this._openedTurrets.Add(turretId);
         }
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("AmmoArea"))
-            {
-               
-                if (_timer >= 10)
-                {
-                    playerManager.AddStack(IdleGameSignals.Instance.onGetAmmo());
-                    _timer = _timer * 60 / 100;
-                }
-                else
-                {
-                    _timer++;
-                }
-            }
-        }
+        // private void OnTriggerStay(Collider other)
+        // {
+        //     if (other.CompareTag("AmmoArea"))
+        //     {
+        //        
+        //         if (_timer >= 10)
+        //         {
+        //             playerManager.AddStack(IdleGameSignals.Instance.onGetAmmo());
+        //             _timer = _timer * 60 / 100;
+        //         }
+        //         else
+        //         {
+        //             _timer++;
+        //         }
+        //     }
+        // }
 
         
 

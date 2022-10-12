@@ -16,9 +16,9 @@ namespace Controllers.Turret
         {
             _bulletLocation = new List<Vector3>() { 
                 new Vector3(-0.4f, 0, 0.4f), 
-                new Vector3(0.4f, 0, 0.4f), 
-                //new Vector3(0.4f, 0, -0.4f), 
-                //new Vector3(-0.4f, 0, -0.4f)
+                new Vector3(0.02f, 0, 0.4f), 
+                new Vector3(0.02f, 0, -0.4f), 
+                new Vector3(-0.4f, 0, -0.4f)
             };
         }
         private void OnTriggerEnter(Collider other)
@@ -26,19 +26,20 @@ namespace Controllers.Turret
             if (other.CompareTag("BulletBox"))
             {
                 _indeks = manager.AmmoBoxList.Count;
-            // manager.SetObjPosition(gameObject);
+                manager.AmmoBoxList.Add(other.transform);
                 int moddedIndeks = _indeks %_bulletLocation.Count;
-              //manager.SetObjPosition(gameObject);
-              //IdleGameSignals.Instance.onAddBulletBoxStack.Invoke(gameObject);
-             other.transform.DOLocalMove(new Vector3(Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f), Random.Range(-0.5f, 1f)), 0.5f);
-            //other.transform.DOLocalMove(new Vector3(_bulletLocation[moddedIndeks].x, (int)(_indeks / 2) * 0.5f , _bulletLocation[moddedIndeks].z), 1f);
-             StartCoroutine(ResetCollectableRotation(other.transform));
+                other.transform.DOLocalMove(new Vector3(_bulletLocation[moddedIndeks].x, (int)(_indeks / 2) * 0.1f , _bulletLocation[moddedIndeks].z), 1f); 
+                StartCoroutine(ResetCollectableRotation(other.transform));
             }
         }
         private IEnumerator ResetCollectableRotation(Transform ammoBox)
         {
             yield return new WaitForSeconds(0.5f);
-            ammoBox.rotation = Quaternion.Euler(Vector3.zero);
+            if (ammoBox != null)
+            {
+                ammoBox.rotation = Quaternion.Euler(Vector3.zero);
+            }
+          
         }
     }
 }

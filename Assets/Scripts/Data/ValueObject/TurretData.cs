@@ -21,5 +21,9 @@ namespace Data.ValueObject
         public float OffsetX;
         public float OffsetY;
         public float OffsetZ;
+        public StackData BulletBoxStackData;
+        public float FireRate=1;
+        public int Damage=1;
+        public int AutoModeCost=500;
     }
 }
