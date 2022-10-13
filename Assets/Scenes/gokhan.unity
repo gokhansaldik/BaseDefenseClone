@@ -13916,6 +13916,14 @@ PrefabInstance:
       propertyPath: HealthImage
       value: 
       objectReference: {fileID: 1363090039}
+    - target: {fileID: 7208020882257330663, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 58.093246
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208020882257330663, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38
+      objectReference: {fileID: 0}
     - target: {fileID: 7443049332994691448, guid: 5aaf4c372877b0a44a5f3107fe1b41ed, type: 3}
       propertyPath: m_RootOrder
       value: 6

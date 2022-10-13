@@ -213,7 +213,7 @@ MonoBehaviour:
   CurrentHealth: 0
   HealthInfo: {fileID: 11400000, guid: 71b4f7dd7c7768544b6416a3c140abe8, type: 2}
   Money: {fileID: 5306968015789955880, guid: 05f06c73845ca06499edb72876f1eed7, type: 3}
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 3897148670118573045, guid: e2b46dc8e6b8a2b409cdc36b805d99f1, type: 3}
   enemyAnimationController: {fileID: 2954878444245197890}
 --- !u!114 &328580665966747405
 MonoBehaviour:

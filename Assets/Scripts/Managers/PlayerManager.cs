@@ -29,7 +29,7 @@ namespace Managers
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerStackController playerStackController;
-        [SerializeField] private PlayerAimController playerAimController;
+        public PlayerAimController playerAimController;
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform respawnPointTransform;

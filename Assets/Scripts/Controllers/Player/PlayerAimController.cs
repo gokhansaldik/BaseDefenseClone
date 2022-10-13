@@ -19,8 +19,6 @@ namespace Controllers.Player
         [SerializeField] private GameObject currentBullet;
         [SerializeField] private Transform sight;
         [SerializeField] private PlayerMovementController playerMovementController;
-
-
         private ParticleSystem _gunParticle;
 
         #endregion

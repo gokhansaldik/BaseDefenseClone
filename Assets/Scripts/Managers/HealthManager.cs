@@ -1,5 +1,6 @@
 using System;
 using Controllers.Enemy;
+using Controllers.Player;
 using Data.UnityObject;
 using Enums;
 using Interface;
@@ -24,15 +25,16 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
+        
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private EnemyAnimationController enemyAnimationController;
+       //  private EnemyManager enemyManager;
+       private  PlayerAimController playerAimController;
 
         #endregion
 
         #region Private Variables
 
-        private EnemyManager enemyManager;
 
         #endregion
 
@@ -41,6 +43,13 @@ namespace Managers
         private void Awake()
         {
             CurrentHealth = HealthInfo.HealthData.maxHealth;
+            
+        }
+
+
+        private void Start()
+        {
+            playerAimController = FindObjectOfType<PlayerAimController>();
         }
 
         public void EnemyAnim()
@@ -48,9 +57,10 @@ namespace Managers
             if (IsDead)
             {
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
-
                 Instantiate(Money, new Vector3(transform.position.x, 0.073f, transform.position.z), transform.rotation);
-                EnemySignals.Instance.onEnemyDie?.Invoke(enemyManager.transform);
+               // enemyManager.enemies.Remove(gameObject.GetComponent<EnemyController>());
+                //EnemySignals.Instance.onEnemyDie?.Invoke(enemyManager.transform);
+                playerAimController.targetList.Remove(transform);
             }
         }
 
