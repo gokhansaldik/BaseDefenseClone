@@ -15,11 +15,9 @@ namespace Controllers.Player
 
         [SerializeField] private PlayerManager manager;
         [SerializeField] private Transform currentTarget;
-
         [SerializeField] private Transform targetGameObject;
         [SerializeField] private GameObject currentBullet;
         [SerializeField] private Transform sight;
-
         [SerializeField] private PlayerMovementController playerMovementController;
 
 
@@ -66,7 +64,7 @@ namespace Controllers.Player
             {
                 //do nothing
             }
-            else if (targetList.Count > 0)
+            else if (targetList.Count > 0 && manager.GunActive)
             {
                 Instantiate(currentBullet, sight.transform.position, sight.rotation);
                 AimAt(targetList[0]);

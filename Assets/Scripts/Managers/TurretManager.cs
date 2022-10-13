@@ -102,7 +102,6 @@ namespace Managers
             IsPlayerUsing = true;
             playerObject.SetActive(false);
             player.parent = turretPlayerParentObj;
-
             player.transform.position = turretPlayerParentObj.position;
             player.transform.rotation = turretPlayerParentObj.rotation;
             ownerObject.SetActive(true);

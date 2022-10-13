@@ -19,6 +19,7 @@ namespace Managers
         public PlayerData PlayerData;
         public bool InBase = true;
         public GameObject PistolGun;
+        public bool GunActive;
         public bool PlayerDead;
 
         #endregion
@@ -102,6 +103,7 @@ namespace Managers
             playerMovementController.DeactivateMovement();
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
             PistolGun.SetActive(false);
+            GunActive = false;
         }
         private void ActivateMovement()
         {
@@ -110,11 +112,13 @@ namespace Managers
             {
                 ChangePlayerAnimation(PlayerAnimationStates.Run);
                 PistolGun.SetActive(false);
+                GunActive = false;
             }
             else if (!InBase)
             {
                 ChangePlayerAnimation(PlayerAnimationStates.Gun);
                 PistolGun.SetActive(true);
+                GunActive = true;
             }
         }
         private void OnReset()
