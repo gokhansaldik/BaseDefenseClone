@@ -12,7 +12,7 @@ namespace Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-
+        
         #endregion
 
         #region Private Variables
@@ -38,9 +38,17 @@ namespace Controllers.Player
                 other.gameObject.tag = "CollectedMoney";
             }
 
-            if (other.CompareTag("BaseOutTrigger")) playerManager.InBase = false;
+            if (other.CompareTag("BaseOutTrigger"))
+            {
+                playerManager.InBase = false;
+                IdleGameSignals.Instance.onOpenPlayerHealthBar?.Invoke();
+            }
 
-            if (other.CompareTag("InBaseTrigger")) playerManager.InBase = true;
+            if (other.CompareTag("InBaseTrigger"))
+            {
+                playerManager.InBase = true;
+                IdleGameSignals.Instance.onClosePlayerHealthBar?.Invoke();
+            }
 
             if (other.CompareTag("Turret"))
             {

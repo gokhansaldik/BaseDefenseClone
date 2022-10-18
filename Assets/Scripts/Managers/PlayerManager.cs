@@ -33,6 +33,7 @@ namespace Managers
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform respawnPointTransform;
+        [SerializeField] private GameObject playerHealthBar;
 
         #endregion
 
@@ -77,6 +78,8 @@ namespace Managers
             InputSignals.Instance.onJoystickDragged += OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed += OnLevelFailed;
             EnemySignals.Instance.onEnemyDie += playerAimController.OnRemoveFromTargetList;
+            IdleGameSignals.Instance.onOpenPlayerHealthBar += OnOpenPlayerHealthBar;
+            IdleGameSignals.Instance.onClosePlayerHealthBar += OnClosePlayerHealthBar;
         }
 
         private void UnsubscribeEvents()
@@ -88,6 +91,8 @@ namespace Managers
             InputSignals.Instance.onJoystickDragged -= OnJoystickDragged;
             LevelSignals.Instance.onLevelFailed -= OnLevelFailed;
             EnemySignals.Instance.onEnemyDie -= playerAimController.OnRemoveFromTargetList;
+            IdleGameSignals.Instance.onOpenPlayerHealthBar -= OnOpenPlayerHealthBar;
+            IdleGameSignals.Instance.onClosePlayerHealthBar -= OnClosePlayerHealthBar;
         }
 
         private void OnDisable()
@@ -137,6 +142,15 @@ namespace Managers
             yield return new WaitForSeconds(2.5f);
             playerTransform.transform.position = respawnPointTransform.transform.position;
             ChangePlayerAnimation(PlayerAnimationStates.Idle);
+        }
+
+        private void OnOpenPlayerHealthBar()
+        {
+            playerHealthBar.SetActive(true);
+        }
+        private void OnClosePlayerHealthBar()
+        {
+            playerHealthBar.SetActive(false);
         }
         private void SetPlayerDataToControllers() => playerMovementController.SetMovementData(_playerData.playerMovementData);
         private void OnPlay() => playerMovementController.IsReadyToPlay(true);

@@ -22,6 +22,8 @@ namespace Signals
 
         public UnityAction onGettedBaseData = delegate { };
         public Func<GameObject> onGetAmmo = delegate { return default; };
+        public UnityAction onOpenPlayerHealthBar = delegate { };
+        public UnityAction onClosePlayerHealthBar = delegate { };
 
         #endregion
 

@@ -10,7 +10,6 @@ namespace Signals
         public UnityAction onCollectablePlayerMiner = delegate { }; 
         public UnityAction onCollectablePlayerTaken = delegate { }; 
         public UnityAction onCollectableUpSpeed = delegate { }; 
-        public UnityAction onCollectableUpDown = delegate { }; 
-        
+        public UnityAction onCollectableUpDown = delegate { };
     }
 }

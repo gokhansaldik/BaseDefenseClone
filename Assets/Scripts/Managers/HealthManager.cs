@@ -43,7 +43,6 @@ namespace Managers
         private void Awake()
         {
             CurrentHealth = HealthInfo.HealthData.maxHealth;
-            
         }
 
 
@@ -58,8 +57,6 @@ namespace Managers
             {
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
                 Instantiate(Money, new Vector3(transform.position.x, 0.073f, transform.position.z), transform.rotation);
-               // enemyManager.enemies.Remove(gameObject.GetComponent<EnemyController>());
-                //EnemySignals.Instance.onEnemyDie?.Invoke(enemyManager.transform);
                 playerAimController.targetList.Remove(transform);
             }
         }

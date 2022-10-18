@@ -78,11 +78,9 @@ namespace Managers
                 RoomTurretPayedAmount = SaveSignals.Instance.onSaveAreaData().RoomTurretPayedAmount
             };
             if (_areaDataCache.RoomPayedAmount != null)
-                ES3.Save("RoomPayedAmound",
-                    _areaDataCache.RoomPayedAmount, "AreaData.es3");
+                ES3.Save("RoomPayedAmount",_areaDataCache.RoomPayedAmount, "AreaData.es3");
             if (_areaDataCache.RoomTurretPayedAmount != null)
-                ES3.Save("RoomTurretPayedAmound",
-                    _areaDataCache.RoomTurretPayedAmount, "AreaData.es3");
+                ES3.Save("RoomTurretPayedAmount",_areaDataCache.RoomTurretPayedAmount, "AreaData.es3");
         }
 
         private int OnLevelLoad()
@@ -109,11 +107,11 @@ namespace Managers
         {
             return new AreaDataParams
             {
-                RoomPayedAmount = ES3.KeyExists("RoomPayedAmound", "AreaData.es3")
-                    ? ES3.Load<List<int>>("RoomPayedAmound", "AreaData.es3")
+                RoomPayedAmount = ES3.KeyExists("RoomPayedAmount", "AreaData.es3")
+                    ? ES3.Load<List<int>>("RoomPayedAmount", "AreaData.es3")
                     : new List<int>(),
-                RoomTurretPayedAmount = ES3.KeyExists("RoomTurretPayedAmound", "AreaData.es3")
-                    ? ES3.Load<List<int>>("RoomTurretPayedAmound", "AreaData.es3")
+                RoomTurretPayedAmount = ES3.KeyExists("RoomTurretPayedAmount", "AreaData.es3")
+                    ? ES3.Load<List<int>>("RoomTurretPayedAmount", "AreaData.es3")
                     : new List<int>()
             };
         }
