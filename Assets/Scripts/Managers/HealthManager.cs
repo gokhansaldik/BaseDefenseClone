@@ -42,8 +42,7 @@ namespace Managers
         {
             CurrentHealth = HealthInfo.HealthData.maxHealth;
         }
-
-
+        
         private void Start()
         {
             _playerAimController = FindObjectOfType<PlayerAimController>();

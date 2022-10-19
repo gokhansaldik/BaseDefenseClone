@@ -70,7 +70,18 @@ namespace Managers
             _isBase = roomData.Base;
             if (!_isBase) PayedAmount = payedAmount;
         }
+        private IEnumerator Buy()
+        {
+            var waitForSecond = new WaitForSeconds(0.05f);
+            while (_remainingAmount > 0)
+            {
+                PayedAmount++;
+                ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
+                yield return waitForSecond;
+            }
 
+            IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
+        }
         public void BuyAreaEnter()
         {
             _scoreCache = ScoreSignals.Instance.onScoreData();
@@ -91,18 +102,7 @@ namespace Managers
             IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
         }
 
-        private IEnumerator Buy()
-        {
-            var waitForSecond = new WaitForSeconds(0.05f);
-            while (_remainingAmount > 0)
-            {
-                PayedAmount++;
-                ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
-                yield return waitForSecond;
-            }
-
-            IdleGameSignals.Instance.onBaseAreaBuyedItem?.Invoke();
-        }
+       
 
         private void SetText(int remainingAmound)
         {

@@ -65,11 +65,11 @@ namespace Managers
         {
             switch (scoreType)
             {
-                case PayType.Money:
-                    _scoreData.MoneyScore += score;
-                    break;
                 case PayType.Gem:
                     _scoreData.DiamondScore += score;
+                    break;
+                case PayType.Money:
+                    _scoreData.MoneyScore += score;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(scoreType), scoreType, null);

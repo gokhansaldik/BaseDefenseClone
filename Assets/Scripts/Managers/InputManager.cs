@@ -98,8 +98,7 @@ namespace Managers
         }
 
         private void OnPlay() =>isReadyForTouch = true;
-       
-
+        
         private void OnReset()
         {
             _isTouching = false;

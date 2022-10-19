@@ -71,22 +71,22 @@ namespace Managers
         {
             switch (stateType)
             {
-                case MinerStatesType.Pickaxe:
-                    CurrentState = _pickaxe;
-                    diamond.SetActive(false);
-                    pickaxe.SetActive(true);
+                case MinerStatesType.Wait:
+                    CurrentState = _wait;
                     break;
                 case MinerStatesType.GoDigging:
                     CurrentState = _goMine;
                     diamond.SetActive(false);
                     break;
+                case MinerStatesType.Pickaxe:
+                    CurrentState = _pickaxe;
+                    diamond.SetActive(false);
+                    pickaxe.SetActive(true);
+                    break;
                 case MinerStatesType.GoStacking:
                     CurrentState = _goStacking;
                     pickaxe.SetActive(false);
                     diamond.SetActive(true);
-                    break;
-                case MinerStatesType.Wait:
-                    CurrentState = _wait;
                     break;
             }
 

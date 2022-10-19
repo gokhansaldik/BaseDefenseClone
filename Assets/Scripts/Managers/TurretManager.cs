@@ -135,7 +135,6 @@ namespace Managers
 
         public void OnAddBulletBoxStack(GameObject target)
         {
-            // SetObjPosition(target);
             var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
             if (obj == null) return;
             obj.transform.parent = ammoBoxHolder.transform;

@@ -20,18 +20,6 @@ namespace Signals
         public UnityAction<UIPanels> onCloseStorePanel;
 
         #endregion
-
-        #region Gun Signals
-
-        //public UnityAction<List<int>> onInitializeGunLevels;
-        //public UnityAction<List<int>> onChangeGunLevels;
-
-        #endregion
-
-        #region Worker Signals
-
-        public UnityAction<List<int>> onInitializeWorkerUpgrades = delegate { };
         
-        #endregion
     }
 }

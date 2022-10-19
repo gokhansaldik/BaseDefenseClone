@@ -9,7 +9,6 @@ namespace Datas.ValueObject
         public float OffsetY;
         public float OffsetZ;
         public int LimitX;
-        public int LimitY;
         public int LimitZ;
     }
 }

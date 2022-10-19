@@ -6,6 +6,5 @@ namespace Enums
     public enum GameStatesType
     {
         Idle,
-        IdleFinish,
     }
 }

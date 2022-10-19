@@ -86,6 +86,19 @@ namespace Managers
             _turretData = IdleGameSignals.Instance.onTurretData(turretName);
             PayedAmount = IdleGameSignals.Instance.onPayedTurretData(turretName);
         }
+        private IEnumerator Buy()
+        {
+            var waitForSecond = new WaitForSeconds(0.05f);
+            while (_remainingAmount > 0)
+            {
+                PayedAmount++;
+                ScoreSignals.Instance.onSetScore?.Invoke(_turretData.PayType, -1);
+                SaveSignals.Instance.onScoreSave?.Invoke();
+                yield return waitForSecond;
+            }
+
+            IdleGameSignals.Instance.onTurretAreaBuyedItem?.Invoke(turretName, _payedAmount);
+        }
 
         public void BuyAreaEnter()
         {
@@ -108,19 +121,7 @@ namespace Managers
             SaveSignals.Instance.onAreaDataSave?.Invoke();
         }
 
-        private IEnumerator Buy()
-        {
-            var waitForSecond = new WaitForSeconds(0.05f);
-            while (_remainingAmount > 0)
-            {
-                PayedAmount++;
-                ScoreSignals.Instance.onSetScore?.Invoke(_turretData.PayType, -1);
-                SaveSignals.Instance.onScoreSave?.Invoke();
-                yield return waitForSecond;
-            }
-
-            IdleGameSignals.Instance.onTurretAreaBuyedItem?.Invoke(turretName, _payedAmount);
-        }
+     
 
         private void SetText(int remainingAmount)
         {

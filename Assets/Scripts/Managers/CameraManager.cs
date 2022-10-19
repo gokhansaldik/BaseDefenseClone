@@ -69,9 +69,7 @@ namespace Managers
         }
 
         #endregion
-
         
-
         private void SetPlayerFollow()
         {
             _playerManager = FindObjectOfType<PlayerManager>().transform;
