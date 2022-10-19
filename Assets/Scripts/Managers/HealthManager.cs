@@ -4,7 +4,6 @@ using Controllers.Player;
 using Data.UnityObject;
 using Enums;
 using Interface;
-using Signals;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,16 +24,15 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        
+
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private EnemyAnimationController enemyAnimationController;
-       //  private EnemyManager enemyManager;
-       private  PlayerAimController playerAimController;
 
         #endregion
 
         #region Private Variables
 
+        private PlayerAimController _playerAimController;
 
         #endregion
 
@@ -48,7 +46,7 @@ namespace Managers
 
         private void Start()
         {
-            playerAimController = FindObjectOfType<PlayerAimController>();
+            _playerAimController = FindObjectOfType<PlayerAimController>();
         }
 
         public void EnemyAnim()
@@ -57,7 +55,7 @@ namespace Managers
             {
                 enemyAnimationController.Playanim(EnemyAnimationStates.Dead);
                 Instantiate(Money, new Vector3(transform.position.x, 0.073f, transform.position.z), transform.rotation);
-                playerAimController.targetList.Remove(transform);
+                _playerAimController.targetList.Remove(transform);
             }
         }
 

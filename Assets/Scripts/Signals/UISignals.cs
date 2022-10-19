@@ -23,8 +23,8 @@ namespace Signals
 
         #region Gun Signals
 
-        public UnityAction<List<int>> onInitializeGunLevels;
-        public UnityAction<List<int>> onChangeGunLevels;
+        //public UnityAction<List<int>> onInitializeGunLevels;
+        //public UnityAction<List<int>> onChangeGunLevels;
 
         #endregion
 

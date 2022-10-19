@@ -33,8 +33,7 @@ namespace Managers
         private GameObject OnGetAmmo()
         {
             var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
-            if (obj == null)
-                return null;
+            if (obj == null) return null;
             obj.transform.position = transform.position;
             obj.SetActive(true);
             return obj;

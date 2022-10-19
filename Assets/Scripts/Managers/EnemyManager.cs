@@ -12,7 +12,8 @@ namespace Managers
 
         #region Public Variables
 
-        public bool CanSpawn => maxCountOnGame > enemies.Count;
+        public bool CanSpawn => maxCountOnGame > Enemies.Count;
+        public List<EnemyController> Enemies;
 
         #endregion
 
@@ -20,7 +21,6 @@ namespace Managers
 
         [SerializeField] private int maxCountOnGame = 40;
         [SerializeField] private HealthManager healthManager;
-        public List<EnemyController> enemies;
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace Managers
 
         private void Awake()
         {
-            enemies = new List<EnemyController>();
+            Enemies = new List<EnemyController>();
         }
 
         #region Event Subscriptions
@@ -55,7 +55,7 @@ namespace Managers
         public void AddEnemyController(EnemyController enemyController)
         {
             enemyController.transform.parent = transform;
-            enemies.Add(enemyController);
+            Enemies.Add(enemyController);
         }
     }
 }

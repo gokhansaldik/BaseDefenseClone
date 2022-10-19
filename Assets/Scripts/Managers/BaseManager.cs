@@ -30,9 +30,9 @@ namespace Managers
 
         #region Private Variables
 
+        [ShowInInspector] private AreaDataParams _areaDatas;
         private Dictionary<TurretNameEnum, int> _payedTurretDatas;
         private Dictionary<RoomNameType, int> _payedRoomDatas;
-        [ShowInInspector] private AreaDataParams _areaDatas;
         private int _baseLevel;
 
         #endregion
@@ -73,11 +73,11 @@ namespace Managers
             _areaDatas = SaveSignals.Instance.onLoadAreaData();
             Data = Resources.Load<CD_Level>("Data/CD_Level").LevelData[_baseLevel].BaseData;
             SetBaseLevelText();
-            EmptyListChack();
+            EmptyListCheck();
             SetRoomData();
         }
 
-        private void EmptyListChack()
+        private void EmptyListCheck()
         {
             if (!_areaDatas.RoomPayedAmount.IsNullOrEmpty()) return;
             _areaDatas.RoomPayedAmount = new List<int>(new int[Data.BaseRoomData.BaseRooms.Count]);
