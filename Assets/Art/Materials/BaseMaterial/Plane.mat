@@ -22,9 +22,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Plane
   m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
-  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-    _MK_LIGHT_CEL _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
-    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_ALBEDO
+    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_CEL _MK_OUTLINE_HULL_CLIP _MK_OUTLINE_NOISE
+    _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON
+    _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -175,13 +176,13 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
-    - _Contrast: 1
+    - _ColorGrading: 1
+    - _Contrast: 1.8
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseSmoothness: 0.022
+    - _DiffuseSmoothness: 0.181
     - _DiffuseThresholdOffset: 0.25
     - _Dissolve: 0
     - _DissolveAmount: 0.5
@@ -206,7 +207,7 @@ Material:
     - _Light: 1
     - _LightBands: 4
     - _LightBandsScale: 0.5
-    - _LightThreshold: 0.771
+    - _LightThreshold: 0.73
     - _Metallic: 0.062
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
@@ -227,9 +228,9 @@ Material:
     - _RimSize: 1
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
-    - _Saturation: 1
+    - _Saturation: 1.7
     - _SketchMapScale: 1
-    - _Smoothness: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _Specular: 1
     - _SpecularHighlights: 1
@@ -256,12 +257,12 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.69411767, g: 0.79607844, b: 0.4373442, a: 1}
+    - _AlbedoColor: {r: 0.70146614, g: 0.8113208, b: 0.4247953, a: 1}
     - _BaseColor: {r: 0.69411767, g: 0.79607844, b: 0.43734422, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GoochBrightColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
     - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
