@@ -21,7 +21,6 @@ namespace Managers
 
         [ShowInInspector] private Vector3 _initalPosition;
         private Animator _animator;
-        private CameraStatesType _cameraStatesType = CameraStatesType.Idle;
         private Transform _playerManager;
 
         #endregion

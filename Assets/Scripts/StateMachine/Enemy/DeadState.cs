@@ -8,8 +8,8 @@ namespace StateMachine.Enemy
     public class DeadState : IState
     {
         private IEnemyController _enemyController;
-        private float _maxTime = 5;
-        private float _currentTime = 0;
+       // private float _maxTime = 5;
+        //private float _currentTime = 0;
        
 
         public DeadState(IEnemyController enemyController)

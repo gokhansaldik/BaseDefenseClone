@@ -31,7 +31,7 @@ namespace Controllers.Enemy
 
         private NavMeshAgent _navMeshAgent;
         private StateMachinee _stateMachine;
-        private bool _isMoneyInstantiated = false;
+        //private bool _isMoneyInstantiated = false;
 
         #endregion
 

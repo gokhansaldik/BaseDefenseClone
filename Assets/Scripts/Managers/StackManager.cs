@@ -21,7 +21,7 @@ namespace Managers
         public StackData StackData;
         public bool LerpStatus;
         public List<GameObject> StackList = new List<GameObject>();
-        public ItemAddOnStackCommand ItemAddOnStack;
+        
 
         #endregion
 
@@ -99,7 +99,7 @@ namespace Managers
                 new CollectableAddOnStackCommand(ref stackManager, ref StackList, ref StackData);
             _stackLerpMovementCommand = new StackLerpMovementCommand(ref StackList);
             _collectableAnimSetCommand = new CollectableAnimSetCommand();
-            ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
+          
         }
 
         private void Update()
@@ -170,9 +170,7 @@ namespace Managers
         private void OnReleaseAmmosToTurretArea(GameObject releaseObject)
         {
             if (_isReleasingAmmo) return;
-
             _isReleasingAmmo = true;
-            ItemAddOnStack.ResetTowerCount();
             StartCoroutine(ReleaseAmmoToTurret(releaseObject));
         }
 
