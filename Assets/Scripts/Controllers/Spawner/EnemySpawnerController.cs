@@ -6,6 +6,7 @@ namespace Controllers.Spawner
 {
     public class EnemySpawnerController : MonoBehaviour
     {
+        
         #region Self Variables
 
         #region Serialized Variables

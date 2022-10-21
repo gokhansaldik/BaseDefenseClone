@@ -12,6 +12,7 @@ namespace Managers
 {
     public class PlayerManager : MonoBehaviour
     {
+        
         #region Self Variables
 
         #region Public Variables
@@ -45,6 +46,7 @@ namespace Managers
         #endregion
 
         #endregion
+        
 
         private void Awake()
         {

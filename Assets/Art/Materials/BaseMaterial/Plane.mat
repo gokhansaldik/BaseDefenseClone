@@ -176,7 +176,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorGrading: 1
-    - _Contrast: 3
+    - _Contrast: 1.15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -206,7 +206,7 @@ Material:
     - _Light: 1
     - _LightBands: 4
     - _LightBandsScale: 0.5
-    - _LightThreshold: 0.489
+    - _LightThreshold: 0.52
     - _Metallic: 0.062
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
@@ -256,7 +256,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.70146614, g: 0.8113208, b: 0.4247953, a: 1}
+    - _AlbedoColor: {r: 0.6749311, g: 0.8018868, b: 0.3517711, a: 1}
     - _BaseColor: {r: 0.69411767, g: 0.79607844, b: 0.43734422, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
