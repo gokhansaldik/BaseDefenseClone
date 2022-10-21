@@ -54,7 +54,7 @@ namespace Managers
         private int _remainingAmount;
         private ScoreDataParams _scoreCache;
         private GameObject _textParentGameObject;
-
+        
         #endregion
 
         #endregion
@@ -62,6 +62,7 @@ namespace Managers
         private void Awake()
         {
             _textParentGameObject = tmp.transform.parent.gameObject;
+           
         }
 
         public void SetRoomData(RoomData roomData, int payedAmount)
@@ -77,6 +78,7 @@ namespace Managers
             {
                 PayedAmount++;
                 ScoreSignals.Instance.onSetScore?.Invoke(_roomData.PayType, -1);
+                // _buyParticle.Play();
                 yield return waitForSecond;
             }
 

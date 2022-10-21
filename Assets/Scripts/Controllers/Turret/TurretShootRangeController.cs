@@ -49,7 +49,7 @@ namespace Controllers.Turret
 
         private void Start()
         {
-            StartCoroutine(Shoot());
+            StartCoroutine(GunFire());
             currentBullet = GetBullet();
         }
 
@@ -88,7 +88,7 @@ namespace Controllers.Turret
             }
         }
 
-        private IEnumerator Shoot()
+        private IEnumerator GunFire()
         {
             if ((manager.HasOwner || manager.IsPlayerUsing) && targetList.Count > 0 && manager.AmmoBoxList.Count > 0) //
             {
@@ -98,7 +98,7 @@ namespace Controllers.Turret
             }
 
             yield return new WaitForSeconds(0.5f);
-            StartCoroutine(Shoot());
+            StartCoroutine(GunFire());
         }
 
         private void UseAmmo()
